@@ -1,0 +1,19 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+# PODNAME: embra
+# ABSTRACT: do stuff with your blog files
+
+=head1 OVERVIEW
+
+    embra commands
+
+=cut
+
+package embra;
+
+use App::Embra::App;
+
+App::Embra::App->run;
