@@ -13,7 +13,6 @@ sub expand_config_package_name {
         {
           '=' => '',
           '@' => 'App::Embra::PluginBundle::',
-          '%' => 'App::Embra::Stash::',
           ''  => 'App::Embra::Plugin::',
         },
         $pkg_name,
