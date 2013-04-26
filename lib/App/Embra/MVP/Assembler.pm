@@ -8,20 +8,11 @@ package App::Embra::MVP::Assembler;
 use Moo;
 extends 'Config::MVP::Assembler';
 with 'Config::MVP::Assembler::WithBundles';
-
-use String::RewritePrefix;
+use App::Embra::Util;
 
 sub expand_package {
     my ( $self, $pkg_name ) = @_;
-    String::RewritePrefix->rewrite(
-        {
-          '=' => '',
-          '@' => 'App::Embra::PluginBundle::',
-          '%' => 'App::Embra::Stash::',
-          ''  => 'App::Embra::Plugin::',
-        },
-        $pkg_name,
-    );
+    App::Embra::Util->expand_config_package_name( $pkg_name );
 }
 
 1;
