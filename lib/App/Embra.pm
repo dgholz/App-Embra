@@ -3,7 +3,7 @@ use warnings;
 
 package App::Embra;
 
-# ABSTRACT: build-a-blog from parts
+# ABSTRACT: build a site from parts
 
 use Moo;
 use Method::Signatures;
