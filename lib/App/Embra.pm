@@ -31,4 +31,16 @@ method add_plugin( $plugin where { $_->DOES( "App::Embra::Role::Plugin" ) } ) {
     push @{ $self->plugins}, $plugin;
 }
 
+method collate {
+    $_->gather_files    for $self->plugins_with( -FileGatherer );
+    $_->transform_files for $self->plugins_with( -FileTransformer );
+    $_->render_files    for $self->plugins_with( -FileRenderer );
+    $_->publish_files   for $self->plugins_with( -FilePublisher );
+}
+
+method plugins_with( $rolename ) {
+  $rolename =~ s/^-/App::Embra::Role::/xms;
+  return grep { $_->does( $rolename ) } @{ $self->plugins };
+}
+
 1;
