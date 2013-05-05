@@ -13,6 +13,11 @@ has 'plugins' => (
     default => sub{[]},
 );
 
+has 'files' => (
+    is => 'ro',
+    default => sub{[]},
+);
+
 method from_config_mvp_sequence( $class:, Config::MVP::Sequence :$sequence ) {
     my $root_section = $sequence->section_named( '_' );
     my $creatura = $class->new( $root_section->payload );
