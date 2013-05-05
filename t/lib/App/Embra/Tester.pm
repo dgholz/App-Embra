@@ -10,8 +10,8 @@ has embra => (
 );
 
 has plugin => (
-    is => 'ro',
-    default => sub { App::Embra::Plugin::Test->new },
+    is => 'lazy',
+    default => sub { App::Embra::Plugin::Test->new( embra => $_[0]->embra ) },
 );
 
 1;

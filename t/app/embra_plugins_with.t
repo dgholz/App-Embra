@@ -14,8 +14,8 @@ with 'App::Embra::Role::Plugin';
 package main;
 
 has 'plugin_with_role' => (
-    is => 'ro',
-    default => sub { App::Embra::Plugin::TestRole-> new },
+    is => 'lazy',
+    default => sub { App::Embra::Plugin::TestRole-> new( embra => $_[0]->embra ) },
 );
 
 before 'setup' => method {
