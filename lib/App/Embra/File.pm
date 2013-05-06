@@ -16,7 +16,7 @@ has 'name' => (
 has 'content' => (
   is  => 'rw',
   lazy => 1,
-  default => method { shift->_read_file },
+  default => method { $self->_read_file },
 );
  
 has '_original_name' => (
