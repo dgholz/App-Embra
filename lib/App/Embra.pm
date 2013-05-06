@@ -19,10 +19,13 @@ has 'files' => (
 );
 
 method from_config_mvp_sequence( $class:, Config::MVP::Sequence :$sequence ) {
-    my $root_section = $sequence->section_named( '_' );
-    my $creatura = $class->new( $root_section->payload );
+    my $payload = {};
+    if ( my $root_section = $sequence->section_named( '_' ) ) {
+        $payload = $root_section->payload;
+    }
+    my $creatura = $class->new( $payload );
     for my $plugin_section ( $sequence->sections ) {
-        next if $plugin_section == $root_section;
+        next if $plugin_section->name eq '_';
         $plugin_section->package->register_plugin(
             name => $plugin_section->name,
             args => $plugin_section->payload,
