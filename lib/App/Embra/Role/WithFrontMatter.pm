@@ -8,8 +8,16 @@ package App::Embra::Role::WithFrontMatter;
 use Moo::Role;
 
 has 'front_matter' => (
-    is => 'rw',
-    default => sub{ {} },
+    is => 'lazy',
 );
+
+sub _build_front_matter {
+    {};
+}
+
+sub update_front_matter {
+    my ($self, $update) = @_;
+    @{ $self->front_matter }{ keys %$update } = values %$update;
+}
 
 1;

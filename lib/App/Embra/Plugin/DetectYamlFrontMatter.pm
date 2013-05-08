@@ -29,7 +29,7 @@ method transform_files {
         if( ! $file->DOES( 'App::Embra::Role::WithFrontMatter' ) ) {
             Role::Tiny->apply_roles_to_object( $file, 'App::Embra::Role::WithFrontMatter' );
         }
-        $file->front_matter( $front_matter );
+        $file->update_front_matter( $front_matter );
         $file->content( ${^POSTMATCH} );
     }
 }
