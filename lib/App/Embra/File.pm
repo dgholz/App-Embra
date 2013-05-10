@@ -23,6 +23,11 @@ has '_original_name' => (
   is  => 'ro',
   init_arg => undef,
 );
+
+has 'notes' => (
+    is => 'ro',
+    default => method { {} },
+);
  
 method BUILD( $args ) {
   $self->{_original_name} = $self->name;
@@ -35,6 +40,10 @@ method _read_file {
   binmode $fh, ':raw';
  
   my $content = do { local $/; <$fh> };
+}
+
+method update_notes( HashRef $update ) {
+    @{ $self->notes }{ keys %$update } = values %$update;
 }
 
 1;
