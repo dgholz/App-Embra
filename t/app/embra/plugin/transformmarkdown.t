@@ -26,15 +26,10 @@ test 'tranforms markdown files' => method {
         undef,
         'did not change name of markdown file ...'
     );
-    isnt(
-        $should_transform->can('front_matter'),
-        undef,
-        '... and added front matter ...'
-    );
-    is_deeply(
-        $should_transform->front_matter,
-        { converted_from => 'markdown', },
-        '... noting that the file was converted from markdown ...'
+    is(
+        $should_transform->notes->{converted_from},
+        'markdown',
+        '... and noted that the file was converted from markdown ...'
     );
     is(
         $should_transform->content,
@@ -50,11 +45,6 @@ test 'does not tranforms non-markdown files' => method {
         $should_not_transform,
         undef,
         'did not change name of untransformed file ...'
-    );
-    is(
-        $should_not_transform->can('front_matter'),
-        undef,
-        '... and did not added front matter ...'
     );
     is(
         $should_not_transform->content,

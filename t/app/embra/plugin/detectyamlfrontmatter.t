@@ -26,20 +26,15 @@ test 'detects frontmatter' => method {
         undef,
         'did not change name of file with YAML front matter ...'
     );
-    isnt(
-        $should_have_notes->can('front_matter'),
-        undef,
-        '... and added front matter ...'
-    );
-    is_deeply(
-        $should_have_notes->front_matter,
-        { hi => 'there', },
-        '... with the right data ...'
+    is(
+        $should_have_notes->notes->{hi},
+        'there',
+        '... and noted the value of the YAML front matter ...'
     );
     is(
         $should_have_notes->content,
         "hello\n",
-        '... and removed the front matter'
+        '... and removed the YAML front matter'
     );
 };
 
@@ -51,9 +46,9 @@ test 'frontmatter not detected if not present' => method {
         undef,
         'did not change name of file with no YAML front matter ...'
     );
-    is(
-        $should_not_have_notes->can('front_matter'),
-        undef,
+    is_deeply(
+        $should_not_have_notes->notes,
+        {},
         '... and did not add front matter ...'
     );
     is(
