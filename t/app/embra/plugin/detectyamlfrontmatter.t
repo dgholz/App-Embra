@@ -1,22 +1,16 @@
 use lib 't/lib';
+use App::Embra::File;
+use App::Embra::Plugin::DetectYamlFrontMatter;
+
+use List::Util qw< first >;
 use Test::Roo;
 use Method::Signatures;
-use App::Embra::File;
-use List::Util qw< first >;
 
-extends 'App::Embra::FromConfigMVP';
+method _build_plugin {
+    return App::Embra::Plugin::DetectYamlFrontMatter->new( embra => $self->embra );
+}
 
-has 'test_files' => (
-    is => 'ro',
-    default => method {
-        App::Embra::File->new( name => 'dummy', content => 'mannequin' );
-    },
-);
-
-before 'setup' => method {
-    push @{ $self->embra->files }, @{ $self->test_files };
-    $self->embra->collate;
-};
+with 'App::Embra::Role::TestTransformPlugin';
 
 test 'detects frontmatter' => method {
     my $should_have_notes = first { defined and $_->name eq 'has YAML front matter' } @{ $self->embra->files };
@@ -64,11 +58,7 @@ EOM
 };
 
 run_me( {
-    config => {
-        'App::Embra::Plugin::DetectYamlFrontMatter' => {
-        },
-    },
-    test_files => [
+    embra_files => [
         App::Embra::File->new(
             name => 'has YAML front matter',
             content => <<EOM,
