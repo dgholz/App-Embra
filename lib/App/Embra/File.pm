@@ -46,10 +46,15 @@ method _build_ext {
     ($self->_split_name)[2];
 }
 
-method _trigger_ext( $old_ext ) {
+method with_ext( $ext ) {
+    $ext =~ s/ \A [.] //xms;
     my ($f, $d, $e) = $self->_split_name;
-    return if $e eq $old_ext;
-    $self->name( canonpath( $d . $f . $self->ext ) );
+    return $self->name if $e eq $ext;
+    return canonpath( $d . $f . $ext );
+}
+
+method _trigger_ext( $old_ext ) {
+    $self->name( $self->with_ext( $self->ext ) );
 }
  
 method BUILD( $args ) {
