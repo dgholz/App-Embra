@@ -7,6 +7,8 @@ package App::Embra::File;
 
 use Moo;
 use Method::Signatures;
+use File::Basename;
+use File::Spec::Functions qw< canonpath >;
 
 has 'name' => (
     is => 'rw',
@@ -28,6 +30,27 @@ has 'notes' => (
     is => 'ro',
     default => method { {} },
 );
+
+has 'ext' => (
+    is => 'rw',
+    lazy => 1,
+    builder => 1,
+    trigger => 1,
+);
+
+method _split_name {
+    fileparse( $self->name, qr{ (?<= [.] ) [^.]+ $ }x );
+}
+
+method _build_ext {
+    ($self->_split_name)[2];
+}
+
+method _trigger_ext( $old_ext ) {
+    my ($f, $d, $e) = $self->_split_name;
+    return if $e eq $old_ext;
+    $self->name( canonpath( $d . $f . $self->ext ) );
+}
  
 method BUILD( $args ) {
   $self->{_original_name} = $self->name;
