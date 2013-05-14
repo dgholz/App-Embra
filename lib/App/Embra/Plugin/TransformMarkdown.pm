@@ -27,7 +27,7 @@ method transform_files {
         my $ext = (fileparse( $file->name, qr{ (?<= [.] ) [^.]+ $ }x ))[2];
         next if $ext ne $self->extension;
         $file->content( $self->converter->format( $file->content, 'markdown' ) );
-        $file->notes->{converted_from} = 'markdown';
+        $file->notes->{transformed_by} = __PACKAGE__;
     }
 }
 

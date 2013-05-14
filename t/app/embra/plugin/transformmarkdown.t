@@ -22,9 +22,9 @@ test 'tranforms markdown files' => method {
         'did not change name of markdown file ...'
     );
     is(
-        $should_transform->notes->{converted_from},
-        'markdown',
-        '... and noted that the file was converted from markdown ...'
+        $should_transform->notes->{transformed_by},
+        'App::Embra::Plugin::TransformMarkdown',
+        '... and noted that the file was converted by the plugin ...'
     );
     is(
         $should_transform->content,
@@ -40,6 +40,10 @@ test 'does not tranforms non-markdown files' => method {
         $should_not_transform,
         undef,
         'did not change name of untransformed file ...'
+    );
+    ok(
+        ! exists $should_not_transform->notes->{transformed_by},
+        '... and did not note that the file was converted by the plugin ...'
     );
     is(
         $should_not_transform->content,
