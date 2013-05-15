@@ -27,6 +27,7 @@ method transform_files {
         next if $file->ext ne $self->extension;
         $file->content( $self->converter->format( $file->content, 'markdown' ) );
         $file->notes->{transformed_by} = __PACKAGE__;
+        $file->ext( 'html' );
     }
 }
 
