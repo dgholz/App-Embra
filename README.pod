@@ -1,0 +1,93 @@
+=head1 NAME
+
+App::Embra - build a site from parts
+
+See how the development is progressing at L<the Trello board|https://trello.com/b/uGOfg0Zj>
+
+=begin html
+
+<p>
+  <a href="https://travis-ci.org/dgholz/App-Embra">
+    <img src="https://travis-ci.org/dgholz/App-Embra.png?branch=master" alt="Travis CI build status">
+  </a>
+</p>
+
+=end html
+
+=head1 HOW TO INSTALL
+
+=head2 Set up your Perl environment
+
+=over
+
+=item *
+
+Windows
+
+=over
+
+=item 1.
+
+Install L<Strawberry Perl|http://strawberryperl.com/> (version 5.10 or higher)
+
+=item 2.
+
+Install cpanm with C<cpan App::cpanminus>
+
+=back
+
+=item *
+
+Mac/Linux
+
+=over
+
+=item 1.
+
+Use L<perlbrew|http://perlbrew.pl/> to install version 5.10 or higher. Don't forget to run C<perlbrew switch <version\>>
+
+=item 2.
+
+Install cpanm with C<perlbrew install-cpanm>
+
+=item 3.
+
+Set up a separate perl library with C<perlbrew lib create app-rssfilter; perlbrew use @app-rssfilter>
+
+=back
+
+=back
+
+=head2 Set up developement environment
+
+C<cpanm dzil; dzil authordeps | cpanm>
+
+=head2 Install App::Embra
+
+C<dzil listdeps | cpanm; dzil install>
+
+=head2 Create a simple configuration file
+
+in embra.ini:
+
+    [GatherDir]
+    [DetectYamlFrontMatter]
+    [TransformMarkdown]
+    [TemplateToolkit]
+    [PublishFiles]
+    to = site
+
+=head2 Make some files
+
+hi.md:
+    ---
+    title: greetings
+    ----
+    *HI THERE*
+
+templates/default.tt:
+    <html><head><title>[% title %]</title></head><body>[% content %]</body></html>
+
+=head2 Run App::Embra
+
+C<embra collate>
