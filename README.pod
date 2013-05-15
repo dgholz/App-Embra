@@ -80,12 +80,14 @@ in embra.ini:
 =head2 Make some files
 
 hi.md:
+
     ---
     title: greetings
     ----
     *HI THERE*
 
 templates/default.tt:
+
     <html><head><title>[% title %]</title></head><body>[% content %]</body></html>
 
 =head2 Run App::Embra
