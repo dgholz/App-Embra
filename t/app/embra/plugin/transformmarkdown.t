@@ -14,12 +14,12 @@ method _build_plugin {
 with 'App::Embra::Role::TestTransformPlugin';
 
 test 'tranforms markdown files' => method {
-    my $should_transform = first { defined and $_->name eq 'transform me.md' } @{ $self->embra->files };
+    my $should_transform = first { defined and $_->name eq 'transform me.html' } @{ $self->embra->files };
 
     isnt(
         $should_transform,
         undef,
-        'did not change name of markdown file ...'
+        'changed the name of markdown file to indicate it is now html ...'
     );
     is(
         $should_transform->notes->{transformed_by},
