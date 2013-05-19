@@ -6,7 +6,7 @@ use Method::Signatures;
 test 'add a plugin' => method {
     my $before = grep { $_ == $self->plugin } @{ $self->embra->plugins };
     $self->embra->add_plugin( $self->plugin );
-    my $after  = grep { $_ == $self->plugin } @{ $self->embra->plugins }; 
+    my $after  = grep { $_ == $self->plugin } @{ $self->embra->plugins };
 
     is(
         $before + 1,
@@ -17,7 +17,7 @@ test 'add a plugin' => method {
 
 test q{can't add a non-plugin} => method {
     use Test::Exception;
-    throws_ok( 
+    throws_ok(
         sub { $self->embra->add_plugin( 'a bean' ) },
         qr/does not satisfy constraint/,
         q{can't add something that doesn't consume the plugin role to the list of plugins}

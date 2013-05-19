@@ -11,7 +11,7 @@ use Try::Tiny;
 
 method transform_files {
     for my $file ( @{ $self->embra->files } ) {
-        my ( $yaml_front_matter ) = 
+        my ( $yaml_front_matter ) =
             $file->content =~ m/
               \A        # beginning of file
               --- \s* ^ # first line is three dashes
