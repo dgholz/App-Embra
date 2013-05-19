@@ -41,6 +41,7 @@ method add_plugin( $plugin where { $_->DOES( "App::Embra::Role::Plugin" ) } ) {
 
 method collate {
     $_->gather_files    for $self->plugins_with( -FileGatherer );
+    $_->prune_files     for $self->plugins_with( -FilePruner );
     $_->transform_files for $self->plugins_with( -FileTransformer );
     $_->render_files    for $self->plugins_with( -FileRenderer );
     $_->publish_files   for $self->plugins_with( -FilePublisher );
