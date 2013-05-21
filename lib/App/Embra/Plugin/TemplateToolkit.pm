@@ -8,10 +8,11 @@ package App::Embra::Plugin::TemplateToolkit;
 use Moo;
 use Method::Signatures;
 use Template;
+use Path::Class qw<>;
 
 has 'include_path' => (
     is => 'ro',
-    default => sub { 'templates' },
+    default => sub { Path::Class::dir( 'templates' ) },
 );
 
 has 'default_template' => (
@@ -53,6 +54,12 @@ method render_files {
     }
 }
 
+method exclude_file( $file ) {
+    return 1 if $self->include_path->subsumes( $file->name );
+    return;
+}
+
 with 'App::Embra::Role::FileRenderer';
+with 'App::Embra::Role::FilePruner';
 
 1;
