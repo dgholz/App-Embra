@@ -10,6 +10,9 @@ use Method::Signatures;
 use File::Basename;
 use File::Spec::Functions qw< canonpath >;
 
+use overload fallback => 1,
+    '""' => method( $other, $swap ) { $self->name };
+
 has 'name' => (
     is => 'rw',
     required => 1,
