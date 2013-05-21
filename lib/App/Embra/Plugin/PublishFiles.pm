@@ -24,6 +24,12 @@ method publish_files {
     }
 }
 
+method exclude_file( $file ) {
+    return 1 if $self->to->subsumes( $file->name );
+    return;
+}
+
 with 'App::Embra::Role::FilePublisher';
+with 'App::Embra::Role::FilePruner';
 
 1;
