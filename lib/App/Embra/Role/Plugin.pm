@@ -23,4 +23,14 @@ method register_plugin( $class:, :$name, HashRef :$args, App::Embra :$embra ) {
     $embra->add_plugin( $self );
 }
 
+method _build_logger {
+    $self->embra->logger;
+}
+
+with 'App::Embra::Role::Logging';
+
+around '_build_log_prefix' => func( $orig, $self ) {
+    return "[${ \ $self->name }] ";
+};
+
 1;
