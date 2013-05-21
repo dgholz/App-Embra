@@ -18,6 +18,16 @@ has 'files' => (
     default => sub{[]},
 );
 
+method _build_logger {
+    return Log::Any->get_logger;
+}
+
+with 'App::Embra::Role::Logging';
+
+around '_build_log_prefix' => func( $orig, $self ) {
+    return "[Embra] ";
+};
+
 method from_config_mvp_sequence( $class:, Config::MVP::Sequence :$sequence ) {
     my $payload = {};
     if ( my $root_section = $sequence->section_named( '_' ) ) {
