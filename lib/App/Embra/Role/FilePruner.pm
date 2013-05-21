@@ -14,11 +14,12 @@ with 'App::Embra::Role::Plugin';
 requires 'exclude_file';
 
 method prune_files {
-    my @files = @{ $self->embra->files };
-    my @to_remove = indexes { $self->exclude_file( $_ ) } @files;
+    my $files = $self->embra->files;
+    my @to_remove = indexes { $self->exclude_file( $_ ) } @{ $files };
 
     for my $i ( reverse sort @to_remove ) {
-        splice @files, $i, 1;
+        $self->debug( "pruning ${ \ $files->[$i] }" );
+        splice @{ $files }, $i, 1;
     }
 
     return;
