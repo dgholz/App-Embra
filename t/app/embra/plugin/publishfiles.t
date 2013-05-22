@@ -26,6 +26,7 @@ method _build_plugin {
 }
 
 with 'App::Embra::Role::TestPublishPlugin';
+with 'App::Embra::Role::TestPrunePlugin';
 
 after setup => method {
     $self->output_dir->recurse( callback => func( $file ) {
@@ -42,6 +43,22 @@ test 'publishes files' => method {
             'quux/quuux' => 'quuuux',
         },
         'published the expected files'
+    );
+};
+
+test 'prunes files in publish dir' => method {
+    my $should_be_pruned = first { defined and $_->name eq $self->output_dir.'/prune me' } @{ $self->embra->files };
+
+    is(
+        $should_be_pruned,
+        undef,
+        'pruned files which were already in the directory to publish to'
+    );
+};
+
+before '_build_embra' => method( @_ ) {
+    push @{ $self->embra_files }, App::Embra::File->new(
+        name => $self->output_dir.'/prune me',
     );
 };
 

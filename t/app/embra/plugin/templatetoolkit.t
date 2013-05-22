@@ -14,6 +14,7 @@ method _build_plugin {
 }
 
 with 'App::Embra::Role::TestRenderPlugin';
+with 'App::Embra::Role::TestPrunePlugin';
 
 test 'renders from default template' => method {
     my $should_be_html = first { defined and $_->name eq 'render me.html' } @{ $self->embra->files };
@@ -55,6 +56,16 @@ test 'renders from non-default template' => method {
     );
 };
 
+test 'prunes files in include_path' => method {
+    my $should_be_pruned = first { defined and $_->name eq 't/corpus/tt_templates/prune me' } @{ $self->embra->files };
+
+    is(
+        $should_be_pruned,
+        undef,
+        'pruned template files'
+    );
+};
+
 run_me( {
     embra_files => [
         App::Embra::File->new(
@@ -68,6 +79,9 @@ run_me( {
                 title => 'A Brief Interlude',
                 header => 'HI MA',
             },
+        ),
+        App::Embra::File->new(
+            name => 't/corpus/tt_templates/prune me',
         ),
     ],
 });
