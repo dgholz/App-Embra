@@ -52,7 +52,7 @@ Install cpanm with C<perlbrew install-cpanm>
 
 =item 3.
 
-Set up a separate perl library with C<perlbrew lib create app-rssfilter; perlbrew use @app-rssfilter>
+Set up a separate perl library with C<perlbrew lib create app-embra; perlbrew use @app-embra>
 
 =back
 
