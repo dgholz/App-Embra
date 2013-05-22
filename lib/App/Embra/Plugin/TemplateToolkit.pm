@@ -12,7 +12,8 @@ use Path::Class qw<>;
 
 has 'include_path' => (
     is => 'ro',
-    default => sub { Path::Class::dir( 'templates' ) },
+    default => sub { 'templates' },
+    coerce => sub { Path::Class::dir( $_[0] ) },
 );
 
 has 'default_template' => (
