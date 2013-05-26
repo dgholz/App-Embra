@@ -7,7 +7,29 @@ package App::Embra::App::Command::collate;
 
 use App::Embra::App -command;
 
+=head1 SYNOPSIS
+
+    embra collate
+
+=head1 DESCRIPTION
+
+This command is a very thin layer over L<App::Embra/collate>, which does all the things required to collate your site.
+
+=cut
+
 sub abstract { 'collate your site'; }
+
+=head1 example
+
+    $ embra collate
+
+=cut
+
+=head1 OPTIONS
+
+No options.
+
+=cut
 
 sub execute {
     my ( $self, $opt, $arg ) = @_;
