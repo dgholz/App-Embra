@@ -7,12 +7,20 @@ package App::Embra::App::Command;
 
 use App::Cmd::Setup -command;
 
+=method embra
+
+This returns the App::Embra object in use by the command. it will be constructed by calling C<< App::Embra->from_config_mvp_sequence >> with the settings from C< embra.ini >.
+
+=cut
+
 sub embra {
     my ( $self ) = @_;
     use 5.010;
     require App::Embra;
     state $embra = App::Embra->from_config_mvp_sequence( sequence => $self->_create_seq );
 }
+
+# from Dist::Zilla::Dist::Build, where it is known as _load_config
 
 sub _create_seq {
     my ( $self ) = @_;
