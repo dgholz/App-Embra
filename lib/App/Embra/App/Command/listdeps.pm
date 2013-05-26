@@ -1,13 +1,29 @@
-
 use strict;
 use warnings;
 
 package App::Embra::App::Command::listdeps;
 
-# ABSTRACT: list plugins required to publish your blog
+# ABSTRACT: list plugins required to collate your site
 
 use App::Embra::App -command;
 use App::Embra::Util;
+
+=head1 SYNOPSIS
+
+    embra listdeps [ --root /path/to/site/ ] [ --missing ] [ --versions ]
+
+=head1 DESCRIPTION
+
+=cut
+
+sub abstract { 'list required plugins' }
+
+=head1 EXAMPLE
+
+    $ embra listdeps
+    $ embra listdeps --missing | cpanm
+
+=cut
 
 sub opt_spec {
     return (
@@ -16,6 +32,22 @@ sub opt_spec {
         [ 'versions' => 'include required version numbers in listing' ],
     );
 }
+
+=head1 OPTIONS
+
+=head2 --root
+
+Specifies the directory to find the site's C<embra.ini>. Defaults to the current directory.
+
+=head2 --missing
+
+List only plugins which are not installed.
+
+=head2 --versions
+
+List the required version number for the required plugins.
+
+=cut
 
 sub execute {
     my ( $self, $opt, $arg ) = @_;
@@ -33,6 +65,8 @@ sub execute {
         print $deps, "\n";
     }
 }
+
+# straight from the mouth of App::Zilla::Util
 
 sub extract_deps {
     my ($root, $missing) = @_;
