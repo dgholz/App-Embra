@@ -10,6 +10,14 @@ extends 'Config::MVP::Assembler';
 with 'Config::MVP::Assembler::WithBundles';
 use App::Embra::Util;
 
+=head1 DESCRIPTION
+
+App::Embra::MVP::Assembler extends L<Config::MVP::Assembler> and composes L<Config::MVP::Assembler::WithBundles> for potential plugin bundles (things composing L<App::Embra::Role::PluginBundle> (once that role is written)).
+
+The Assembler's C<expand_package> method delegates to L<App::Embra::Util/expand_config_package_name>.
+
+=cut
+
 sub expand_package {
     my ( $self, $pkg_name ) = @_;
     App::Embra::Util->expand_config_package_name( $pkg_name );
