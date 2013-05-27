@@ -10,13 +10,33 @@ use Method::Signatures;
 use File::Basename;
 use File::Spec::Functions qw< canonpath >;
 
+# mostly Dist::Zilla::File::OnDisk
+
+=head1 DESCRIPTION
+
+This represents a file to be included in your site.
+
+=cut
+
 use overload fallback => 1,
     '""' => method( $other, $swap ) { $self->name };
+
+=attr name
+
+The name of the file. Change this to change where the file will appear in the site.
+
+=cut
 
 has 'name' => (
     is => 'rw',
     required => 1,
 );
+
+=attr content
+
+The content of the file. Change this to change the content of the file when it appears in the site. Defaults to the contents of C<_original_name>.
+
+=cut
 
 has 'content' => (
   is  => 'rw',
@@ -24,15 +44,33 @@ has 'content' => (
   default => method { $self->_read_file },
 );
 
+=attr _original_name
+
+The original name of this file. This is automatically saved from the C<name> attributes used to construct the object, and can't be altered.
+
+=cut
+
 has '_original_name' => (
   is  => 'ro',
   init_arg => undef,
 );
 
+=attr notes
+
+A hash ref which stores extra values associated with the file. Transform plugins will read and write notes, and Render plugins will read notes.
+
+=cut
+
 has 'notes' => (
     is => 'ro',
     default => method { {} },
 );
+
+=attr ext
+
+The extention of the file's C<name>. Changing this will cause the file's C<name> to be updated to match.
+
+=cut
 
 has 'ext' => (
     is => 'rw',
@@ -48,6 +86,14 @@ method _split_name {
 method _build_ext {
     ($self->_split_name)[2];
 }
+
+=method with_ext
+
+    $file->with_ext( $ext );
+
+Returns file's name with its extension changed to <$ext>.
+
+=cut
 
 method with_ext( $ext ) {
     $ext =~ s/ \A [.] //xms;
@@ -73,8 +119,16 @@ method _read_file {
   my $content = do { local $/; <$fh> };
 }
 
-method update_notes( HashRef $update ) {
-    @{ $self->notes }{ keys %$update } = values %$update;
+=method update_notes
+
+    $file->update_notes( $more_notes );
+
+Merges C<$more_notes> into the file's existing notes.
+
+=cut
+
+method update_notes( HashRef $more_notes ) {
+    @{ $self->notes }{ keys %$more_notes } = values %$more_notes;
 }
 
 1;
