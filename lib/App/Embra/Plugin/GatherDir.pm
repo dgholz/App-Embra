@@ -11,6 +11,18 @@ use Method::Signatures;
 use App::Embra::File;
 use Path::Class::Dir;
 
+=head1 DESCRIPTION
+
+This plugin recursively add all files in a directory to the site.
+
+=cut
+
+=attr from
+
+The directory to gather files from. Defaults to F<.> (the current directory).
+
+=cut
+
 has 'from' => (
     is => 'ro',
     required => 1,
