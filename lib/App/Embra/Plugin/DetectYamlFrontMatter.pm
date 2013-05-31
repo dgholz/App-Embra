@@ -9,6 +9,20 @@ use Moo;
 use Method::Signatures;
 use Try::Tiny;
 
+=head1 DESCRIPTION
+
+This plugin will check each gathered file for L<YAML front-matter|http://jekyllrb.com/docs/frontmatter/>. Any keys & values found will be added to the file's notes.
+
+Files must start with YAML front-matter for it to be detected. The format is:
+
+    ---
+    key: value
+    key2: value2
+    ---
+    << rest of file … >>
+
+=cut
+
 method transform_files {
     for my $file ( @{ $self->embra->files } ) {
         my ( $yaml_front_matter ) =
