@@ -9,6 +9,20 @@ use Moo;
 use Method::Signatures;
 use Path::Class qw<>;
 
+=head1 DESCRIPTION
+
+This plugin creates your site in a directory. The file name is used as the path to write its content to, relative to the destinatino directory.
+
+This plugin additionally prunes already-published files from the list of files to include in the site.
+
+=cut
+
+=attr to
+
+The directory where site files will be written. Defaults to F<.> (the current directory).
+
+=cut
+
 has 'to' => (
     is => 'ro',
     required => 1,
