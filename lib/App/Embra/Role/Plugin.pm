@@ -15,7 +15,7 @@ has 'embra' => (
 
 has 'name' => (
     is => 'ro',
-    default => sub { __PACKAGE__ },
+    default => method { ref $self },
 );
 
 method register_plugin( $class:, :$name, HashRef :$args, App::Embra :$embra ) {
