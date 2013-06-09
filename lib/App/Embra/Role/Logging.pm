@@ -22,7 +22,9 @@ has 'logger' => (
     handles => [ Log::Any->logging_methods ],
 );
 
-requires '_build_logger';
+method _build_logger {
+    return Log::Any->get_logger;
+}
 
 for my $logging_method ( Log::Any->logging_methods ) {
     around $logging_method => func( $orig, $self, $log_msg ) {
