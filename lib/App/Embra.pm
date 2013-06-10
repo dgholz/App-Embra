@@ -18,14 +18,14 @@ has 'files' => (
     default => sub{[]},
 );
 
-method _build_logger {
-    return Log::Any->get_logger;
-}
-
 with 'App::Embra::Role::Logging';
 
 around '_build_log_prefix' => func( $orig, $self ) {
     return "[Embra] ";
+};
+
+around '_build_logger' => func( $orig, $self ) {
+    return Log::Any->get_logger;
 };
 
 method from_config_mvp_sequence( $class:, Config::MVP::Sequence :$sequence ) {
