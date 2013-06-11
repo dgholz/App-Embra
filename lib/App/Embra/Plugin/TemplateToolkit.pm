@@ -81,7 +81,12 @@ method render_files {
             name    => $file->name,
             %{ $file->notes },
         };
-        $self->renderer->process( $template, $notes, \$rendered );
+        use Try::Tiny;
+        try {
+            $self->renderer->process( $template, $notes, \$rendered ) or $self->debug( $self->renderer->error );
+        } catch {
+            $self->debug( $_ );
+        };
         $file->content( $rendered );
         $file->notes->{rendered_by} = __PACKAGE__;
     }
