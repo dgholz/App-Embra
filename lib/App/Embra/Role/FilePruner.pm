@@ -33,7 +33,7 @@ method prune_files {
     my $files = $self->embra->files;
     my @to_remove = indexes { $self->exclude_file( $_ ) } @{ $files };
 
-    for my $i ( reverse sort @to_remove ) {
+    for my $i ( reverse sort { $a <=> $b } @to_remove ) {
         $self->debug( "pruning ${ \ $files->[$i] }" );
         splice @{ $files }, $i, 1;
     }
