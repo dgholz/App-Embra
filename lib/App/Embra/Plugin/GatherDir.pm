@@ -43,8 +43,10 @@ has 'include_dotfiles' => (
 
 method gather_files {
     $self->from->recurse( callback => func( $file ) {
+        my $skip = $file->basename =~ m/ \A [.] /xms && not $self->include_dotfiles;
+        return $file->PRUNE if $file->is_dir and $skip;
         return if $file->is_dir;
-        return if $file->basename =~ m/ \A [.] /xms and not $self->include_dotfiles;
+        return if $skip;
         $self->add_file( App::Embra::File->new( name => $file->stringify ) );
     } );
 }
