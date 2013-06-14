@@ -1,7 +1,6 @@
 use strict;
 use warnings;
 
-use lib 't/lib';
 use App::Embra::Role::Snippet;
 
 package Foo;
