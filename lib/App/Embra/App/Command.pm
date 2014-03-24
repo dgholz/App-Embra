@@ -17,6 +17,7 @@ sub embra {
     my ( $self ) = @_;
     use 5.010;
     require App::Embra;
+    use feature qw< state >;
     state $embra = App::Embra->from_config_mvp_sequence( sequence => $self->_create_seq );
 }
 
