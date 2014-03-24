@@ -285,6 +285,15 @@ DISTRIBUTIONS
       Class::Singleton 1.4
     requirements:
       ExtUtils::MakeMaker 0
+  Class-Tiny-0.014
+    pathname: D/DA/DAGOLDEN/Class-Tiny-0.014.tar.gz
+    provides:
+      Class::Tiny 0.014
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 6.17
+      strict 0
+      warnings 0
   Clone-0.36
     pathname: G/GA/GARU/Clone-0.36.tar.gz
     provides:
@@ -1396,6 +1405,7 @@ DISTRIBUTIONS
     requirements:
       B::Hooks::OP::Annotation 0.44
       B::Hooks::OP::Check 0.19
+      ExtUtils::Depends 0.302
       ExtUtils::MakeMaker 0
       Lexical::SealRequireHints 0.007
   Devel-StackTrace-1.31
@@ -1705,6 +1715,27 @@ DISTRIBUTIONS
       MooseX::Types 0.06
       String::Errf 0.001
       namespace::clean 0.06
+  Dist-Zilla-Plugin-CopyFilesFromBuild-0.103510
+    pathname: R/RT/RTHOMPSON/Dist-Zilla-Plugin-CopyFilesFromBuild-0.103510.tar.gz
+    provides:
+      Dist::Zilla::Plugin::CopyFilesFromBuild 0.103510
+    requirements:
+      Carp 0
+      Dist::Zilla::Role::AfterBuild 0
+      English 0
+      ExtUtils::MakeMaker 6.31
+      File::Copy 0
+      File::Find 0
+      File::Temp 0
+      List::AllUtils 0
+      Moose 0
+      Moose::Autobox 0
+      MooseX::Has::Sugar 0
+      Scalar::Util 0
+      Set::Scalar 0
+      Test::More 0.94
+      perl 5.004
+      utf8 0
   Dist-Zilla-Plugin-Git-2.019
     pathname: C/CJ/CJM/Dist-Zilla-Plugin-Git-2.019.tar.gz
     provides:
@@ -1801,6 +1832,30 @@ DISTRIBUTIONS
       Module::CPANfile 0.9029
       Try::Tiny 0.1
       perl 5.008001
+  Dist-Zilla-Plugin-Run-0.021
+    pathname: E/ET/ETHER/Dist-Zilla-Plugin-Run-0.021.tar.gz
+    provides:
+      Dist::Zilla::Plugin::Run 0.021
+      Dist::Zilla::Plugin::Run::AfterBuild 0.021
+      Dist::Zilla::Plugin::Run::AfterMint 0.021
+      Dist::Zilla::Plugin::Run::AfterRelease 0.021
+      Dist::Zilla::Plugin::Run::BeforeBuild 0.021
+      Dist::Zilla::Plugin::Run::BeforeRelease 0.021
+      Dist::Zilla::Plugin::Run::Release 0.021
+      Dist::Zilla::Plugin::Run::Role::Runner 0.021
+      Dist::Zilla::Plugin::Run::Test 0.021
+    requirements:
+      Config 0
+      Dist::Zilla 4.200002
+      ExtUtils::MakeMaker 6.30
+      File::Spec 0
+      IPC::Open3 0
+      Moose 1.15
+      Path::Class 0.16
+      String::Formatter 0.102082
+      Test::DZil 4.200002
+      Test::File::ShareDir 0
+      namespace::autoclean 0.11
   Dist-Zilla-Plugin-Test-Perl-Critic-2.112410
     pathname: J/JQ/JQUELIN/Dist-Zilla-Plugin-Test-Perl-Critic-2.112410.tar.gz
     provides:
@@ -3946,7 +4001,6 @@ DISTRIBUTIONS
       Role::Tiny::With undef
     requirements:
       Exporter 5.57
-      ExtUtils::MakeMaker 0
       Test::Fatal 0.003
       Test::More 0.96
   Scalar-List-Utils-1.38
@@ -3966,6 +4020,19 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Test::More 0
       perl 5.006001
+  Set-Scalar-1.29
+    pathname: D/DA/DAVIDO/Set-Scalar-1.29.tar.gz
+    provides:
+      Set::Scalar 1.29
+      Set::Scalar::Base 1.29
+      Set::Scalar::Null 1.29
+      Set::Scalar::Real 1.29
+      Set::Scalar::Universe 1.29
+      Set::Scalar::Valued 1.29
+      Set::Scalar::ValuedUniverse 1.29
+      Set::Scalar::Virtual 1.29
+    requirements:
+      ExtUtils::MakeMaker 0
   Software-License-0.103008
     pathname: R/RJ/RJBS/Software-License-0.103008.tar.gz
     provides:
@@ -4370,6 +4437,26 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.30
       Test::Builder 0
       Try::Tiny 0.07
+      strict 0
+      warnings 0
+  Test-File-ShareDir-1.000000
+    pathname: K/KE/KENTNL/Test-File-ShareDir-1.000000.tar.gz
+    provides:
+      Test::File::ShareDir 1.000000
+      Test::File::ShareDir::Dist 1.000000
+      Test::File::ShareDir::Module 1.000000
+      Test::File::ShareDir::Object::Dist 1.000000
+      Test::File::ShareDir::Object::Inc 1.000000
+      Test::File::ShareDir::Object::Module 1.000000
+      Test::File::ShareDir::TempDirObject 1.000000
+    requirements:
+      Carp 0
+      Class::Tiny 0
+      ExtUtils::MakeMaker 6.30
+      File::Copy::Recursive 0
+      File::ShareDir 1.00
+      File::Temp 0
+      Path::Tiny 0
       strict 0
       warnings 0
   Test-Harness-3.30
@@ -4932,6 +5019,7 @@ DISTRIBUTIONS
     provides:
       strictures 1.005002
     requirements:
+      ExtUtils::CBuilder 0
       ExtUtils::MakeMaker 0
       bareword::filehandles 0
       indirect 0
