@@ -53,8 +53,8 @@ sub execute {
     my ( $self, $opt, $arg ) = @_;
     require Path::Class;
 
-    my $deps = format_deps(
-        extract_deps(
+    my $deps = _format_deps(
+        _extract_deps(
             Path::Class::dir(defined $opt->root ? $opt->root : '.'),
             $opt->missing,
         ),
@@ -68,7 +68,7 @@ sub execute {
 
 # straight from the mouth of App::Zilla::Util
 
-sub extract_deps {
+sub _extract_deps {
     my ($root, $missing) = @_;
 
     my $ini = $root->file('embra.ini');
@@ -154,7 +154,7 @@ sub extract_deps {
     return \@final;
 }
 
-sub format_deps {
+sub _format_deps {
     my ($reqs, $versions) = @_;
 
     my $formatted = '';
