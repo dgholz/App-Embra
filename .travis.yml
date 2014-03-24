@@ -1,5 +1,6 @@
 language: perl
 perl:
+- "5.18"
 - "5.16"
 - "5.14"
 - "5.12"
@@ -9,9 +10,8 @@ before_install:
 - git config --global user.name "TravisCI"
 
 install:
-- cpanm --quiet --notest --skip-satisfied Dist::Zilla
-- dzil authordeps | grep -vP '[^\w:]' | cpanm --quiet --notest --skip-satisfied
-- dzil listdeps | grep -vP '[^\w:]' | cpanm --verbose
+- cpanm --quiet --notest --skip-satisfied Carton
+- carton install
 
 script:
-- dzil smoke --release --author
+- carton exec dzil smoke --release --author
