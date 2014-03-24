@@ -12,7 +12,7 @@ use Path::Class qw<>;
 
 =head1 DESCRIPTION
 
-This plugin will process site files through Template Toolkit. For each file with a C<.html> extension, it will look for a template in the C<include_path> with a matching name and use it to process the contents of the file into a rendered HTML document.
+This plugin will process site files through Template Toolkit. For each file with a C<.html> extension, it will look for a template in the C<include_path> with a matching name and use it to process the contents of the file into an assembled HTML document.
 
 Templates will be passed the file's content and body as variables, as well as each of the file's notes.
 
@@ -20,7 +20,7 @@ Templates will be passed the file's content and body as variables, as well as ea
 
 =attr include_path
 
-Where to find templates. Defaults to F<templates> in the current directory.
+Where to find templates. Defaults to F<templates> in the current directory. All files within the path will be pruned.
 
 =cut
 
@@ -52,17 +52,17 @@ has 'extension' => (
     default => sub { '.tt' },
 );
 
-=attr renderer
+=attr assembler
 
-The object used to render files. Defaults to an instance of L<Template Toolkit|Template>.
+The object used to assemble files. Defaults to an instance of L<Template Toolkit|Template>.
 
 =cut
 
-has 'renderer' => (
+has 'assembler' => (
     is => 'lazy',
 );
 
-method _build_renderer {
+method _build_assembler {
     Template->new({
         INCLUDE_PATH => $self->include_path,
         DEFAULT => $self->default_template,
@@ -70,12 +70,12 @@ method _build_renderer {
     });
 }
 
-method render_files {
+method assemble_files {
     for my $file ( @{ $self->embra->files } ) {
         next if $file->ext ne 'html';
 
         my $template = $file->with_ext( $self->extension );
-        my $rendered;
+        my $assembled;
         my $notes = {
             content => $file->content,
             name    => $file->name,
@@ -83,12 +83,12 @@ method render_files {
         };
         use Try::Tiny;
         try {
-            $self->renderer->process( $template, $notes, \$rendered ) or $self->debug( $self->renderer->error );
+            $self->assembler->process( $template, $notes, \$assembled ) or $self->debug( $self->assembler->error );
         } catch {
             $self->debug( $_ );
         };
-        $file->content( $rendered );
-        $file->notes->{rendered_by} = __PACKAGE__;
+        $file->content( $assembled );
+        $file->notes->{assembled_by} = __PACKAGE__;
     }
 }
 
@@ -97,7 +97,7 @@ method exclude_file( $file ) {
     return;
 }
 
-with 'App::Embra::Role::FileRenderer';
+with 'App::Embra::Role::FileAssembler';
 with 'App::Embra::Role::FilePruner';
 
 1;

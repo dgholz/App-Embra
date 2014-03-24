@@ -13,46 +13,46 @@ method _build_plugin {
     );
 }
 
-with 'App::Embra::Role::TestRenderPlugin';
+with 'App::Embra::Role::TestAssemblePlugin';
 with 'App::Embra::Role::TestPrunePlugin';
 
-test 'renders from default template' => method {
-    my $should_be_html = first { defined and $_->name eq 'render me.html' } @{ $self->embra->files };
+test 'assembles from default template' => method {
+    my $should_be_html = first { defined and $_->name eq 'assemble me.html' } @{ $self->embra->files };
 
     isnt(
         $should_be_html,
         undef,
-        'did not change name of rendered file ...'
+        'did not change name of assembled file ...'
     );
     is(
-        $should_be_html->notes->{rendered_by},
+        $should_be_html->notes->{assembled_by},
         'App::Embra::Plugin::TemplateToolkit',
-        '... and noted that it rendered the file ...'
+        '... and noted that it assembled the file ...'
     );
     is(
         $should_be_html->content,
         '<html><body>hello</body></html>',
-        '... and rendered the file'
+        '... and assembled the file'
     );
 };
 
-test 'renders from non-default template' => method {
+test 'assembles from non-default template' => method {
     my $should_be_html = first { defined and $_->name eq 'with_vars.html' } @{ $self->embra->files };
 
     isnt(
         $should_be_html,
         undef,
-        'changed name of rendered file ...'
+        'changed name of assembled file ...'
     );
     is(
-        $should_be_html->notes->{rendered_by},
+        $should_be_html->notes->{assembled_by},
         'App::Embra::Plugin::TemplateToolkit',
-        '... and noted that it rendered the file ...'
+        '... and noted that it assembled the file ...'
     );
     is(
         $should_be_html->content,
         '<html><title>A Brief Interlude</title><body><h1>HI MA</h1>howdy</body></html>',
-        '... and rendered the file'
+        '... and assembled the file'
     );
 };
 
@@ -69,7 +69,7 @@ test 'prunes files in include_path' => method {
 run_me( {
     embra_files => [
         App::Embra::File->new(
-            name => 'render me.html',
+            name => 'assemble me.html',
             content => 'hello',
         ),
         App::Embra::File->new(

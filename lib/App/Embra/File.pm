@@ -57,7 +57,7 @@ has '_original_name' => (
 
 =attr notes
 
-A hash ref which stores extra values associated with the file. Transform plugins will read and write notes, and Render plugins will read notes.
+A hash ref which stores extra values associated with the file. Transform plugins will read and write notes, and Assemble plugins will read notes.
 
 =cut
 

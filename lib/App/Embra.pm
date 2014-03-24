@@ -93,7 +93,7 @@ Assembles your site. Plugins are called in this order:
 * gather
 * prune
 * transform
-* render
+* assemble
 * publish
 
 For each of the types, all plugins which implement C<< App::Embra::Role::File<Type> >> have their C<< <type>_files> >> method called, in ths same order as they appear in L<C</plugins>>.
@@ -104,7 +104,7 @@ method collate {
     $_->gather_files    for $self->plugins_with( -FileGatherer );
     $_->prune_files     for $self->plugins_with( -FilePruner );
     $_->transform_files for $self->plugins_with( -FileTransformer );
-    $_->render_files    for $self->plugins_with( -FileRenderer );
+    $_->assemble_files  for $self->plugins_with( -FileAssembler );
     $_->publish_files   for $self->plugins_with( -FilePublisher );
 }
 
