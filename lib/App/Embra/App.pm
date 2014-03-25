@@ -7,4 +7,7 @@ package App::Embra::App;
 
 use App::Cmd::Setup -app;
 
+use Log::Any::Adapter;
+Log::Any::Adapter->set( 'Stdout' );
+
 1;

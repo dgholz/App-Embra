@@ -15,7 +15,5 @@ use warnings;
 package embra;
 
 use App::Embra::App;
-use Log::Any::Adapter;
-Log::Any::Adapter->set( 'Stdout' );
 
 App::Embra::App->run;
