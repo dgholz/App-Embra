@@ -101,6 +101,7 @@ For each of the types, all plugins which implement C<< App::Embra::Role::File<Ty
 =cut
 
 method collate {
+    $self->debug( 'collating' );
     $_->gather_files    for $self->plugins_with( -FileGatherer );
     $_->prune_files     for $self->plugins_with( -FilePruner );
     $_->transform_files for $self->plugins_with( -FileTransformer );
