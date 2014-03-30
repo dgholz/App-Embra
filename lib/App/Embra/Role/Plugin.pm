@@ -56,6 +56,7 @@ Static method which creates a new instance of the implementing plugin with its C
 
 method register_plugin( $class:, :$name, HashRef :$args, App::Embra :$embra ) {
     my $self = $class->new( embra => $embra, name => $name, %{ $args } );
+    $self->logger->debugf( '%sregistered with %s', $self->log_prefix, $args );
     $embra->add_plugin( $self );
 }
 
