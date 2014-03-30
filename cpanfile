@@ -11,6 +11,7 @@ requires "File::Spec::Functions" => "0";
 requires "List::MoreUtils" => "0";
 requires "Log::Any" => "0";
 requires "Log::Any::Adapter" => "0";
+requires "Log::Any::Adapter::Dispatch" => "0";
 requires "Method::Signatures" => "0";
 requires "Moo" => "0";
 requires "Moo::Role" => "0";
