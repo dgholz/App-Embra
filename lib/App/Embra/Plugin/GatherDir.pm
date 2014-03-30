@@ -42,6 +42,8 @@ has 'include_dotfiles' => (
 );
 
 method gather_files {
+    $self->debug( 'gathering a *lot* of files' );
+    $self->info( 'yay files' );
     $self->from->recurse( callback => func( $file ) {
         my $skip = $file->basename =~ m/ \A [.] /xms && not $self->include_dotfiles;
         return $file->PRUNE if $file->is_dir and $skip;
