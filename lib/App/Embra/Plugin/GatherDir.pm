@@ -10,6 +10,9 @@ use Method::Signatures;
 
 use App::Embra::File;
 use Path::Class::Dir;
+use List::MoreUtils qw< any >;
+
+method mvp_multivalue_args() { qw< exclude_match >; }
 
 =head1 DESCRIPTION
 
@@ -41,15 +44,28 @@ has 'include_dotfiles' => (
     default => sub { !1 },
 );
 
+=attr exclude_match
+
+A regular expression to match files which should not be gathered. May be used multiple times tospecify multiple patterns to exclude.
+
+=cut
+
+has 'exclude_match' => (
+    is => 'ro',
+    coerce => sub { [ map { qr{$_} } @{ $_[0] } ] },
+    default => sub { [] },
+);
+
 method gather_files {
     $self->debug( 'looking in '.$self->from );
     $self->from->recurse( callback => func( $file ) {
         return if $file eq $self->from;
         my $skip = $file->basename =~ m/ \A [.] /xms && not $self->include_dotfiles;
-        return $file->PRUNE if $file->is_dir and $skip;
+        my $exclude = any { $file =~ $_ } @{ $self->exclude_match };
+        return $file->PRUNE if $file->is_dir and $skip || $exclude;
         return if $file->is_dir;
         $self->debug( "considering $file" );
-        return if $skip;
+        return if $skip or $exclude;
         my $embra_file = App::Embra::File->new( name => $file->stringify );
         $embra_file->name( $file->relative( $self->from )->stringify );
         $self->add_file( $embra_file );
