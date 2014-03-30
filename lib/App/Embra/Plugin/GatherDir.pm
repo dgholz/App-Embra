@@ -27,7 +27,7 @@ has 'from' => (
     is => 'ro',
     required => 1,
     default => sub { '.' },
-    coerce => sub { Path::Class::Dir->new( $_[0] ) },
+    coerce => sub { Path::Class::Dir->new( $_[0] )->absolute },
 );
 
 =attr include_dotfiles
@@ -44,12 +44,15 @@ has 'include_dotfiles' => (
 method gather_files {
     $self->debug( 'looking in '.$self->from );
     $self->from->recurse( callback => func( $file ) {
+        return if $file eq $self->from;
         my $skip = $file->basename =~ m/ \A [.] /xms && not $self->include_dotfiles;
         return $file->PRUNE if $file->is_dir and $skip;
         return if $file->is_dir;
         $self->debug( "considering $file" );
         return if $skip;
-        $self->add_file( App::Embra::File->new( name => $file->stringify ) );
+        my $embra_file = App::Embra::File->new( name => $file->stringify );
+        $embra_file->name( $file->relative( $self->from )->stringify );
+        $self->add_file( $embra_file );
     } );
 }
 
