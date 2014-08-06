@@ -106,7 +106,7 @@ method collate {
     $_->prune_files     for $self->plugins_with( -FilePruner );
     $_->transform_files for $self->plugins_with( -FileTransformer );
     $_->assemble_files  for $self->plugins_with( -FileAssembler );
-    $_->publish_files   for $self->plugins_with( -FilePublisher );
+    $_->publish_site    for $self->plugins_with( -SitePublisher );
 }
 
 =method plugins_with

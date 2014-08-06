@@ -30,7 +30,7 @@ has 'to' => (
     coerce => sub { Path::Class::dir( $_[0] ) },
 );
 
-method publish_files {
+method publish_site {
     for my $file ( @{ $self->embra->files } ) {
         my $f = $self->to->file( $file->name );
         $f->parent->mkpath;
@@ -43,7 +43,7 @@ method exclude_file( $file ) {
     return;
 }
 
-with 'App::Embra::Role::FilePublisher';
+with 'App::Embra::Role::SitePublisher';
 with 'App::Embra::Role::FilePruner';
 
 1;

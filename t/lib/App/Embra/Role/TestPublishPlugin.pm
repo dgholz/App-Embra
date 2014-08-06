@@ -3,7 +3,7 @@ use Test::Roo::Role;
 with 'App::Embra::Role::TestPlugin';
 
 before setup => sub {
-    shift->plugin->publish_files;
+    shift->plugin->publish_site;
 };
 
 1;
