@@ -26,7 +26,7 @@ test 'fakes enough of Dist::Zilla to fool a plugin' => method {
     $self->embra->collate;
 
     my $foo = grep { $_->name eq 'Hello' } @{ $self->embra->plugins };
-    my $bar = grep { $_->name eq 'Dist::Zilla::Plugin::Hello' } @{ $foo->zilla->plugins };
+    my $bar = grep { $_->name eq 'Dist::Zilla::Plugin::Hello' } @{ $foo->plugins };
     is_deeply(
         $bar->files,
         [ $fake_file ],
