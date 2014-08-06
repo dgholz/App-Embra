@@ -50,7 +50,7 @@ has 'files' => (
 
     my $embra = App::Embra->from_config_mvp_sequence( $sequence );
 
-Returns a new instance with its initial attributes set from an instance of L<Config::MVP::Sequence>. Called by the L<command-line base class|App::Embra::App::Command> whenever the L<embra> is run.
+Returns a new C<App::Embra> with its attributes & plugins taken from a L<Config::MVP::Sequence>. Called by the L<command-line base class|App::Embra::App::Command> whenever L<embra> is run.
 
 =cut
 
