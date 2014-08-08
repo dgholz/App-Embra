@@ -20,26 +20,26 @@ use App::Embra::File;
 }
 
 test 'fakes enough of Dist::Zilla to fool a plugin' => method {
-    my $fake_file = App::Embra::File( name => "hi", content => "hellow" );
-    push @{ $self->embra->files }, $fake_file;
 
     $self->embra->collate;
 
-    my $foo = grep { $_->name eq 'Hello' } @{ $self->embra->plugins };
-    my $bar = grep { $_->name eq 'Dist::Zilla::Plugin::Hello' } @{ $foo->plugins };
+    my $foo = $self->embra->find_plugin( 'App::Embra::Plugin::WrapZillaPlugin' );
     is_deeply(
-        $bar->files,
-        [ $fake_file ],
+        $foo->plugin->files,
+        [],
     );
 
 };
 
 run_me( {
+    embra_files => [
+        App::Embra::File->new( name => "hi", content => "hello" ),
+    ],
     config => {
-        'Hello' => {
-            __package => 'App::Embra::Plugin::Zilla',
+        '-Hello' => {
+            __package => 'App::Embra::Plugin::WrapZillaPlugin',
         }
-    }
+    },
 } );
 
 done_testing;
