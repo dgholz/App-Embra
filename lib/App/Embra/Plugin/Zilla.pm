@@ -3,39 +3,27 @@ use warnings;
 
 package App::Embra::Plugin::Zilla;
 
-# ABSTRACT: adapts a Dist::Zilla plugin to work with App::Embra
+# ABSTRACT: provides a Dist::Zilla-like object for wrapped plugins
 
 use Moo;
 use Method::Signatures;
 
 =head1 DESCRIPTION
 
-This plugin fools something which does L<Dist::Zilla::Role::Plugin> into treating a L<App::Embra> as if it were a L<Dist::Zilla>. Not all Dist::Zilla plugin roles are supported!
+This plugin provides enough of the functionality of L<Dist::Zilla> to fool a plugin wrapped by L<App::Embra::Plugin::WrapZillaPlugin>. Not all Dist::Zilla plugin roles are supported!
 
 =cut
 
-=attr wrapped_plugin
-
-This is a L<Dist::Zilla> plugin to adapt to work on L<App::Embra>;
-
-=cut
-
-has 'plugin' => (
-    is => 'ro',
-    required => 1,
+has 'zilla' => (
+    is => 'lazy',
+    default => method { $self->embra },
+    handles => [ qw< files > ],
 );
 
-method publish_site {
-    my @wraps = ( [ '-BeforeRelease' => func( $plugin ) { $plugin->before_release() } ] );
-    for my $wrap ( @wraps ) {
-        my( $role, $shim ) = @{ $wrap };
-        $role =~ s/^-/Dist::Zilla::Role::/xms;
-        if( $self->plugin->does( $role ) ) {
-            $shim->( $self->plugin );
-        }
-    }
+method isa( $class ) {
+    $class eq ref $self or $class eq 'Dist::Zilla'; # cheeky
 }
 
-with 'App::Embra::Role::SitePublisher';
+with 'App::Embra::Role::Plugin';
 
 1;
