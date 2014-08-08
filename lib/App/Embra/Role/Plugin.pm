@@ -50,7 +50,7 @@ has 'name' => (
 
     App::Embra::Role::Plugin->register_plugin( $class, $name, $args, $embra );
 
-Static method which creates a new instance of the implementing plugin with its C<name> set to C<$name>, C<embra> set to C<$embra>, and each entry of the C<$args> hash ref passed as an argument to the constructor. It then plugs new instance into C<$embra>.
+Static method which creates a new instance of the implementing plugin with its C<name> set to C<$name>, C<embra> set to C<$embra>, and each entry of the C<$args> hash ref passed as an argument to the constructor. It then plugs new instance into C<$embra>. Returns the created instance.
 
 =cut
 
@@ -58,6 +58,7 @@ method register_plugin( $class:, :$name, HashRef :$args, App::Embra :$embra ) {
     my $self = $class->new( embra => $embra, name => $name, %{ $args } );
     $self->logger->debugf( '%sregistered with %s', $self->log_prefix, $args );
     $embra->add_plugin( $self );
+    return $self;
 }
 
 1;
