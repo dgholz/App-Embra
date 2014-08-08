@@ -83,6 +83,18 @@ method add_plugin( $plugin where { $_->DOES( "App::Embra::Role::Plugin" ) } ) {
     push @{ $self->plugins}, $plugin;
 }
 
+=method find_plugin
+
+    my $plugin = $embra->find_plugin( $class );
+
+Returns the first plugin in L<C</plugins>> with class C<$class>. Returns an emtpy list if no plugin with class C<$class> is present
+
+=cut
+
+method find_plugin( $class ) {
+    ( grep { ref $_ eq $class } @{ $self->plugins } )[0];
+}
+
 =method collate
 
     $embra->collate;
