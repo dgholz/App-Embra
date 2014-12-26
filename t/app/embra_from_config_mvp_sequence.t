@@ -1,9 +1,9 @@
 use lib 't/lib';
 use Test::Roo;
-extends 'App::Embra::FromConfigMVP';
 use Method::Signatures;
 
 with 'App::Embra::StubConfig';
+with 'App::Embra::FromConfigMVP';
 
 test 'create from Config::MVP::Sequence' => method {
     is(

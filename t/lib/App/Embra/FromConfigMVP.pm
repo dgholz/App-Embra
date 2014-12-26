@@ -1,5 +1,5 @@
 package App::Embra::FromConfigMVP;
-use Test::Roo;
+use Test::Roo::Role;
 
 use App::Embra;
 use Method::Signatures;
@@ -16,6 +16,8 @@ has 'config_mvp_sequence' => (
         } );
     },
 );
+
+requires 'config';
 
 has 'embra' => (
     is => 'ro',
