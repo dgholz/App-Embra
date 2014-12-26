@@ -3,6 +3,8 @@ use Test::Roo;
 extends 'App::Embra::FromConfigMVP';
 use Method::Signatures;
 
+with 'App::Embra::StubConfig';
+
 test 'create from Config::MVP::Sequence' => method {
     is(
         scalar @{ $self->embra->plugins },

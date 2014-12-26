@@ -17,17 +17,6 @@ has 'config_mvp_sequence' => (
     },
 );
 
-has 'config' => (
-    is => 'ro',
-    default => method {
-        {
-            'App::Embra::Plugin::Test' => {
-                greeting => 'howdy',
-            },
-        };
-    },
-);
-
 has 'embra' => (
     is => 'ro',
     default => method {
