@@ -21,7 +21,7 @@ has 'config' => (
     }
 }
 
-test 'fakes enough of Dist::Zilla to fool a plugin' => method {
+test 'fake enough of Dist::Zilla to fool a plugin' => method {
 
     $self->embra->collate;
 
