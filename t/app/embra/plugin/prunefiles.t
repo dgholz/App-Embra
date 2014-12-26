@@ -1,8 +1,10 @@
 use lib 't/lib';
 use Test::Roo;
-extends 'App::Embra::FromConfigMVP';
 use Method::Signatures;
-use Path::Class qw< dir >;
+
+has config => (
+    is => 'ro',
+);
 
 test 'stopped files from being processed' => method {
     $self->embra->collate;
@@ -13,6 +15,8 @@ test 'stopped files from being processed' => method {
         'excluded the right files'
     );
 };
+
+with 'App::Embra::FromConfigMVP';
 
 run_me( {
     config => {

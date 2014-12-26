@@ -1,9 +1,11 @@
 use lib 't/lib';
 use Test::Roo;
-extends 'App::Embra::FromConfigMVP';
 use Method::Signatures;
-use Path::Class qw< dir >;
 use App::Embra::File;
+
+has 'config' => (
+    is => 'ro',
+);
 
 {
     package Dist::Zilla::Plugin::Hello;
@@ -30,6 +32,8 @@ test 'fakes enough of Dist::Zilla to fool a plugin' => method {
     );
 
 };
+
+with 'App::Embra::FromConfigMVP';
 
 run_me( {
     embra_files => [
