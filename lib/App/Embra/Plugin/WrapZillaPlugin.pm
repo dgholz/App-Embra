@@ -8,6 +8,8 @@ package App::Embra::Plugin::WrapZillaPlugin;
 use Moo;
 use Method::Signatures;
 use App::Embra::Plugin::Zilla;
+use Class::Inspector qw<>;
+use Module::Runtime qw<>;
 
 =head1 DESCRIPTION
 
@@ -41,6 +43,11 @@ method BUILDARGS( @args ) {
     my $name = delete $args{name};
     die q{must have a plugin to wrap!} if not defined $name;
     ( my $plugin_class = $name ) =~ s/^-/Dist::Zilla::Plugin::/xms;
+
+    if( not Class::Inspector->loaded( $plugin_class ) ) {
+            Module::Runtime::require_module $plugin_class;
+    }
+
     die q{can't wrap something that isn't a Dist::Zilla plugin} if not $plugin_class->does( 'Dist::Zilla::Role::Plugin' );
     my $plugin = $plugin_class->new( zilla => find_zilla( $embra ), plugin_name => $name, %args );
 
