@@ -84,9 +84,9 @@ sub _extract_deps {
     require CPAN::Meta::Requirements;
     my $reqs = CPAN::Meta::Requirements->new;
 
+    delete $config->{_};
     my @packs =
         map    { s/\s.*//; $_ }
-        grep { $_ ne '_' }
         keys %$config;
 
     foreach my $pack (@packs) {
