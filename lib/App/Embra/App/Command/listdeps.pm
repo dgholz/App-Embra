@@ -89,6 +89,7 @@ sub _extract_deps {
         my ($p, $n) = split qr{ [ ]* / [ ]* }xms, $sec;
         if( defined $n ) {
             my $v = delete $config->{$sec};
+            $v->{_name} ||= $n;
             $config->{$p} = $v;
         }
     }
