@@ -5,6 +5,9 @@ package App::Embra::App::Command::listdeps;
 
 # ABSTRACT: list plugins required to collate your site
 
+use Class::Inspector qw<>;
+use Module::Runtime qw<>;
+
 use App::Embra::App -command;
 use App::Embra::Util;
 
@@ -104,6 +107,16 @@ sub _extract_deps {
         }
         my $realname = App::Embra::Util->expand_config_package_name($pack);
         $reqs->add_minimum($realname => $version);
+
+        if( exists $config->{$pack}->{_name} ) {
+            if( not Class::Inspector->loaded( $realname ) ) {
+                Module::Runtime::require_module $realname;
+            }
+            if( $realname->does('App::Embra::Role::ExtraListDeps') ) {
+                $realname->add_extra_deps( config => $config->{$pack}, reqs => $reqs )
+            }
+        }
+
     }
 
     seek $fh, 0, 0;
