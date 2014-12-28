@@ -65,6 +65,12 @@ method publish_site {
     }
 }
 
+method extra_list_deps($class:, HashRef :$config) {
+    ( my $plugin_class = $config->{_name} ) =~ s/^-/Dist::Zilla::Plugin::/xms;
+    return $plugin_class;
+}
+
 with 'App::Embra::Role::SitePublisher';
+with 'App::Embra::Role::ExtraListDeps';
 
 1;
