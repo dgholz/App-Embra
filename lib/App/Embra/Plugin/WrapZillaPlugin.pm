@@ -45,7 +45,7 @@ method BUILDARGS( @args ) {
     ( my $plugin_class = $name ) =~ s/^-/Dist::Zilla::Plugin::/xms;
 
     if( not Class::Inspector->loaded( $plugin_class ) ) {
-            Module::Runtime::require_module $plugin_class;
+        Module::Runtime::require_module $plugin_class;
     }
 
     die q{can't wrap something that isn't a Dist::Zilla plugin} if not $plugin_class->does( 'Dist::Zilla::Role::Plugin' );
