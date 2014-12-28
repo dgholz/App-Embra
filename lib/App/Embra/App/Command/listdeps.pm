@@ -85,9 +85,15 @@ sub _extract_deps {
     my $reqs = CPAN::Meta::Requirements->new;
 
     delete $config->{_};
-    my @packs =
-        map    { s/\s.*//; $_ }
-        keys %$config;
+    for my $sec (keys %$config) {
+        my ($p, $n) = split qr{ [ ]* / [ ]* }xms, $sec;
+        if( defined $n ) {
+            my $v = delete $config->{$sec};
+            $config->{$p} = $v;
+        }
+    }
+
+    my @packs = keys %$config;
 
     foreach my $pack (@packs) {
 
