@@ -63,6 +63,7 @@ method publish_site {
         my( $role, $shim ) = @{ $wrap };
         $role =~ s/^-/Dist::Zilla::Role::/xms;
         if( $self->plugin->does( $role ) ) {
+            local *Dist::Zilla::VERSION = method { 4 }; # App::Embra::File->content, not ->encoded_content
             $shim->( $self->plugin );
         }
     }
