@@ -55,7 +55,10 @@ method BUILDARGS( @args ) {
 }
 
 method publish_site {
-    my @wraps = ( [ '-BeforeRelease' => func( $plugin ) { $plugin->before_release() } ] );
+    my @wraps = (
+        [ '-AfterBuild' => func( $plugin ) { $plugin->after_build({ build_root => q<.> } ) } ],
+        [ '-BeforeRelease' => func( $plugin ) { $plugin->before_release() } ],
+    );
     for my $wrap ( @wraps ) {
         my( $role, $shim ) = @{ $wrap };
         $role =~ s/^-/Dist::Zilla::Role::/xms;
