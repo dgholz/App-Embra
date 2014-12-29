@@ -35,6 +35,7 @@ method publish_site {
         my $f = $self->to->file( $file->name );
         $f->parent->mkpath;
         $f->spew( $file->content );
+        chmod $file->mode, $f or die "could't chmod $file: $!";
     }
 }
 

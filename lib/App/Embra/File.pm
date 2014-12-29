@@ -44,6 +44,18 @@ has 'content' => (
   default => method { $self->_read_file },
 );
 
+=attr mode
+
+The permissions of the file. Defaults to 0644.
+
+=cut
+
+has 'mode' => (
+  is  => 'rw',
+  lazy => 1,
+  default => method { 0644 },
+);
+
 =attr _original_name
 
 The original name of this file. This is automatically saved from the C<name> attributes used to construct the object, and can't be altered.
