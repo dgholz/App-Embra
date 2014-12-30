@@ -22,4 +22,10 @@ has '_wrap_logger' => (
     default => method { $self->logger },
 );
 
+while( my ($w, $r) = each %_log_level_map ) {
+    around $w => func( $orig, $self, $log_msg ) {
+        $self->logger->$r( $self->log_prefix . $log_msg );
+    };
+}
+
 1;
