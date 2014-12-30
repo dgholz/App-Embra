@@ -10,7 +10,7 @@ use Moo;
 
 with 'App::Embra::Role::Logging';
 
-has 'wrap_logger' => (
+has '_wrap_logger' => (
     is => 'lazy',
     handles => {
         log => 'info',
