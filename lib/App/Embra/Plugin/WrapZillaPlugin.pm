@@ -5,11 +5,12 @@ package App::Embra::Plugin::WrapZillaPlugin;
 
 # ABSTRACT: adapts a Dist::Zilla plugin to work with App::Embra
 
-use Moo;
 use Method::Signatures;
 use App::Embra::Plugin::Zilla;
+use App::Embra::Plugin::Zilla::WrapLog;
 use Class::Inspector qw<>;
 use Module::Runtime qw<>;
+use Moo;
 
 =head1 DESCRIPTION
 
@@ -49,7 +50,12 @@ method BUILDARGS( @args ) {
     }
 
     die q{can't wrap something that isn't a Dist::Zilla plugin} if not $plugin_class->does( 'Dist::Zilla::Role::Plugin' );
-    my $plugin = $plugin_class->new( zilla => find_zilla( $embra ), plugin_name => $name, %args );
+    my $plugin = $plugin_class->new(
+        zilla => find_zilla( $embra ),
+        plugin_name => $name,
+        logger => App::Embra::Plugin::Zilla::WrapLog->new( proxy_prefix => "[$name] ", logger => $embra->logger ),
+        %args
+    );
 
     return { embra => $embra, plugin => $plugin };
 }
