@@ -3,17 +3,19 @@ use lib 't/lib';
 use Method::Signatures;
 use Test::Roo;
 
-package App::Embra::Role::Test;
-use Role::Tiny;
-
-package App::Embra::Plugin::TestRole;
-use Moo;
-with 'App::Embra::Role::Test';
-with 'App::Embra::Role::Plugin';
-
-package main;
-
 extends 'App::Embra::Tester';
+
+{
+    package App::Embra::Role::Test;
+    use Role::Tiny;
+}
+
+{
+    package App::Embra::Plugin::TestRole;
+    use Moo;
+    with 'App::Embra::Role::Test';
+    with 'App::Embra::Role::Plugin';
+}
 
 has 'plugin_with_role' => (
     is => 'lazy',
