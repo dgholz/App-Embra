@@ -1,7 +1,7 @@
 package App::Embra::Role::TestPlugin;
-use Test::Roo::Role;
-
 use App::Embra;
+
+use Test::Roo::Role;
 
 requires '_build_plugin';
 

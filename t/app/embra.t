@@ -1,7 +1,9 @@
 use lib 't/lib';
-use Test::Roo;
-extends 'App::Embra::Tester';
+
 use Method::Signatures;
+use Test::Roo;
+
+extends 'App::Embra::Tester';
 
 test 'add a plugin' => method {
     my $before = grep { $_ == $self->plugin } @{ $self->embra->plugins };

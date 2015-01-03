@@ -1,10 +1,9 @@
 use lib 't/lib';
-
 use App::Embra::Plugin::Cname;
 
 use List::Util qw< first >;
-use Test::Roo;
 use Method::Signatures;
+use Test::Roo;
 
 method _build_plugin {
     return App::Embra::Plugin::Cname->new(

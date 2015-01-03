@@ -1,6 +1,7 @@
 use lib 't/lib';
-use Test::Roo;
+
 use Method::Signatures;
+use Test::Roo;
 
 has 'config' => (
     is => 'ro',
