@@ -20,9 +20,9 @@ has 'zilla' => (
     handles => [ qw< files > ],
 );
 
-method isa( $class ) {
-    $class eq ref $self or $class eq 'Dist::Zilla'; # cheeky
-}
+around 'isa' => func ( $orig, $self, $class ) {
+    return $class eq 'Dist::Zilla' or $orig->($self, $class); # cheeky
+};
 
 with 'App::Embra::Role::Plugin';
 
