@@ -5,8 +5,8 @@ package App::Embra;
 
 # ABSTRACT: build a site from parts
 
-use Moo;
 use Method::Signatures;
+use Moo;
 
 =head1 DESCRIPTION
 

@@ -5,9 +5,9 @@ package App::Embra::Plugin::DetectYamlFrontMatter;
 
 # ABSTRACT: detect YAML front matter & save as notes
 
-use Moo;
-use Method::Signatures;
 use Try::Tiny;
+use Method::Signatures;
+use Moo;
 
 =head1 DESCRIPTION
 

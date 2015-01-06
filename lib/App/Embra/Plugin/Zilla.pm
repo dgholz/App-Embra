@@ -5,8 +5,8 @@ package App::Embra::Plugin::Zilla;
 
 # ABSTRACT: provides a Dist::Zilla-like object for wrapped plugins
 
-use Moo;
 use Method::Signatures;
+use Moo;
 
 =head1 DESCRIPTION
 

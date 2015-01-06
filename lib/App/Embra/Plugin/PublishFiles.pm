@@ -5,9 +5,9 @@ package App::Embra::Plugin::PublishFiles;
 
 # ABSTRACT: write site files into a directory
 
-use Moo;
-use Method::Signatures;
 use Path::Class qw<>;
+use Method::Signatures;
+use Moo;
 
 =head1 DESCRIPTION
 

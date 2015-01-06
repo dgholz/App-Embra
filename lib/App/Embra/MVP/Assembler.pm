@@ -5,10 +5,11 @@ package App::Embra::MVP::Assembler;
 
 # ABSTRACT: App::Embra-specific subclass of Config::MVP::Assembler
 
+use App::Embra::Util;
+
 use Moo;
 extends 'Config::MVP::Assembler';
 with 'Config::MVP::Assembler::WithBundles';
-use App::Embra::Util;
 
 =head1 DESCRIPTION
 

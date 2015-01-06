@@ -5,11 +5,12 @@ package App::Embra::Plugin::WrapZillaPlugin;
 
 # ABSTRACT: adapts a Dist::Zilla plugin to work with App::Embra
 
-use Method::Signatures;
-use App::Embra::Plugin::Zilla;
-use App::Embra::Plugin::Zilla::WrapLog;
 use Class::Inspector qw<>;
 use Module::Runtime qw<>;
+use Method::Signatures;
+
+use App::Embra::Plugin::Zilla;
+use App::Embra::Plugin::Zilla::WrapLog;
 use Moo;
 
 =head1 DESCRIPTION

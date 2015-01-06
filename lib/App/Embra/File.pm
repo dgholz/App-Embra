@@ -5,10 +5,10 @@ package App::Embra::File;
 
 # ABSTRACT: a file from your site
 
-use Moo;
-use Method::Signatures;
 use File::Basename;
 use File::Spec::Functions qw< canonpath >;
+use Method::Signatures;
+use Moo;
 
 # mostly Dist::Zilla::File::OnDisk
 
