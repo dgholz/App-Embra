@@ -29,6 +29,7 @@ This adds a file to the site.
 =cut
 
 method add_file( App::Embra::File $file ) {
+    $self->debug( "gathered $file" );
     push @{ $self->embra->files }, $file;
 }
 

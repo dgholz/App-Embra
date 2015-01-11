@@ -2460,6 +2460,16 @@ DISTRIBUTIONS
       IO::File 0
       Log::Any 0
       Test::More 0
+  Log-Any-Adapter-Dispatch-0.06
+    pathname: J/JS/JSWARTZ/Log-Any-Adapter-Dispatch-0.06.tar.gz
+    provides:
+      Log::Any::Adapter::Dispatch 0.06
+    requirements:
+      ExtUtils::MakeMaker 6.42
+      File::Temp 0.20
+      Log::Any::Adapter 0
+      Log::Dispatch 2.26
+      Test::More 0
   Log-Dispatch-2.41
     pathname: D/DR/DROLSKY/Log-Dispatch-2.41.tar.gz
     provides:

@@ -73,7 +73,7 @@ sub _extract_deps {
 
     my $ini = $root->file('embra.ini');
 
-    die "embra listdeps only works on embra.ini files, and you don't have one\n"
+    die "embra listdeps only works on embra.ini files, and I couldn't fined one at: $ini\n"
         unless -e $ini;
 
     my $fh = $ini->openr;
