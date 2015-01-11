@@ -1,3 +1,6 @@
+use strict;
+use warnings;
+
 use lib 't/lib';
 use App::Embra::File;
 use App::Embra::Plugin::DetectYamlFrontMatter;
