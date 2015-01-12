@@ -1,3 +1,6 @@
+use strict;
+use warnings;
+
 package App::Embra::Role::TestPlugin;
 use App::Embra;
 
