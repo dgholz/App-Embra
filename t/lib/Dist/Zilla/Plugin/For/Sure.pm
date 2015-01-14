@@ -1,9 +1,6 @@
 use strict;
 use warnings;
 
-package Dist::Zilla::Role::Plugin;
-use Moo::Role;
-
 package Dist::Zilla::Plugin::For::Sure;
 use Moo;
 
