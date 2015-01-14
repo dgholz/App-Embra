@@ -21,7 +21,7 @@ This plugin fools something which does L<Dist::Zilla::Role::Plugin> into treatin
 
 =attr plugin
 
-This is the name of a L<Dist::Zilla> plugin adapted to work on L<App::Embra>;
+This is a L<Dist::Zilla> plugin adapted to work on L<App::Embra>;
 
 =cut
 
