@@ -37,12 +37,6 @@ has 'plugin_args' => (
     default => func { {} },
 );
 
-has 'zilla' => (
-    is => 'lazy',
-    default => method { $self->embra },
-    handles => [ qw< files > ],
-);
-
 around 'isa' => func ( $orig, $self, $class ) {
     return $class eq 'Dist::Zilla' or $orig->($self, $class); # cheeky
 };
@@ -99,5 +93,11 @@ method extra_list_deps($class:, HashRef :$config) {
 
 with 'App::Embra::Role::SitePublisher';
 with 'App::Embra::Role::ExtraListDeps';
+
+has '+embra' => (
+    is => 'ro',
+    required => 1,
+    handles => [ qw< files > ],
+);
 
 1;
