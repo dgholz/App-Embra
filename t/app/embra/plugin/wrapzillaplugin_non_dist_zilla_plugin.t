@@ -18,7 +18,7 @@ method _build_plugin {
 with 'App::Embra::Role::TestPlugin';
 
 test q{ctor checks whether name is a Dist::Zilla::Role::Plugin} => method {
-    throws_ok { $self->plugin } qr/can't wrap/, 'refused to wrap a non-Dist::Zilla plugin';
+    throws_ok { $self->plugin->plugin } qr/can't wrap/, 'refused to wrap a non-Dist::Zilla plugin';
 };
 
 run_me;

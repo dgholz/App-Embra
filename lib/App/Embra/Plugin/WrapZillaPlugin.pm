@@ -9,7 +9,6 @@ use Class::Inspector qw<>;
 use Module::Runtime qw<>;
 use Method::Signatures;
 
-use App::Embra::Plugin::Zilla;
 use App::Embra::Plugin::Zilla::WrapLog;
 use Moo;
 
@@ -26,39 +25,56 @@ This is a L<Dist::Zilla> plugin adapted to work on L<App::Embra>;
 =cut
 
 has 'plugin' => (
-    is => 'ro',
-    required => 1,
+    is => 'lazy',
+    isa => func( $plugin ) {
+        die q{can't wrap something that isn't a Dist::Zilla plugin!}
+            if not $plugin->does( 'Dist::Zilla::Role::Plugin' );
+    },
 );
 
-func find_zilla( App::Embra $embra ) {
-    my $zilla_class = 'App::Embra::Plugin::Zilla';
-    my $zilla = $embra->find_plugin( $zilla_class );
-    if ( ! $zilla ) {
-        $zilla = $zilla_class->register_plugin( embra => $embra, name => $zilla_class );
-    }
-    return $zilla;
-}
+has 'plugin_args' => (
+    is => 'ro',
+    default => func { {} },
+);
 
-method BUILDARGS( @args ) {
-    my %args = @args;
-    my $embra = delete $args{embra};
-    my $name = delete $args{name};
-    die q{must have a plugin to wrap!} if not defined $name;
-    ( my $plugin_class = $name ) =~ s/^-/Dist::Zilla::Plugin::/xms;
+has 'zilla' => (
+    is => 'lazy',
+    default => method { $self->embra },
+    handles => [ qw< files > ],
+);
+
+around 'isa' => func ( $orig, $self, $class ) {
+    return $class eq 'Dist::Zilla' or $orig->($self, $class); # cheeky
+};
+
+method _build_plugin {
+    ( my $plugin_class = $self->name ) =~ s/^-/Dist::Zilla::Plugin::/xms;
 
     if( not Class::Inspector->loaded( $plugin_class ) ) {
         Module::Runtime::require_module $plugin_class;
     }
 
-    die q{can't wrap something that isn't a Dist::Zilla plugin} if not $plugin_class->does( 'Dist::Zilla::Role::Plugin' );
-    my $plugin = $plugin_class->new(
-        zilla => find_zilla( $embra ),
-        plugin_name => $name,
-        logger => App::Embra::Plugin::Zilla::WrapLog->new( proxy_prefix => "[$name] ", logger => $embra->logger ),
-        %args
+    return $plugin_class->new(
+        zilla => $self,
+        plugin_name => $self->name,
+        logger => App::Embra::Plugin::Zilla::WrapLog->new(
+            proxy_prefix => '['.$self->name.'] ',
+            logger => $self->embra->logger,
+        ),
+        %{ $self->plugin_args },
     );
+}
 
-    return { embra => $embra, plugin => $plugin };
+method BUILDARGS( @args ) {
+    my %args = @args;
+    my %attrs;
+    for my $attr ( qw< embra name plugin > ) {
+        if( exists $args{$attr} ) {
+            $attrs{$attr} = delete $args{$attr};
+        }
+    }
+
+    return { %attrs, plugin_args => \%args };
 }
 
 method publish_site {
