@@ -10,7 +10,7 @@ use Moo::Role;
 
 =head1 DESCRIPTION
 
-This role provides a few key methods and attributes which all plugins for App::Embra should implement. It consumes the L<Logging role|App::Embra::Role::Logging>, altering L<C<log prefix>|App::Embra::Role::Logging/log_prefix> to include the plugin's name, and L<C<logger>|App::Embra::Role::Logging/logger> to reuse the C<logger> to reuse the C<logger> from the instance of App::Embra being plugged into.
+This role provides a few key methods and attributes which all plugins for App::Embra should implement. It consumes the L<Logging role|App::Embra::Role::Logging>, altering L<C<log prefix>|App::Embra::Role::Logging/log_prefix> to include the plugin's name, and L<C<logger>|App::Embra::Role::Logging/logger> to reuse the C<logger> from the instance of App::Embra being plugged into.
 
 =cut
 
