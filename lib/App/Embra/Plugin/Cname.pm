@@ -5,10 +5,10 @@ package App::Embra::Plugin::Cname;
 
 # ABSTRACT: adds a file containing the site's canonical domain name
 
-use Moo;
 use Method::Signatures;
 
 use App::Embra::File;
+use Moo;
 
 =head1 DESCRIPTION
 

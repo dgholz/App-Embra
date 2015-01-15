@@ -5,6 +5,9 @@ package App::Embra::App::Command::listdeps;
 
 # ABSTRACT: list plugins required to collate your site
 
+use Class::Inspector qw<>;
+use Module::Runtime qw<>;
+
 use App::Embra::App -command;
 use App::Embra::Util;
 
@@ -73,7 +76,7 @@ sub _extract_deps {
 
     my $ini = $root->file('embra.ini');
 
-    die "embra listdeps only works on embra.ini files, and I couldn't fined one at: $ini\n"
+    die "embra listdeps only works on embra.ini files, and I couldn't find one at: $ini\n"
         unless -e $ini;
 
     my $fh = $ini->openr;
@@ -84,10 +87,17 @@ sub _extract_deps {
     require CPAN::Meta::Requirements;
     my $reqs = CPAN::Meta::Requirements->new;
 
-    my @packs =
-        map    { s/\s.*//; $_ }
-        grep { $_ ne '_' }
-        keys %$config;
+    delete $config->{_};
+    for my $sec (keys %$config) {
+        my ($p, $n) = split qr{ [ ]* / [ ]* }xms, $sec;
+        if( defined $n ) {
+            my $v = delete $config->{$sec};
+            $v->{_name} ||= $n;
+            $config->{$p} = $v;
+        }
+    }
+
+    my @packs = keys %$config;
 
     foreach my $pack (@packs) {
 
@@ -97,6 +107,16 @@ sub _extract_deps {
         }
         my $realname = App::Embra::Util->expand_config_package_name($pack);
         $reqs->add_minimum($realname => $version);
+
+        if( exists $config->{$pack}->{_name} ) {
+            if( not Class::Inspector->loaded( $realname ) ) {
+                Module::Runtime::require_module $realname;
+            }
+            if( $realname->does('App::Embra::Role::ExtraListDeps') ) {
+                $realname->add_extra_deps( config => $config->{$pack}, reqs => $reqs )
+            }
+        }
+
     }
 
     seek $fh, 0, 0;

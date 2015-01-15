@@ -5,9 +5,9 @@ package App::Embra::Plugin::PruneFiles;
 
 # ABSTRACT: exclude files from the site
 
-use Moo;
-use Method::Signatures;
 use List::MoreUtils qw< any >;
+use Method::Signatures;
+use Moo;
 
 =head1 DESCRIPTION
 

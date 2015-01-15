@@ -5,12 +5,12 @@ package App::Embra::Plugin::GatherDir;
 
 # ABSTRACT: gather all the files in a directory
 
-use Moo;
+use Path::Class::Dir;
+use List::MoreUtils qw< any >;
 use Method::Signatures;
 
 use App::Embra::File;
-use Path::Class::Dir;
-use List::MoreUtils qw< any >;
+use Moo;
 
 method mvp_multivalue_args() { qw< exclude_match >; }
 

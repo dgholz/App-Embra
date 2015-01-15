@@ -5,9 +5,9 @@ package App::Embra::Plugin::TransformMarkdown;
 
 # ABSTRACT: turn markdown files into html
 
-use Moo;
-use Method::Signatures;
 use File::Basename;
+use Method::Signatures;
+use Moo;
 
 =head1 DESCRIPTION
 

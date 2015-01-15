@@ -1,11 +1,13 @@
+use strict;
+use warnings;
+
 use lib 't/lib';
 use App::Embra::File;
-
 use App::Embra::Plugin::TransformMarkdown;
 
 use List::Util qw< first >;
-use Test::Roo;
 use Method::Signatures;
+use Test::Roo;
 
 method _build_plugin {
     return App::Embra::Plugin::TransformMarkdown->new( embra => $self->embra );

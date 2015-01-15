@@ -5,10 +5,10 @@ package App::Embra::File;
 
 # ABSTRACT: a file from your site
 
-use Moo;
-use Method::Signatures;
 use File::Basename;
 use File::Spec::Functions qw< canonpath >;
+use Method::Signatures;
+use Moo;
 
 # mostly Dist::Zilla::File::OnDisk
 
@@ -42,6 +42,18 @@ has 'content' => (
   is  => 'rw',
   lazy => 1,
   default => method { $self->_read_file },
+);
+
+=attr mode
+
+The permissions of the file. Defaults to 0644.
+
+=cut
+
+has 'mode' => (
+  is  => 'rw',
+  lazy => 1,
+  default => method { 0644 },
 );
 
 =attr _original_name

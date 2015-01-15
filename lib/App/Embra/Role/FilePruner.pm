@@ -5,9 +5,9 @@ package App::Embra::Role::FilePruner;
 
 # ABSTRACT: something that stops files from appearing in a site
 
+use List::MoreUtils qw< indexes >;
 use Method::Signatures;
 use Moo::Role;
-use List::MoreUtils qw< indexes >;
 
 =head1 DESCRIPTION
 

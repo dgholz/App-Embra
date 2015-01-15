@@ -1,12 +1,14 @@
+use strict;
+use warnings;
+
 use lib 't/lib';
 use App::Embra::File;
-
 use App::Embra::Plugin::PublishFiles;
 
 use List::Util qw< first >;
-use Test::Roo;
 use Method::Signatures;
 use Path::Class qw<>;
+use Test::Roo;
 
 has output_dir => (
     is => 'ro',

@@ -1,5 +1,8 @@
+use strict;
+use warnings;
+
 package App::Embra::FromConfigMVP;
-use Test::Roo;
+use Test::Roo::Role;
 
 use App::Embra;
 use Method::Signatures;
@@ -17,16 +20,7 @@ has 'config_mvp_sequence' => (
     },
 );
 
-has 'config' => (
-    is => 'ro',
-    default => method {
-        {
-            'App::Embra::Plugin::Test' => {
-                greeting => 'howdy',
-            },
-        };
-    },
-);
+requires 'config';
 
 has 'embra' => (
     is => 'ro',

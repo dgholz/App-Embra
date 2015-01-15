@@ -1,21 +1,32 @@
+use strict;
+use warnings;
+
+use App::Embra;
 use lib 't/lib';
-use Test::Roo;
-extends 'App::Embra::Tester';
+
 use Method::Signatures;
+use Test::Roo;
 
-package App::Embra::Role::Test;
-use Role::Tiny;
+{
+    package App::Embra::Plugin::TestRole;
+    use Method::Signatures;
+    use List::Util qw< any >;
+    use Moo;
+    extends 'App::Embra::Plugin::Test';
 
-package App::Embra::Plugin::TestRole;
-use Moo;
-with 'App::Embra::Role::Test';
-with 'App::Embra::Role::Plugin';
+    around 'does' => func( $orig, $self, $role ) {
+        return any { $_ eq $role } qw< App::Embra::Role::Test App::Embra::Role::Plugin > or $orig->($self, $role);
+    };
+}
 
-package main;
+has embra => (
+    is => 'ro',
+    default => sub { App::Embra->new },
+);
 
 has 'plugin_with_role' => (
     is => 'lazy',
-    default => sub { App::Embra::Plugin::TestRole-> new( embra => $_[0]->embra ) },
+    default => method { App::Embra::Plugin::TestRole-> new( embra => $self->embra ) },
 );
 
 before 'setup' => method {

@@ -5,9 +5,9 @@ package App::Embra::Plugin::PublishFiles;
 
 # ABSTRACT: write site files into a directory
 
-use Moo;
-use Method::Signatures;
 use Path::Class qw<>;
+use Method::Signatures;
+use Moo;
 
 =head1 DESCRIPTION
 
@@ -30,11 +30,12 @@ has 'to' => (
     coerce => sub { Path::Class::dir( $_[0] ) },
 );
 
-method publish_files {
+method publish_site {
     for my $file ( @{ $self->embra->files } ) {
         my $f = $self->to->file( $file->name );
         $f->parent->mkpath;
         $f->spew( $file->content );
+        chmod $file->mode, $f or die "could't chmod $file: $!";
     }
 }
 
@@ -43,7 +44,7 @@ method exclude_file( $file ) {
     return;
 }
 
-with 'App::Embra::Role::FilePublisher';
+with 'App::Embra::Role::SitePublisher';
 with 'App::Embra::Role::FilePruner';
 
 1;

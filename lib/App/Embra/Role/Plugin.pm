@@ -10,7 +10,7 @@ use Moo::Role;
 
 =head1 DESCRIPTION
 
-This role provides a few key methods and attributes which all plugins for App::Embra should implement. It consumes the L<Logging role|App::Embra::Role::Logging>, altering L<C<log prefix>|App::Embra::Role::Logging/log_prefix> to include the plugin's name, and L<C<logger>|App::Embra::Role::Logging/logger> to reuse the C<logger> to reuse the C<logger> from the instance of App::Embra being plugged into.
+This role provides a few key methods and attributes which all plugins for App::Embra should implement. It consumes the L<Logging role|App::Embra::Role::Logging>, altering L<C<log prefix>|App::Embra::Role::Logging/log_prefix> to include the plugin's name, and L<C<logger>|App::Embra::Role::Logging/logger> to reuse the C<logger> from the instance of App::Embra being plugged into.
 
 =cut
 
@@ -50,7 +50,7 @@ has 'name' => (
 
     App::Embra::Role::Plugin->register_plugin( $class, $name, $args, $embra );
 
-Static method which creates a new instance of the implementing plugin with its C<name> set to C<$name>, C<embra> set to C<$embra>, and each entry of the C<$args> hash ref passed as an argument to the constructor. It then plugs new instance into C<$embra>.
+Static method which creates a new instance of the implementing plugin with its C<name> set to C<$name>, C<embra> set to C<$embra>, and each entry of the C<$args> hash ref passed as an argument to the constructor. It then plugs new instance into C<$embra>. Returns the created instance.
 
 =cut
 
@@ -58,6 +58,7 @@ method register_plugin( $class:, :$name, HashRef :$args, App::Embra :$embra ) {
     my $self = $class->new( embra => $embra, name => $name, %{ $args } );
     $self->logger->debugf( '%sregistered with %s', $self->log_prefix, $args );
     $embra->add_plugin( $self );
+    return $self;
 }
 
 1;

@@ -1,12 +1,23 @@
+use strict;
+use warnings;
+
+use App::Embra;
 use lib 't/lib';
-use Test::Roo;
-extends 'App::Embra::Tester';
+use App::Embra::Plugin::Test;
+
 use Method::Signatures;
+use Test::Roo;
+
+has embra => (
+    is => 'ro',
+    default => sub { App::Embra->new },
+);
 
 test 'add a plugin' => method {
-    my $before = grep { $_ == $self->plugin } @{ $self->embra->plugins };
-    $self->embra->add_plugin( $self->plugin );
-    my $after  = grep { $_ == $self->plugin } @{ $self->embra->plugins };
+    my $plugin = App::Embra::Plugin::Test->new( embra => $self->embra );
+    my $before = grep { $_ == $plugin } @{ $self->embra->plugins };
+    $self->embra->add_plugin( $plugin );
+    my $after  = grep { $_ == $plugin } @{ $self->embra->plugins };
 
     is(
         $before + 1,

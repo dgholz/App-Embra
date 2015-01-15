@@ -17,24 +17,24 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 6.30
       Moose 0
-  App-Cmd-0.323
-    pathname: R/RJ/RJBS/App-Cmd-0.323.tar.gz
+  App-Cmd-0.326
+    pathname: R/RJ/RJBS/App-Cmd-0.326.tar.gz
     provides:
-      App::Cmd 0.323
-      App::Cmd::ArgProcessor 0.323
-      App::Cmd::Command 0.323
-      App::Cmd::Command::commands 0.323
-      App::Cmd::Command::help 0.323
-      App::Cmd::Command::version 0.323
-      App::Cmd::Plugin 0.323
-      App::Cmd::Setup 0.323
-      App::Cmd::Simple 0.323
-      App::Cmd::Subdispatch 0.323
-      App::Cmd::Subdispatch::DashedStyle 0.323
-      App::Cmd::Tester 0.323
-      App::Cmd::Tester::CaptureExternal 0.323
-      App::Cmd::Tester::Exited 0.323
-      App::Cmd::Tester::Result 0.323
+      App::Cmd 0.326
+      App::Cmd::ArgProcessor 0.326
+      App::Cmd::Command 0.326
+      App::Cmd::Command::commands 0.326
+      App::Cmd::Command::help 0.326
+      App::Cmd::Command::version 0.326
+      App::Cmd::Plugin 0.326
+      App::Cmd::Setup 0.326
+      App::Cmd::Simple 0.326
+      App::Cmd::Subdispatch 0.326
+      App::Cmd::Subdispatch::DashedStyle 0.326
+      App::Cmd::Tester 0.326
+      App::Cmd::Tester::CaptureExternal 0.326
+      App::Cmd::Tester::Exited 0.326
+      App::Cmd::Tester::Result 0.326
       Test::BrokenCmd undef
       Test::BrokenCmd::Command undef
       Test::IgnoreCommand undef
@@ -69,7 +69,7 @@ DISTRIBUTIONS
       Carp 0
       Class::Load 0.06
       Data::OptList 0
-      ExtUtils::MakeMaker 6.30
+      ExtUtils::MakeMaker 0
       File::Basename 0
       Getopt::Long 2.39
       Getopt::Long::Descriptive 0.084
@@ -82,6 +82,7 @@ DISTRIBUTIONS
       Text::Abbrev 0
       constant 0
       parent 0
+      perl 5.006
       strict 0
       warnings 0
   AppConfig-1.66
@@ -129,25 +130,26 @@ DISTRIBUTIONS
       Test::More 0
       parent 0
       perl 5.008001
-  CPAN-Meta-2.133380
-    pathname: D/DA/DAGOLDEN/CPAN-Meta-2.133380.tar.gz
+  CPAN-Meta-2.143240
+    pathname: D/DA/DAGOLDEN/CPAN-Meta-2.143240.tar.gz
     provides:
-      CPAN::Meta 2.133380
-      CPAN::Meta::Converter 2.133380
-      CPAN::Meta::Feature 2.133380
-      CPAN::Meta::History 2.133380
-      CPAN::Meta::Prereqs 2.133380
-      CPAN::Meta::Spec 2.133380
-      CPAN::Meta::Validator 2.133380
+      CPAN::Meta 2.143240
+      CPAN::Meta::Converter 2.143240
+      CPAN::Meta::Feature 2.143240
+      CPAN::Meta::History 2.143240
+      CPAN::Meta::Merge 2.143240
+      CPAN::Meta::Prereqs 2.143240
+      CPAN::Meta::Spec 2.143240
+      CPAN::Meta::Validator 2.143240
     requirements:
       CPAN::Meta::Requirements 2.121
       CPAN::Meta::YAML 0.008
       Carp 0
       ExtUtils::MakeMaker 6.17
       JSON::PP 2.27200
-      List::Util 1.33
-      Parse::CPAN::Meta 1.4403
+      Parse::CPAN::Meta 1.4414
       Scalar::Util 0
+      perl 5.008
       strict 0
       version 0.88
       warnings 0
@@ -161,6 +163,19 @@ DISTRIBUTIONS
       Exporter 5.57
       ExtUtils::MakeMaker 6.30
       Module::Metadata 0
+      strict 0
+      warnings 0
+  CPAN-Meta-YAML-0.012
+    pathname: D/DA/DAGOLDEN/CPAN-Meta-YAML-0.012.tar.gz
+    provides:
+      CPAN::Meta::YAML 0.012
+    requirements:
+      B 0
+      Carp 0
+      Exporter 0
+      ExtUtils::MakeMaker 6.17
+      Fcntl 0
+      Scalar::Util 0
       strict 0
       warnings 0
   CPAN-Uploader-0.103006
@@ -219,24 +234,25 @@ DISTRIBUTIONS
       File::Spec 0.80
       Test::More 0.47
       perl 5.006
-  Class-Load-0.21
-    pathname: E/ET/ETHER/Class-Load-0.21.tar.gz
+  Class-Load-0.22
+    pathname: E/ET/ETHER/Class-Load-0.22.tar.gz
     provides:
-      Class::Load 0.21
-      Class::Load::PP 0.21
+      Class::Load 0.22
+      Class::Load::PP 0.22
     requirements:
       Carp 0
       Data::OptList 0
       Exporter 0
-      ExtUtils::MakeMaker 6.30
-      Module::Build::Tiny 0.034
+      ExtUtils::MakeMaker 0
+      Module::Build::Tiny 0.037
       Module::Implementation 0.04
       Module::Runtime 0.012
       Package::Stash 0.14
       Scalar::Util 0
       Try::Tiny 0
       base 0
-      perl 5.008
+      namespace::clean 0
+      perl 5.006
       strict 0
       warnings 0
   Class-Load-XS-0.06
@@ -301,34 +317,34 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
-  Config-INI-0.022
-    pathname: R/RJ/RJBS/Config-INI-0.022.tar.gz
+  Config-INI-0.025
+    pathname: R/RJ/RJBS/Config-INI-0.025.tar.gz
     provides:
-      Config::INI 0.022
-      Config::INI::Reader 0.022
-      Config::INI::Writer 0.022
+      Config::INI 0.025
+      Config::INI::Reader 0.025
+      Config::INI::Writer 0.025
     requirements:
       Carp 0
-      ExtUtils::MakeMaker 6.30
-      Mixin::Linewise::Readers 0
+      ExtUtils::MakeMaker 0
+      Mixin::Linewise::Readers 0.105
       Mixin::Linewise::Writers 0
       strict 0
       warnings 0
-  Config-MVP-2.200007
-    pathname: R/RJ/RJBS/Config-MVP-2.200007.tar.gz
+  Config-MVP-2.200008
+    pathname: R/RJ/RJBS/Config-MVP-2.200008.tar.gz
     provides:
-      Config::MVP 2.200007
-      Config::MVP::Assembler 2.200007
-      Config::MVP::Assembler::WithBundles 2.200007
-      Config::MVP::Error 2.200007
-      Config::MVP::Reader 2.200007
-      Config::MVP::Reader::Findable 2.200007
-      Config::MVP::Reader::Findable::ByExtension 2.200007
-      Config::MVP::Reader::Finder 2.200007
-      Config::MVP::Reader::Hash 2.200007
+      Config::MVP 2.200008
+      Config::MVP::Assembler 2.200008
+      Config::MVP::Assembler::WithBundles 2.200008
+      Config::MVP::Error 2.200008
+      Config::MVP::Reader 2.200008
+      Config::MVP::Reader::Findable 2.200008
+      Config::MVP::Reader::Findable::ByExtension 2.200008
+      Config::MVP::Reader::Finder 2.200008
+      Config::MVP::Reader::Hash 2.200008
       Config::MVP::Reader::Test undef
-      Config::MVP::Section 2.200007
-      Config::MVP::Sequence 2.200007
+      Config::MVP::Section 2.200008
+      Config::MVP::Sequence 2.200008
       Foo::Bar undef
       Foo::Baz undef
       Foo::Boo1 undef
@@ -343,7 +359,6 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.30
       File::Spec 0
       Module::Pluggable::Object 0
-      Module::Runtime 0
       Moose 0.91
       Moose::Role 0
       Moose::Util::TypeConstraints 0
@@ -359,10 +374,10 @@ DISTRIBUTIONS
       overload 0
       strict 0
       warnings 0
-  Config-MVP-Reader-INI-2.101462
-    pathname: R/RJ/RJBS/Config-MVP-Reader-INI-2.101462.tar.gz
+  Config-MVP-Reader-INI-2.101463
+    pathname: R/RJ/RJBS/Config-MVP-Reader-INI-2.101463.tar.gz
     provides:
-      Config::MVP::Reader::INI 2.101462
+      Config::MVP::Reader::INI 2.101463
       Foo::Bar undef
       Foo::Quux undef
     requirements:
@@ -372,7 +387,7 @@ DISTRIBUTIONS
       Config::MVP::Reader::Findable::ByExtension 0
       ExtUtils::MakeMaker 6.30
       Moose 0
-      base 0
+      parent 0
   Const-Fast-0.014
     pathname: L/LE/LEONT/Const-Fast-0.014.tar.gz
     provides:
@@ -386,6 +401,14 @@ DISTRIBUTIONS
       perl 5.008
       strict 0
       warnings 0
+  Cpanel-JSON-XS-3.0113
+    pathname: R/RU/RURBAN/Cpanel-JSON-XS-3.0113.tar.gz
+    provides:
+      Cpanel::JSON::XS 3.0113
+    requirements:
+      ExtUtils::MakeMaker 0
+      Pod::Text 2.08
+      Pod::Usage 1.33
   Data-OptList-0.109
     pathname: R/RJ/RJBS/Data-OptList-0.109.tar.gz
     provides:
@@ -1443,153 +1466,154 @@ DISTRIBUTIONS
       base 0
       strict 0
       warnings 0
-  Dist-Zilla-5.013
-    pathname: R/RJ/RJBS/Dist-Zilla-5.013.tar.gz
+  Dist-Zilla-5.029
+    pathname: R/RJ/RJBS/Dist-Zilla-5.029.tar.gz
     provides:
-      Dist::Zilla 5.013
-      Dist::Zilla::App 5.013
-      Dist::Zilla::App::Command 5.013
-      Dist::Zilla::App::Command::add 5.013
-      Dist::Zilla::App::Command::authordeps 5.013
-      Dist::Zilla::App::Command::build 5.013
-      Dist::Zilla::App::Command::clean 5.013
-      Dist::Zilla::App::Command::install 5.013
-      Dist::Zilla::App::Command::listdeps 5.013
-      Dist::Zilla::App::Command::new 5.013
-      Dist::Zilla::App::Command::nop 5.013
-      Dist::Zilla::App::Command::release 5.013
-      Dist::Zilla::App::Command::run 5.013
-      Dist::Zilla::App::Command::setup 5.013
-      Dist::Zilla::App::Command::smoke 5.013
-      Dist::Zilla::App::Command::test 5.013
-      Dist::Zilla::App::Command::version 5.013
-      Dist::Zilla::App::Tester 5.013
-      Dist::Zilla::App::Tester::Result 5.013
-      Dist::Zilla::Chrome::Term 5.013
-      Dist::Zilla::Chrome::Test 5.013
-      Dist::Zilla::Dist::Builder 5.013
-      Dist::Zilla::Dist::Minter 5.013
-      Dist::Zilla::File::FromCode 5.013
-      Dist::Zilla::File::InMemory 5.013
-      Dist::Zilla::File::OnDisk 5.013
-      Dist::Zilla::MVP::Assembler 5.013
-      Dist::Zilla::MVP::Assembler::GlobalConfig 5.013
-      Dist::Zilla::MVP::Assembler::Zilla 5.013
-      Dist::Zilla::MVP::Reader::Finder 5.013
-      Dist::Zilla::MVP::Reader::Perl 5.013
-      Dist::Zilla::MVP::RootSection 5.013
-      Dist::Zilla::MVP::Section 5.013
-      Dist::Zilla::MintingProfile::Default 5.013
-      Dist::Zilla::Plugin::AutoPrereq 5.013
-      Dist::Zilla::Plugin::AutoPrereqs 5.013
-      Dist::Zilla::Plugin::AutoVersion 5.013
+      Dist::Zilla 5.029
+      Dist::Zilla::App 5.029
+      Dist::Zilla::App::Command 5.029
+      Dist::Zilla::App::Command::add 5.029
+      Dist::Zilla::App::Command::authordeps 5.029
+      Dist::Zilla::App::Command::build 5.029
+      Dist::Zilla::App::Command::clean 5.029
+      Dist::Zilla::App::Command::install 5.029
+      Dist::Zilla::App::Command::listdeps 5.029
+      Dist::Zilla::App::Command::new 5.029
+      Dist::Zilla::App::Command::nop 5.029
+      Dist::Zilla::App::Command::release 5.029
+      Dist::Zilla::App::Command::run 5.029
+      Dist::Zilla::App::Command::setup 5.029
+      Dist::Zilla::App::Command::smoke 5.029
+      Dist::Zilla::App::Command::test 5.029
+      Dist::Zilla::App::Command::version 5.029
+      Dist::Zilla::App::Tester 5.029
+      Dist::Zilla::App::Tester::Result 5.029
+      Dist::Zilla::Chrome::Term 5.029
+      Dist::Zilla::Chrome::Test 5.029
+      Dist::Zilla::Dist::Builder 5.029
+      Dist::Zilla::Dist::Minter 5.029
+      Dist::Zilla::File::FromCode 5.029
+      Dist::Zilla::File::InMemory 5.029
+      Dist::Zilla::File::OnDisk 5.029
+      Dist::Zilla::MVP::Assembler 5.029
+      Dist::Zilla::MVP::Assembler::GlobalConfig 5.029
+      Dist::Zilla::MVP::Assembler::Zilla 5.029
+      Dist::Zilla::MVP::Reader::Finder 5.029
+      Dist::Zilla::MVP::Reader::Perl 5.029
+      Dist::Zilla::MVP::RootSection 5.029
+      Dist::Zilla::MVP::Section 5.029
+      Dist::Zilla::MintingProfile::Default 5.029
+      Dist::Zilla::Plugin::AutoPrereq 5.029
+      Dist::Zilla::Plugin::AutoPrereqs 5.029
+      Dist::Zilla::Plugin::AutoVersion 5.029
       Dist::Zilla::Plugin::BrokenPlugin undef
-      Dist::Zilla::Plugin::BumpVersion 5.013
-      Dist::Zilla::Plugin::CPANFile 5.013
-      Dist::Zilla::Plugin::ConfirmRelease 5.013
-      Dist::Zilla::Plugin::DistINI 5.013
-      Dist::Zilla::Plugin::Encoding 5.013
-      Dist::Zilla::Plugin::ExecDir 5.013
-      Dist::Zilla::Plugin::ExtraTests 5.013
-      Dist::Zilla::Plugin::FakeRelease 5.013
-      Dist::Zilla::Plugin::FileFinder::ByName 5.013
-      Dist::Zilla::Plugin::FileFinder::Filter 5.013
-      Dist::Zilla::Plugin::FinderCode 5.013
-      Dist::Zilla::Plugin::GatherDir 5.013
-      Dist::Zilla::Plugin::GatherDir::Template 5.013
-      Dist::Zilla::Plugin::GenerateFile 5.013
-      Dist::Zilla::Plugin::InlineFiles 5.013
+      Dist::Zilla::Plugin::BumpVersion 5.029
+      Dist::Zilla::Plugin::CPANFile 5.029
+      Dist::Zilla::Plugin::ConfirmRelease 5.029
+      Dist::Zilla::Plugin::DistINI 5.029
+      Dist::Zilla::Plugin::Encoding 5.029
+      Dist::Zilla::Plugin::ExecDir 5.029
+      Dist::Zilla::Plugin::ExtraTests 5.029
+      Dist::Zilla::Plugin::FakeRelease 5.029
+      Dist::Zilla::Plugin::FileFinder::ByName 5.029
+      Dist::Zilla::Plugin::FileFinder::Filter 5.029
+      Dist::Zilla::Plugin::FinderCode 5.029
+      Dist::Zilla::Plugin::GatherDir 5.029
+      Dist::Zilla::Plugin::GatherDir::Template 5.029
+      Dist::Zilla::Plugin::GenerateFile 5.029
+      Dist::Zilla::Plugin::InlineFiles 5.029
       Dist::Zilla::Plugin::JustForManifestSkipTests undef
-      Dist::Zilla::Plugin::License 5.013
-      Dist::Zilla::Plugin::MakeMaker 5.013
-      Dist::Zilla::Plugin::MakeMaker::Runner 5.013
-      Dist::Zilla::Plugin::Manifest 5.013
-      Dist::Zilla::Plugin::ManifestSkip 5.013
-      Dist::Zilla::Plugin::MetaConfig 5.013
-      Dist::Zilla::Plugin::MetaJSON 5.013
-      Dist::Zilla::Plugin::MetaNoIndex 5.013
-      Dist::Zilla::Plugin::MetaResources 5.013
-      Dist::Zilla::Plugin::MetaTests 5.013
-      Dist::Zilla::Plugin::MetaYAML 5.013
-      Dist::Zilla::Plugin::ModuleBuild 5.013
-      Dist::Zilla::Plugin::ModuleShareDirs 5.013
-      Dist::Zilla::Plugin::NextRelease 5.013
-      Dist::Zilla::Plugin::PkgDist 5.013
-      Dist::Zilla::Plugin::PkgVersion 5.013
-      Dist::Zilla::Plugin::PodCoverageTests 5.013
-      Dist::Zilla::Plugin::PodSyntaxTests 5.013
-      Dist::Zilla::Plugin::PodVersion 5.013
-      Dist::Zilla::Plugin::Prereq 5.013
-      Dist::Zilla::Plugin::Prereqs 5.013
-      Dist::Zilla::Plugin::PruneCruft 5.013
-      Dist::Zilla::Plugin::PruneFiles 5.013
-      Dist::Zilla::Plugin::Readme 5.013
-      Dist::Zilla::Plugin::RemovePrereqs 5.013
-      Dist::Zilla::Plugin::ShareDir 5.013
-      Dist::Zilla::Plugin::TemplateModule 5.013
+      Dist::Zilla::Plugin::License 5.029
+      Dist::Zilla::Plugin::MakeMaker 5.029
+      Dist::Zilla::Plugin::MakeMaker::Runner 5.029
+      Dist::Zilla::Plugin::Manifest 5.029
+      Dist::Zilla::Plugin::ManifestSkip 5.029
+      Dist::Zilla::Plugin::MetaConfig 5.029
+      Dist::Zilla::Plugin::MetaJSON 5.029
+      Dist::Zilla::Plugin::MetaNoIndex 5.029
+      Dist::Zilla::Plugin::MetaResources 5.029
+      Dist::Zilla::Plugin::MetaTests 5.029
+      Dist::Zilla::Plugin::MetaYAML 5.029
+      Dist::Zilla::Plugin::ModuleBuild 5.029
+      Dist::Zilla::Plugin::ModuleShareDirs 5.029
+      Dist::Zilla::Plugin::NextRelease 5.029
+      Dist::Zilla::Plugin::PkgDist 5.029
+      Dist::Zilla::Plugin::PkgVersion 5.029
+      Dist::Zilla::Plugin::PodCoverageTests 5.029
+      Dist::Zilla::Plugin::PodSyntaxTests 5.029
+      Dist::Zilla::Plugin::PodVersion 5.029
+      Dist::Zilla::Plugin::Prereq 5.029
+      Dist::Zilla::Plugin::Prereqs 5.029
+      Dist::Zilla::Plugin::PruneCruft 5.029
+      Dist::Zilla::Plugin::PruneFiles 5.029
+      Dist::Zilla::Plugin::Readme 5.029
+      Dist::Zilla::Plugin::RemovePrereqs 5.029
+      Dist::Zilla::Plugin::ShareDir 5.029
+      Dist::Zilla::Plugin::TemplateModule 5.029
       Dist::Zilla::Plugin::TestAutoLicense undef
       Dist::Zilla::Plugin::TestAutoName undef
-      Dist::Zilla::Plugin::TestRelease 5.013
-      Dist::Zilla::Plugin::UploadToCPAN 5.013
-      Dist::Zilla::PluginBundle::Basic 5.013
-      Dist::Zilla::PluginBundle::Classic 5.013
-      Dist::Zilla::PluginBundle::FakeClassic 5.013
-      Dist::Zilla::PluginBundle::Filter 5.013
-      Dist::Zilla::Prereqs 5.013
-      Dist::Zilla::Role::AfterBuild 5.013
-      Dist::Zilla::Role::AfterMint 5.013
-      Dist::Zilla::Role::AfterRelease 5.013
-      Dist::Zilla::Role::BeforeArchive 5.013
-      Dist::Zilla::Role::BeforeBuild 5.013
-      Dist::Zilla::Role::BeforeMint 5.013
-      Dist::Zilla::Role::BeforeRelease 5.013
-      Dist::Zilla::Role::BuildPL 5.013
-      Dist::Zilla::Role::BuildRunner 5.013
-      Dist::Zilla::Role::Chrome 5.013
-      Dist::Zilla::Role::ConfigDumper 5.013
-      Dist::Zilla::Role::EncodingProvider 5.013
-      Dist::Zilla::Role::ExecFiles 5.013
-      Dist::Zilla::Role::File 5.013
-      Dist::Zilla::Role::FileFinder 5.013
-      Dist::Zilla::Role::FileFinderUser 5.013
-      Dist::Zilla::Role::FileGatherer 5.013
-      Dist::Zilla::Role::FileInjector 5.013
-      Dist::Zilla::Role::FileMunger 5.013
-      Dist::Zilla::Role::FilePruner 5.013
-      Dist::Zilla::Role::InstallTool 5.013
-      Dist::Zilla::Role::LicenseProvider 5.013
-      Dist::Zilla::Role::MetaProvider 5.013
-      Dist::Zilla::Role::MintingProfile 5.013
-      Dist::Zilla::Role::MintingProfile::ShareDir 5.013
-      Dist::Zilla::Role::ModuleMaker 5.013
-      Dist::Zilla::Role::MutableFile 5.013
-      Dist::Zilla::Role::NameProvider 5.013
-      Dist::Zilla::Role::PPI 5.013
-      Dist::Zilla::Role::Plugin 5.013
-      Dist::Zilla::Role::PluginBundle 5.013
-      Dist::Zilla::Role::PluginBundle::Easy 5.013
-      Dist::Zilla::Role::PrereqSource 5.013
-      Dist::Zilla::Role::Releaser 5.013
-      Dist::Zilla::Role::ShareDir 5.013
-      Dist::Zilla::Role::Stash 5.013
-      Dist::Zilla::Role::Stash::Authors 5.013
-      Dist::Zilla::Role::Stash::Login 5.013
-      Dist::Zilla::Role::StubBuild 5.013
-      Dist::Zilla::Role::TestRunner 5.013
-      Dist::Zilla::Role::TextTemplate 5.013
-      Dist::Zilla::Role::VersionProvider 5.013
+      Dist::Zilla::Plugin::TestRelease 5.029
+      Dist::Zilla::Plugin::UploadToCPAN 5.029
+      Dist::Zilla::PluginBundle::Basic 5.029
+      Dist::Zilla::PluginBundle::Classic 5.029
+      Dist::Zilla::PluginBundle::FakeClassic 5.029
+      Dist::Zilla::PluginBundle::Filter 5.029
+      Dist::Zilla::Prereqs 5.029
+      Dist::Zilla::Role::AfterBuild 5.029
+      Dist::Zilla::Role::AfterMint 5.029
+      Dist::Zilla::Role::AfterRelease 5.029
+      Dist::Zilla::Role::BeforeArchive 5.029
+      Dist::Zilla::Role::BeforeBuild 5.029
+      Dist::Zilla::Role::BeforeMint 5.029
+      Dist::Zilla::Role::BeforeRelease 5.029
+      Dist::Zilla::Role::BuildPL 5.029
+      Dist::Zilla::Role::BuildRunner 5.029
+      Dist::Zilla::Role::Chrome 5.029
+      Dist::Zilla::Role::ConfigDumper 5.029
+      Dist::Zilla::Role::EncodingProvider 5.029
+      Dist::Zilla::Role::ExecFiles 5.029
+      Dist::Zilla::Role::File 5.029
+      Dist::Zilla::Role::FileFinder 5.029
+      Dist::Zilla::Role::FileFinderUser 5.029
+      Dist::Zilla::Role::FileGatherer 5.029
+      Dist::Zilla::Role::FileInjector 5.029
+      Dist::Zilla::Role::FileMunger 5.029
+      Dist::Zilla::Role::FilePruner 5.029
+      Dist::Zilla::Role::InstallTool 5.029
+      Dist::Zilla::Role::LicenseProvider 5.029
+      Dist::Zilla::Role::MetaProvider 5.029
+      Dist::Zilla::Role::MintingProfile 5.029
+      Dist::Zilla::Role::MintingProfile::ShareDir 5.029
+      Dist::Zilla::Role::ModuleMaker 5.029
+      Dist::Zilla::Role::MutableFile 5.029
+      Dist::Zilla::Role::NameProvider 5.029
+      Dist::Zilla::Role::PPI 5.029
+      Dist::Zilla::Role::Plugin 5.029
+      Dist::Zilla::Role::PluginBundle 5.029
+      Dist::Zilla::Role::PluginBundle::Easy 5.029
+      Dist::Zilla::Role::PrereqSource 5.029
+      Dist::Zilla::Role::Releaser 5.029
+      Dist::Zilla::Role::ShareDir 5.029
+      Dist::Zilla::Role::Stash 5.029
+      Dist::Zilla::Role::Stash::Authors 5.029
+      Dist::Zilla::Role::Stash::Login 5.029
+      Dist::Zilla::Role::StubBuild 5.029
+      Dist::Zilla::Role::TestRunner 5.029
+      Dist::Zilla::Role::TextTemplate 5.029
+      Dist::Zilla::Role::VersionProvider 5.029
       Dist::Zilla::Stash::Heap undef
-      Dist::Zilla::Stash::PAUSE 5.013
-      Dist::Zilla::Stash::Rights 5.013
-      Dist::Zilla::Stash::User 5.013
-      Dist::Zilla::Tester 5.013
-      Dist::Zilla::Tester::_Builder 5.013
-      Dist::Zilla::Tester::_Minter 5.013
-      Dist::Zilla::Tutorial 5.013
-      Dist::Zilla::Types 5.013
-      Dist::Zilla::Util 5.013
-      Dist::Zilla::Util::AuthorDeps 5.013
-      Test::DZil 5.013
+      Dist::Zilla::Stash::Mint 5.029
+      Dist::Zilla::Stash::PAUSE 5.029
+      Dist::Zilla::Stash::Rights 5.029
+      Dist::Zilla::Stash::User 5.029
+      Dist::Zilla::Tester 5.029
+      Dist::Zilla::Tester::_Builder 5.029
+      Dist::Zilla::Tester::_Minter 5.029
+      Dist::Zilla::Tutorial 5.029
+      Dist::Zilla::Types 5.029
+      Dist::Zilla::Util 5.029
+      Dist::Zilla::Util::AuthorDeps 5.029
+      Test::DZil 5.029
     requirements:
       App::Cmd::Command::version 0
       App::Cmd::Setup 0.309
@@ -1597,6 +1621,7 @@ DISTRIBUTIONS
       App::Cmd::Tester::CaptureExternal 0
       Archive::Tar 0
       CPAN::Meta::Converter 2.101550
+      CPAN::Meta::Merge 0
       CPAN::Meta::Prereqs 2.120630
       CPAN::Meta::Requirements 2.121
       CPAN::Meta::Validator 2.101550
@@ -1616,26 +1641,24 @@ DISTRIBUTIONS
       DateTime 0.44
       Digest::MD5 0
       Encode 0
-      ExtUtils::MakeMaker 6.30
-      ExtUtils::Manifest 1.54
+      ExtUtils::MakeMaker 0
+      ExtUtils::Manifest 1.66
       File::Copy::Recursive 0
       File::Find::Rule 0
       File::HomeDir 0
       File::Path 0
       File::ShareDir 0
-      File::ShareDir::Install 0.03
+      File::ShareDir::Install 0.06
       File::Spec 0
       File::Temp 0
       File::pushd 0
-      Hash::Merge::Simple 0
-      JSON 2
-      List::AllUtils 0
+      JSON::MaybeXS 0
       List::MoreUtils 0
-      List::Util 0
+      List::Util 1.33
       Log::Dispatchouli 1.102220
       Mixin::Linewise::Readers 0.100
+      Module::CoreList 0
       Moose 0.92
-      Moose::Autobox 0.10
       Moose::Role 0
       Moose::Util::TypeConstraints 0
       MooseX::LazyRequire 0
@@ -1645,7 +1668,6 @@ DISTRIBUTIONS
       MooseX::Types::Moose 0
       MooseX::Types::Path::Class 0
       MooseX::Types::Perl 0
-      PPI 0
       PPI::Document 0
       Params::Util 0
       Path::Class 0.22
@@ -1671,37 +1693,34 @@ DISTRIBUTIONS
       Text::Template 0
       Try::Tiny 0
       YAML::Tiny 0
-      autobox 2.53
       autodie 0
       namespace::autoclean 0
       parent 0
+      perl 5.008005
       strict 0
       version 0
       warnings 0
-  Dist-Zilla-Plugin-CheckChangesHasContent-0.006
-    pathname: D/DA/DAGOLDEN/Dist-Zilla-Plugin-CheckChangesHasContent-0.006.tar.gz
+  Dist-Zilla-Plugin-CheckChangesHasContent-0.007
+    pathname: D/DA/DAGOLDEN/Dist-Zilla-Plugin-CheckChangesHasContent-0.007.tar.gz
     provides:
-      Dist::Zilla::Plugin::CheckChangesHasContent 0.006
-      Dist::Zilla::Plugin::Test::ChangesHasContent 0.006
+      Dist::Zilla::Plugin::CheckChangesHasContent 0.007
+      Dist::Zilla::Plugin::Test::ChangesHasContent 0.007
     requirements:
-      Capture::Tiny 0
-      Cwd 0
+      Data::Section 0.200002
       Dist::Zilla 2.100950
-      Dist::Zilla::Plugin::InlineFiles 0
+      Dist::Zilla::File::InMemory 0
       Dist::Zilla::Role::BeforeRelease 0
+      Dist::Zilla::Role::FileGatherer 0
+      Dist::Zilla::Role::FileMunger 0
       Dist::Zilla::Role::TextTemplate 0
-      Dist::Zilla::Tester 0
-      ExtUtils::MakeMaker 6.30
-      File::Find 0
-      File::Temp 0
+      ExtUtils::MakeMaker 6.17
       File::pushd 0
       Moose 0.99
-      Path::Class 0
-      Test::Harness 0
-      Test::More 0.88
-      Try::Tiny 0
+      Moose::Util::TypeConstraints 0
+      Sub::Exporter::ForMethods 0
       autodie 2.00
       namespace::autoclean 0.09
+      perl 5.006
       strict 0
       warnings 0
   Dist-Zilla-Plugin-Config-Git-0.92
@@ -1736,21 +1755,22 @@ DISTRIBUTIONS
       Test::More 0.94
       perl 5.004
       utf8 0
-  Dist-Zilla-Plugin-Git-2.019
-    pathname: C/CJ/CJM/Dist-Zilla-Plugin-Git-2.019.tar.gz
+  Dist-Zilla-Plugin-Git-2.029
+    pathname: C/CJ/CJM/Dist-Zilla-Plugin-Git-2.029.tar.gz
     provides:
-      Dist::Zilla::Plugin::Git 2.019
-      Dist::Zilla::Plugin::Git::Check 2.019
-      Dist::Zilla::Plugin::Git::Commit 2.019
-      Dist::Zilla::Plugin::Git::CommitBuild 2.019
-      Dist::Zilla::Plugin::Git::GatherDir 2.019
-      Dist::Zilla::Plugin::Git::Init 2.019
-      Dist::Zilla::Plugin::Git::NextVersion 2.019
-      Dist::Zilla::Plugin::Git::Push 2.019
-      Dist::Zilla::Plugin::Git::Tag 2.019
-      Dist::Zilla::PluginBundle::Git 2.019
-      Dist::Zilla::Role::Git::DirtyFiles 2.019
-      Dist::Zilla::Role::Git::Repo 2.019
+      Dist::Zilla::Plugin::Git 2.029
+      Dist::Zilla::Plugin::Git::Check 2.029
+      Dist::Zilla::Plugin::Git::Commit 2.029
+      Dist::Zilla::Plugin::Git::CommitBuild 2.029
+      Dist::Zilla::Plugin::Git::GatherDir 2.029
+      Dist::Zilla::Plugin::Git::Init 2.029
+      Dist::Zilla::Plugin::Git::NextVersion 2.029
+      Dist::Zilla::Plugin::Git::Push 2.029
+      Dist::Zilla::Plugin::Git::Tag 2.029
+      Dist::Zilla::PluginBundle::Git 2.029
+      Dist::Zilla::Role::Git::DirtyFiles 2.029
+      Dist::Zilla::Role::Git::Repo 2.029
+      Dist::Zilla::Role::Git::StringFormatter 2.029
     requirements:
       Cwd 0
       DateTime 0
@@ -1776,15 +1796,12 @@ DISTRIBUTIONS
       Module::Build 0.3601
       Module::Runtime 0
       Moose 0
-      Moose::Autobox 0
       Moose::Role 0
       Moose::Util::TypeConstraints 0
-      MooseX::AttributeShortcuts 0
       MooseX::Has::Sugar 0
       MooseX::Types::Moose 0
-      MooseX::Types::Path::Class 0
-      Path::Class 0.22
-      Path::Class::Dir 0
+      MooseX::Types::Path::Tiny 0.010
+      Path::Tiny 0.048
       String::Formatter 0
       Try::Tiny 0
       Version::Next 0
@@ -1794,10 +1811,10 @@ DISTRIBUTIONS
       strict 0
       version 0.80
       warnings 0
-  Dist-Zilla-Plugin-GithubMeta-0.42
-    pathname: B/BI/BINGOS/Dist-Zilla-Plugin-GithubMeta-0.42.tar.gz
+  Dist-Zilla-Plugin-GithubMeta-0.46
+    pathname: B/BI/BINGOS/Dist-Zilla-Plugin-GithubMeta-0.46.tar.gz
     provides:
-      Dist::Zilla::Plugin::GithubMeta 0.42
+      Dist::Zilla::Plugin::GithubMeta 0.46
     requirements:
       Dist::Zilla 4.101582
       Dist::Zilla::Role::MetaProvider 4.101582
@@ -1806,15 +1823,15 @@ DISTRIBUTIONS
       Moose 1.07
       MooseX::Types::URI 0.03
       version 0
-  Dist-Zilla-Plugin-PodWeaver-4.005
-    pathname: R/RJ/RJBS/Dist-Zilla-Plugin-PodWeaver-4.005.tar.gz
+  Dist-Zilla-Plugin-PodWeaver-4.006
+    pathname: R/RJ/RJBS/Dist-Zilla-Plugin-PodWeaver-4.006.tar.gz
     provides:
-      Dist::Zilla::Plugin::PodWeaver 4.005
+      Dist::Zilla::Plugin::PodWeaver 4.006
     requirements:
       Dist::Zilla 5
       Dist::Zilla::Role::FileFinderUser 0
       Dist::Zilla::Role::FileMunger 0
-      ExtUtils::MakeMaker 6.30
+      ExtUtils::MakeMaker 0
       List::MoreUtils 0
       Moose 0
       PPI 0
@@ -1822,40 +1839,47 @@ DISTRIBUTIONS
       Pod::Weaver 4
       Pod::Weaver::Config::Assembler 0
       namespace::autoclean 0
-  Dist-Zilla-Plugin-Prereqs-FromCPANfile-0.06
-    pathname: M/MI/MIYAGAWA/Dist-Zilla-Plugin-Prereqs-FromCPANfile-0.06.tar.gz
+  Dist-Zilla-Plugin-Prereqs-FromCPANfile-0.08
+    pathname: M/MI/MIYAGAWA/Dist-Zilla-Plugin-Prereqs-FromCPANfile-0.08.tar.gz
     provides:
-      Dist::Zilla::Plugin::Prereqs::FromCPANfile 0.06
+      Dist::Zilla::Plugin::Prereqs::FromCPANfile 0.08
     requirements:
       Dist::Zilla 4.300017
-      Module::Build::Tiny 0.017
-      Module::CPANfile 0.9029
+      Module::Build::Tiny 0.039
+      Module::CPANfile 0.903
       Try::Tiny 0.1
       perl 5.008001
-  Dist-Zilla-Plugin-Run-0.021
-    pathname: E/ET/ETHER/Dist-Zilla-Plugin-Run-0.021.tar.gz
+  Dist-Zilla-Plugin-Run-0.028
+    pathname: E/ET/ETHER/Dist-Zilla-Plugin-Run-0.028.tar.gz
     provides:
-      Dist::Zilla::Plugin::Run 0.021
-      Dist::Zilla::Plugin::Run::AfterBuild 0.021
-      Dist::Zilla::Plugin::Run::AfterMint 0.021
-      Dist::Zilla::Plugin::Run::AfterRelease 0.021
-      Dist::Zilla::Plugin::Run::BeforeBuild 0.021
-      Dist::Zilla::Plugin::Run::BeforeRelease 0.021
-      Dist::Zilla::Plugin::Run::Release 0.021
-      Dist::Zilla::Plugin::Run::Role::Runner 0.021
-      Dist::Zilla::Plugin::Run::Test 0.021
+      Dist::Zilla::Plugin::Run 0.028
+      Dist::Zilla::Plugin::Run::AfterBuild 0.028
+      Dist::Zilla::Plugin::Run::AfterMint 0.028
+      Dist::Zilla::Plugin::Run::AfterRelease 0.028
+      Dist::Zilla::Plugin::Run::BeforeBuild 0.028
+      Dist::Zilla::Plugin::Run::BeforeRelease 0.028
+      Dist::Zilla::Plugin::Run::Release 0.028
+      Dist::Zilla::Plugin::Run::Role::Runner 0.028
+      Dist::Zilla::Plugin::Run::Test 0.028
     requirements:
-      Config 0
-      Dist::Zilla 4.200002
-      ExtUtils::MakeMaker 6.30
+      Dist::Zilla::Role::AfterBuild 0
+      Dist::Zilla::Role::AfterMint 0
+      Dist::Zilla::Role::AfterRelease 0
+      Dist::Zilla::Role::BeforeBuild 0
+      Dist::Zilla::Role::BeforeRelease 0
+      Dist::Zilla::Role::Releaser 0
+      Dist::Zilla::Role::TestRunner 0
       File::Spec 0
       IPC::Open3 0
-      Moose 1.15
-      Path::Class 0.16
+      List::Util 1.33
+      Module::Build::Tiny 0.039
+      Moose 0
+      Moose::Role 0
       String::Formatter 0.102082
-      Test::DZil 4.200002
-      Test::File::ShareDir 0
-      namespace::autoclean 0.11
+      namespace::autoclean 0
+      perl 5.006
+      strict 0
+      warnings 0
   Dist-Zilla-Plugin-Test-Perl-Critic-2.112410
     pathname: J/JQ/JQUELIN/Dist-Zilla-Plugin-Test-Perl-Critic-2.112410.tar.gz
     provides:
@@ -1921,6 +1945,14 @@ DISTRIBUTIONS
       strict 0
       vars 0
       warnings 0
+  Exporter-Tiny-0.042
+    pathname: T/TO/TOBYINK/Exporter-Tiny-0.042.tar.gz
+    provides:
+      Exporter::Shiny 0.042
+      Exporter::Tiny 0.042
+    requirements:
+      ExtUtils::MakeMaker 6.17
+      perl 5.006001
   ExtUtils-Config-0.007
     pathname: L/LE/LEONT/ExtUtils-Config-0.007.tar.gz
     provides:
@@ -1972,6 +2004,69 @@ DISTRIBUTIONS
       ExtUtils::Config 0.002
       ExtUtils::MakeMaker 6.30
       File::Spec 0
+      strict 0
+      warnings 0
+  ExtUtils-MakeMaker-7.04
+    pathname: B/BI/BINGOS/ExtUtils-MakeMaker-7.04.tar.gz
+    provides:
+      DynaLoader 7.04
+      ExtUtils::Command::MM 7.04
+      ExtUtils::Liblist 7.04
+      ExtUtils::Liblist::Kid 7.04
+      ExtUtils::MM 7.04
+      ExtUtils::MM_AIX 7.04
+      ExtUtils::MM_Any 7.04
+      ExtUtils::MM_BeOS 7.04
+      ExtUtils::MM_Cygwin 7.04
+      ExtUtils::MM_DOS 7.04
+      ExtUtils::MM_Darwin 7.04
+      ExtUtils::MM_MacOS 7.04
+      ExtUtils::MM_NW5 7.04
+      ExtUtils::MM_OS2 7.04
+      ExtUtils::MM_QNX 7.04
+      ExtUtils::MM_UWIN 7.04
+      ExtUtils::MM_Unix 7.04
+      ExtUtils::MM_VMS 7.04
+      ExtUtils::MM_VOS 7.04
+      ExtUtils::MM_Win32 7.04
+      ExtUtils::MM_Win95 7.04
+      ExtUtils::MY 7.04
+      ExtUtils::MakeMaker 7.04
+      ExtUtils::MakeMaker::Config 7.04
+      ExtUtils::MakeMaker::Locale 7.04
+      ExtUtils::MakeMaker::_version 7.04
+      ExtUtils::MakeMaker::charstar 7.04
+      ExtUtils::MakeMaker::version 7.04
+      ExtUtils::MakeMaker::version::regex 7.04
+      ExtUtils::MakeMaker::version::vpp 7.04
+      ExtUtils::Mkbootstrap 7.04
+      ExtUtils::Mksymlists 7.04
+      ExtUtils::testlib 7.04
+      MM 7.04
+      MY 7.04
+      in 7.04
+    requirements:
+      Data::Dumper 0
+      DirHandle 0
+      Encode 0
+      File::Basename 0
+      File::Spec 0.8
+      Pod::Man 0
+      perl 5.006
+  ExtUtils-Manifest-1.69
+    pathname: E/ET/ETHER/ExtUtils-Manifest-1.69.tar.gz
+    provides:
+      ExtUtils::Manifest 1.69
+    requirements:
+      Carp 0
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      File::Basename 0
+      File::Copy 0
+      File::Find 0
+      File::Path 0
+      File::Spec 0.8
+      perl 5.006
       strict 0
       warnings 0
   ExtUtils-ParseXS-3.22
@@ -2382,6 +2477,20 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
+  JSON-MaybeXS-1.003003
+    pathname: E/ET/ETHER/JSON-MaybeXS-1.003003.tar.gz
+    provides:
+      JSON::MaybeXS 1.003003
+    requirements:
+      Carp 0
+      Cpanel::JSON::XS 2.3310
+      ExtUtils::CBuilder 0.27
+      ExtUtils::MakeMaker 0
+      File::Spec 0
+      File::Temp 0
+      JSON::PP 2.27202
+      Scalar::Util 0
+      perl 5.006
   LWP-MediaTypes-6.02
     pathname: G/GA/GAAS/LWP-MediaTypes-6.02.tar.gz
     provides:
@@ -2423,25 +2532,46 @@ DISTRIBUTIONS
       base 0
       strict 0
       warnings 0
-  List-MoreUtils-0.33
-    pathname: A/AD/ADAMK/List-MoreUtils-0.33.tar.gz
+  List-MoreUtils-0.402
+    pathname: R/RE/REHSACK/List-MoreUtils-0.402.tar.gz
     provides:
-      List::MoreUtils 0.33
+      List::MoreUtils 0.402
+      List::MoreUtils::PP 0.402
+      List::MoreUtils::XS 0.402
     requirements:
-      ExtUtils::CBuilder 0.27
-      ExtUtils::MakeMaker 6.52
-      Test::More 0.82
-      perl 5.00503
-  Log-Any-0.15
-    pathname: J/JS/JSWARTZ/Log-Any-0.15.tar.gz
+      Exporter::Tiny 0.038
+      ExtUtils::MakeMaker 0
+      XSLoader 0
+  Log-Any-1.02
+    pathname: D/DA/DAGOLDEN/Log-Any-1.02.tar.gz
     provides:
-      Log::Any 0.15
-      Log::Any::Adapter::Null 0.15
-      Log::Any::Adapter::Test 0.15
-      Log::Any::Test 0.15
+      Log::Any 1.02
+      Log::Any::Adapter 1.02
+      Log::Any::Adapter::Base 1.02
+      Log::Any::Adapter::File 1.02
+      Log::Any::Adapter::Null 1.02
+      Log::Any::Adapter::Stderr 1.02
+      Log::Any::Adapter::Stdout 1.02
+      Log::Any::Adapter::Test 1.02
+      Log::Any::Adapter::Util 1.02
+      Log::Any::Manager 1.02
+      Log::Any::Proxy 1.02
+      Log::Any::Proxy::Test 1.02
+      Log::Any::Test 1.02
     requirements:
-      ExtUtils::MakeMaker 6.30
-      Test::More 0
+      B 0
+      Carp 0
+      Data::Dumper 0
+      Exporter 0
+      ExtUtils::MakeMaker 6.17
+      Fcntl 0
+      IO::File 0
+      Test::Builder 0
+      base 0
+      constant 0
+      perl 5.008001
+      strict 0
+      warnings 0
   Log-Any-Adapter-0.11
     pathname: J/JS/JSWARTZ/Log-Any-Adapter-0.11.tar.gz
     provides:
@@ -2569,19 +2699,21 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.59
       Test::More 0.47
       perl 5.006
-  Method-Signatures-20131010
-    pathname: B/BA/BAREFOOT/Method-Signatures-20131010.tar.gz
+  Method-Signatures-20141021
+    pathname: B/BA/BAREFOOT/Method-Signatures-20141021.tar.gz
     provides:
-      Method::Signatures 20131010
-      Method::Signatures::Modifiers 20131010
+      Method::Signatures 20141021
+      Method::Signatures::Modifiers 20141021
       Method::Signatures::Parameter undef
-      Method::Signatures::Parser undef
+      Method::Signatures::Signature undef
+      Method::Signatures::Types undef
+      Method::Signatures::Utils undef
     requirements:
       Any::Moose 0.11
       Const::Fast 0.006
       Devel::Declare 0.006002
       Devel::Declare::MethodInstaller::Simple 0.006002
-      Devel::Pragma 0.40
+      Lexical::SealRequireHints 0.007
       Module::Build 0.26
       Mouse 0.64
       PPI 1.203
@@ -2590,19 +2722,19 @@ DISTRIBUTIONS
       Test::Exception 0.29
       Test::More 0.82
       Test::Warn 0.10
-      experimental 0.005
       perl v5.8.1
-  Mixin-Linewise-0.104
-    pathname: R/RJ/RJBS/Mixin-Linewise-0.104.tar.gz
+  Mixin-Linewise-0.106
+    pathname: R/RJ/RJBS/Mixin-Linewise-0.106.tar.gz
     provides:
       MLTests undef
-      Mixin::Linewise 0.104
-      Mixin::Linewise::Readers 0.104
-      Mixin::Linewise::Writers 0.104
+      Mixin::Linewise 0.106
+      Mixin::Linewise::Readers 0.106
+      Mixin::Linewise::Writers 0.106
     requirements:
       Carp 0
       ExtUtils::MakeMaker 6.30
       IO::File 0
+      PerlIO::utf8_strict 0
       Sub::Exporter 0
       strict 0
       warnings 0
@@ -2661,10 +2793,10 @@ DISTRIBUTIONS
       Text::ParseWords 0
       perl 5.006001
       version 0.87
-  Module-Build-Tiny-0.034
-    pathname: L/LE/LEONT/Module-Build-Tiny-0.034.tar.gz
+  Module-Build-Tiny-0.039
+    pathname: L/LE/LEONT/Module-Build-Tiny-0.039.tar.gz
     provides:
-      Module::Build::Tiny 0.034
+      Module::Build::Tiny 0.039
     requirements:
       CPAN::Meta 0
       DynaLoader 0
@@ -2762,36 +2894,37 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Moo-1.004002
-    pathname: H/HA/HAARG/Moo-1.004002.tar.gz
+  Moo-1.006001
+    pathname: H/HA/HAARG/Moo-1.006001.tar.gz
     provides:
       Method::Generate::Accessor undef
       Method::Generate::BuildAll undef
       Method::Generate::Constructor undef
       Method::Generate::DemolishAll undef
       Method::Inliner undef
-      Moo 1.004002
+      Moo 1.006001
       Moo::HandleMoose undef
       Moo::HandleMoose::FakeConstructor undef
       Moo::HandleMoose::FakeMetaClass undef
       Moo::HandleMoose::_TypeMap undef
       Moo::Object undef
-      Moo::Role 1.004002
+      Moo::Role 1.006001
       Moo::_Utils undef
       Moo::_mro undef
       Moo::sification undef
-      Sub::Defer 1.004002
-      Sub::Quote 1.004002
+      Sub::Defer 1.006001
+      Sub::Quote 1.006001
       oo undef
     requirements:
       Class::Method::Modifiers 1.1
       Devel::GlobalDestruction 0.11
-      Dist::CheckConflicts 0.02
+      Exporter 5.57
       ExtUtils::MakeMaker 0
       Import::Into 1.002
-      Module::Runtime 0.012
-      Role::Tiny 1.003002
-      perl 5.008001
+      Module::Runtime 0.014
+      Role::Tiny 1.003004
+      Scalar::Util 0
+      perl 5.006
       strictures 1.004003
   MooX-Types-MooseLike-0.25
     pathname: M/MA/MATEU/MooX-Types-MooseLike-0.25.tar.gz
@@ -3374,6 +3507,23 @@ DISTRIBUTIONS
       MooseX::Types 0.04
       Path::Class 0.16
       Test::More 0.88
+  MooseX-Types-Path-Tiny-0.011
+    pathname: E/ET/ETHER/MooseX-Types-Path-Tiny-0.011.tar.gz
+    provides:
+      MooseX::Types::Path::Tiny 0.011
+    requirements:
+      ExtUtils::MakeMaker 0
+      Module::Build::Tiny 0.037
+      Moose 2
+      MooseX::Types 0
+      MooseX::Types::Moose 0
+      MooseX::Types::Stringlike 0
+      Path::Tiny 0
+      if 0
+      namespace::autoclean 0
+      perl 5.006
+      strict 0
+      warnings 0
   MooseX-Types-Perl-0.101343
     pathname: R/RJ/RJBS/MooseX-Types-Perl-0.101343.tar.gz
     provides:
@@ -3384,6 +3534,17 @@ DISTRIBUTIONS
       MooseX::Types::Moose 0
       Params::Util 0
       version 0.82
+  MooseX-Types-Stringlike-0.003
+    pathname: D/DA/DAGOLDEN/MooseX-Types-Stringlike-0.003.tar.gz
+    provides:
+      MooseX::Types::Stringlike 0.003
+    requirements:
+      ExtUtils::MakeMaker 6.17
+      MooseX::Types 0
+      MooseX::Types::Moose 0
+      overload 0
+      strict 0
+      warnings 0
   MooseX-Types-URI-0.05
     pathname: E/ET/ETHER/MooseX-Types-URI-0.05.tar.gz
     provides:
@@ -3698,13 +3859,26 @@ DISTRIBUTIONS
       strict 0
       vars 0
       warnings 0
-  Path-Class-0.33
-    pathname: K/KW/KWILLIAMS/Path-Class-0.33.tar.gz
+  Parse-CPAN-Meta-1.4414
+    pathname: D/DA/DAGOLDEN/Parse-CPAN-Meta-1.4414.tar.gz
     provides:
-      Path::Class 0.33
-      Path::Class::Dir 0.33
-      Path::Class::Entity 0.33
-      Path::Class::File 0.33
+      Parse::CPAN::Meta 1.4414
+    requirements:
+      CPAN::Meta::YAML 0.011
+      Carp 0
+      Encode 0
+      Exporter 0
+      ExtUtils::MakeMaker 6.30
+      File::Spec 0.80
+      JSON::PP 2.27200
+      strict 0
+  Path-Class-0.35
+    pathname: K/KW/KWILLIAMS/Path-Class-0.35.tar.gz
+    provides:
+      Path::Class 0.35
+      Path::Class::Dir 0.35
+      Path::Class::Entity 0.35
+      Path::Class::File 0.35
     requirements:
       Carp 0
       Cwd 0
@@ -3789,6 +3963,17 @@ DISTRIBUTIONS
       Pod::Usage 1.3
       Scalar::Util 0
       Test::More 0
+  PerlIO-utf8_strict-0.005
+    pathname: L/LE/LEONT/PerlIO-utf8_strict-0.005.tar.gz
+    provides:
+      PerlIO::utf8_strict 0.005
+    requirements:
+      ExtUtils::CBuilder 0
+      Module::Build 0.28
+      XSLoader 0
+      perl 5.008
+      strict 0
+      warnings 0
   Pod-Coverage-0.23
     pathname: R/RC/RCLAMP/Pod-Coverage-0.23.tar.gz
     provides:
@@ -4004,21 +4189,21 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.30
       Moose::Role 0
       Moose::Util::TypeConstraints 0
-  Role-Tiny-1.003002
-    pathname: H/HA/HAARG/Role-Tiny-1.003002.tar.gz
+  Role-Tiny-1.003004
+    pathname: H/HA/HAARG/Role-Tiny-1.003004.tar.gz
     provides:
-      Role::Tiny 1.003002
-      Role::Tiny::With undef
+      Role::Tiny 1.003004
+      Role::Tiny::With 1.003004
     requirements:
       Exporter 5.57
-      Test::Fatal 0.003
-      Test::More 0.96
-  Scalar-List-Utils-1.38
-    pathname: P/PE/PEVANS/Scalar-List-Utils-1.38.tar.gz
+      perl 5.006
+  Scalar-List-Utils-1.41
+    pathname: P/PE/PEVANS/Scalar-List-Utils-1.41.tar.gz
     provides:
-      List::Util 1.38
-      List::Util::XS 1.38
-      Scalar::Util 1.38
+      List::Util 1.41
+      List::Util::XS 1.41
+      Scalar::Util 1.41
+      Sub::Util 1.41
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
@@ -4260,10 +4445,10 @@ DISTRIBUTIONS
       Scalar::Util 1.14
       Test::More 0.42
       perl 5.005
-  Template-Toolkit-2.25
-    pathname: A/AB/ABW/Template-Toolkit-2.25.tar.gz
+  Template-Toolkit-2.26
+    pathname: A/AB/ABW/Template-Toolkit-2.26.tar.gz
     provides:
-      Template 2.25
+      Template 2.26
       Template::Base 2.78
       Template::Config 2.75
       Template::Constants 2.75
@@ -4272,7 +4457,7 @@ DISTRIBUTIONS
       Template::Document 2.79
       Template::Exception 2.7
       Template::Filters 2.87
-      Template::Grammar 2.25
+      Template::Grammar 2.26
       Template::Iterator 2.68
       Template::Monad::Assert 1
       Template::Monad::Scalar 1
@@ -4320,6 +4505,7 @@ DISTRIBUTIONS
       File::Spec 0.8
       File::Temp 0.12
       Scalar::Util 0
+      Test::LeakTrace 0
   Term-Encoding-0.02
     pathname: M/MI/MIYAGAWA/Term-Encoding-0.02.tar.gz
     provides:
@@ -4426,10 +4612,10 @@ DISTRIBUTIONS
       Data::Dumper 2.126
       Test::More 0
       Text::Diff 0.35
-  Test-Exception-0.32
-    pathname: A/AD/ADIE/Test-Exception-0.32.tar.gz
+  Test-Exception-0.35
+    pathname: E/EX/EXODIST/Test-Exception-0.35.tar.gz
     provides:
-      Test::Exception 0.32
+      Test::Exception 0.35
     requirements:
       Sub::Uplevel 0.18
       Test::Builder 0.7
@@ -4522,6 +4708,16 @@ DISTRIBUTIONS
       Test::Harness 3.30
     requirements:
       ExtUtils::MakeMaker 0
+  Test-LeakTrace-0.15
+    pathname: G/GF/GFUJI/Test-LeakTrace-0.15.tar.gz
+    provides:
+      Test::LeakTrace 0.15
+      Test::LeakTrace::Script undef
+    requirements:
+      Exporter 5.57
+      ExtUtils::MakeMaker 6.59
+      Test::More 0.62
+      perl 5.008001
   Test-Most-0.33
     pathname: O/OV/OVID/Test-Most-0.33.tar.gz
     provides:
@@ -4573,21 +4769,17 @@ DISTRIBUTIONS
       Pod::Simple 3.05
       Test::Builder::Tester 1.02
       Test::More 0.62
-  Test-Pod-Coverage-1.08
-    pathname: P/PE/PETDANCE/Test-Pod-Coverage-1.08.tar.gz
+  Test-Pod-Coverage-1.10
+    pathname: N/NE/NEILB/Test-Pod-Coverage-1.10.tar.gz
     provides:
-      Nopod undef
-      Nosymbols undef
-      PC_Inherited undef
-      PC_Inherits undef
-      Privates undef
-      Simple undef
-      Test::Pod::Coverage 1.08
+      Test::Pod::Coverage 1.10
     requirements:
       ExtUtils::MakeMaker 0
       Pod::Coverage 0
-      Test::Builder::Tester 0
-      Test::More 0
+      Test::Builder 0
+      perl 5.006
+      strict 0
+      warnings 0
   Test-Requires-0.07
     pathname: T/TO/TOKUHIROM/Test-Requires-0.07.tar.gz
     provides:
@@ -4600,13 +4792,13 @@ DISTRIBUTIONS
       Test::Builder::Module 0
       Test::More 0.61
       perl 5.008_001
-  Test-Roo-1.002
-    pathname: D/DA/DAGOLDEN/Test-Roo-1.002.tar.gz
+  Test-Roo-1.004
+    pathname: D/DA/DAGOLDEN/Test-Roo-1.004.tar.gz
     provides:
-      Test::Roo 1.002
-      Test::Roo::Class 1.002
-      Test::Roo::Cookbook 1.002
-      Test::Roo::Role 1.002
+      Test::Roo 1.004
+      Test::Roo::Class 1.004
+      Test::Roo::Cookbook 1.004
+      Test::Roo::Role 1.004
     requirements:
       ExtUtils::MakeMaker 6.17
       Moo 1.000008
@@ -4737,10 +4929,10 @@ DISTRIBUTIONS
       Test::More 0.98
       strict 0
       warnings 0
-  Try-Tiny-0.19
-    pathname: D/DO/DOY/Try-Tiny-0.19.tar.gz
+  Try-Tiny-0.22
+    pathname: D/DO/DOY/Try-Tiny-0.22.tar.gz
     provides:
-      Try::Tiny 0.19
+      Try::Tiny 0.22
     requirements:
       Carp 0
       Exporter 5.57

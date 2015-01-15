@@ -5,8 +5,8 @@ package App::Embra;
 
 # ABSTRACT: build a site from parts
 
-use Moo;
 use Method::Signatures;
+use Moo;
 
 =head1 DESCRIPTION
 
@@ -50,7 +50,7 @@ has 'files' => (
 
     my $embra = App::Embra->from_config_mvp_sequence( $sequence );
 
-Returns a new instance with its initial attributes set from an instance of L<Config::MVP::Sequence>. Called by the L<command-line base class|App::Embra::App::Command> whenever the L<embra> is run.
+Returns a new C<App::Embra> with its attributes & plugins taken from a L<Config::MVP::Sequence>. Called by the L<command-line base class|App::Embra::App::Command> whenever L<embra> is run.
 
 =cut
 
@@ -83,6 +83,18 @@ method add_plugin( $plugin where { $_->DOES( "App::Embra::Role::Plugin" ) } ) {
     push @{ $self->plugins}, $plugin;
 }
 
+=method find_plugin
+
+    my $plugin = $embra->find_plugin( $class );
+
+Returns the first plugin in L<C</plugins>> with class C<$class>. Returns an emtpy list if no plugin with class C<$class> is present
+
+=cut
+
+method find_plugin( $class ) {
+    ( grep { ref $_ eq $class } @{ $self->plugins } )[0];
+}
+
 =method collate
 
     $embra->collate;
@@ -106,7 +118,7 @@ method collate {
     $_->prune_files     for $self->plugins_with( -FilePruner );
     $_->transform_files for $self->plugins_with( -FileTransformer );
     $_->assemble_files  for $self->plugins_with( -FileAssembler );
-    $_->publish_files   for $self->plugins_with( -FilePublisher );
+    $_->publish_site    for $self->plugins_with( -SitePublisher );
 }
 
 =method plugins_with

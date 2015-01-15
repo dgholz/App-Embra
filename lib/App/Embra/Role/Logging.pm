@@ -5,9 +5,9 @@ package App::Embra::Role::Logging;
 
 # ABSTRACT: adds logging methods to a class
 
-use Moo::Role;
-use Method::Signatures;
 use Log::Any;
+use Method::Signatures;
+use Moo::Role;
 
 =head1 DESCRIPTION
 
