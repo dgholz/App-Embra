@@ -27,8 +27,8 @@ method _build_plugin {
     );
 }
 
-with 'App::Embra::Role::TestPublishPlugin';
 with 'App::Embra::Role::TestPrunePlugin';
+with 'App::Embra::Role::TestPublishPlugin';
 
 after setup => method {
     $self->output_dir->recurse( callback => func( $file ) {
