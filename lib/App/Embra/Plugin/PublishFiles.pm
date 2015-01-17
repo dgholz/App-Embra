@@ -11,9 +11,9 @@ use Moo;
 
 =head1 DESCRIPTION
 
-This plugin creates your site in a directory. The file name is used as the path to write its content to, relative to the destinatino directory.
+This plugin creates your site in a directory. The name of each file is used as the path to write its content to, relative to the destination directory.
 
-This plugin additionally prunes already-published files from the list of files to include in the site.
+This plugin additionally prunes already-published files from the list of files to include in the site. This is useful if your L<App::Embra::Role::FileGather> plugins find the L</to> directory and add the previous version of the published site to be re-published.
 
 =cut
 
@@ -26,8 +26,8 @@ The directory where site files will be written. Defaults to F<.> (the current di
 has 'to' => (
     is => 'ro',
     required => 1,
-    default => sub { '.' },
-    coerce => sub { Path::Class::dir( $_[0] ) },
+    default => '.',
+    coerce => func( $path_as_str ) { Path::Class::dir( $path_as_str ) },
 );
 
 method publish_site {

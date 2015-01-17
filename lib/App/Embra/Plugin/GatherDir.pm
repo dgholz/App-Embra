@@ -46,7 +46,7 @@ has 'include_dotfiles' => (
 
 =attr exclude_match
 
-A regular expression to match files which should not be gathered. May be used multiple times tospecify multiple patterns to exclude.
+A regular expression to match files which should not be gathered. May be used multiple times to specify multiple patterns to exclude.
 
 =cut
 
