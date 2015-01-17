@@ -23,7 +23,7 @@ In your F<embra.ini>:
 
 =attr filename
 
-Name of file to exclude. It can be specified multiple times in your F<embra.ini>.
+Name of file to exclude. May be used multiple times to exclude multiple files.
 
 =cut
 
