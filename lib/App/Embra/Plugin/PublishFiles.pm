@@ -26,8 +26,8 @@ The directory where site files will be written. Defaults to F<.> (the current di
 has 'to' => (
     is => 'ro',
     required => 1,
-    default => sub { '.' },
-    coerce => sub { Path::Class::dir( $_[0] ) },
+    default => '.',
+    coerce => func( $path_as_str ) { Path::Class::dir( $path_as_str ) },
 );
 
 method publish_site {
