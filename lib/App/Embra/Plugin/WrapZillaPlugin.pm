@@ -37,6 +37,10 @@ has 'plugin_args' => (
     default => func { {} },
 );
 
+=for Pod::Coverage isa
+
+=cut
+
 around 'isa' => func ( $orig, $self, $class ) {
     return $class eq 'Dist::Zilla' or $orig->($self, $class); # cheeky
 };
