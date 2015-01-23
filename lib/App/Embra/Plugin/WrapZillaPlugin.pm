@@ -42,7 +42,7 @@ has 'plugin_args' => (
 =cut
 
 around 'isa' => func ( $orig, $self, $class ) {
-    return $class eq 'Dist::Zilla' or $orig->($self, $class); # cheeky
+    return $class eq 'Dist::Zilla' || $orig->($self, $class); # cheeky
 };
 
 method _build_plugin {
