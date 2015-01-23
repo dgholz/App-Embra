@@ -53,7 +53,7 @@ The permissions of the file. Defaults to 0644.
 has 'mode' => (
   is  => 'rw',
   lazy => 1,
-  default => method { oct(0644) },
+  default => method { oct(644) },
 );
 
 =attr _original_name
