@@ -15,7 +15,7 @@ use Test::Roo;
     extends 'App::Embra::Plugin::Test';
 
     around 'does' => func( $orig, $self, $role ) {
-        return any { $_ eq $role } qw< App::Embra::Role::Test App::Embra::Role::Plugin > or $orig->($self, $role);
+        return any { $_ eq $role } qw< App::Embra::Role::Test App::Embra::Role::Plugin > || $orig->($self, $role);
     };
 }
 
