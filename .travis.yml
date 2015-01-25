@@ -9,12 +9,10 @@ perl:
 - "5.12"
 - "5.10"
 
-before_install:
-- git config --global user.name "TravisCI"
-
-install:
-- cpanm --quiet --notest --skip-satisfied Carton
+before_script:
+- cpanm Carton
 - carton install
+- dzil authordeps --missing | cpanm
 
 script:
 - carton exec dzil smoke --release --author
