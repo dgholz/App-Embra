@@ -9,10 +9,12 @@ perl:
 - "5.12"
 - "5.10"
 
-before_script:
+before_install:
 - cpanm Carton
+
+install:
 - carton install
-- dzil authordeps --missing | cpanm
+- carton exec dzil authordeps --missing | cpanm
 
 script:
 - carton exec dzil smoke --release --author
