@@ -2,18 +2,18 @@ sudo: false
 
 language: perl
 perl:
-- "5.20"
-- "5.18"
-- "5.16"
-- "5.14"
-- "5.12"
-- "5.10"
+  - "5.20"
+  - "5.18"
+  - "5.16"
+  - "5.14"
+  - "5.12"
+  - "5.10"
 
 install:
-- dzil authordeps --missing | cpanm --notest --quiet
-- dzil build
-- cpanm Carton
-- carton install
+  - dzil authordeps --missing | cpanm --notest --quiet
+  - dzil build
+  - cpanm Carton
+  - carton install
 
 script:
-- carton exec dzil smoke --release --author
+  - carton exec dzil smoke --release --author
