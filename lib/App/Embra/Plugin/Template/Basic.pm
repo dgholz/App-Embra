@@ -31,6 +31,7 @@ has 'assembler' => (
 
 method _build_assembler {
     App::Embra::Plugin::TemplateToolkit->new(
+        embra => $self->embra,
         include_path => File::ShareDir::module_dir(__PACKAGE__),
     );
 }
