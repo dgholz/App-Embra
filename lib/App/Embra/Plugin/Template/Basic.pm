@@ -26,7 +26,7 @@ The object used to assemble files. Defaults to an instance of L<App::Embra::Plug
 
 has 'assembler' => (
     is => 'lazy',
-    handles => 'assemble_files',
+    handles => [ 'assemble_files' ],
 );
 
 method _build_assembler {
