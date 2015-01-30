@@ -1,1 +1,26 @@
-<html><head>[% title %]</head><body>[% content %]</body></html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>[% title %]</title>
+  </head>
+  <body>
+    <header>
+      <hgroup>
+        [% site.name %]
+      </hgroup>
+    </header>
+    <article>
+      <header>
+        <time datetime="[% timestamp %]">[% timestamp %]</time>
+        <h1>
+          <a href="#" rel="bookmark" title="[% title %]">[% title %]</a>
+        </h1>
+      </header>
+      [% content %]
+    </article>
+    <footer>
+      [% site.copyright %]
+    </footer>
+  </body>
+</html>
