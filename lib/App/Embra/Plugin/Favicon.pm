@@ -27,7 +27,7 @@ has 'filename' => (
 
 has 'fragment' => (
     is => 'ro',
-    default => method { qq{<link rel="icon" type="image/x-icon" href="$self->filename">} ),
+    default => method { qq{<link rel="icon" type="image/x-icon" href="$self->filename">} },
     init_arg => undef,
 );
 
@@ -38,5 +38,11 @@ has 'clipboard' => (
 );
 
 with 'App::Embra::Role::Snippet';
+
+method gather_files {
+    $self->add_file( App::Embra::File->new( name => $self->filename ) );
+}
+
+with 'App::Embra::Role::FileGatherer';
 
 1;
