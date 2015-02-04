@@ -108,13 +108,11 @@ sub _extract_deps {
         my $realname = App::Embra::Util->expand_config_package_name($pack);
         $reqs->add_minimum($realname => $version);
 
-        if( exists $config->{$pack}->{_name} ) {
-            if( not Class::Inspector->loaded( $realname ) ) {
-                Module::Runtime::require_module $realname;
-            }
-            if( $realname->does('App::Embra::Role::ExtraListDeps') ) {
-                $realname->add_extra_deps( config => $config->{$pack}, reqs => $reqs )
-            }
+        if( not Class::Inspector->loaded( $realname ) ) {
+            Module::Runtime::require_module $realname;
+        }
+        if( $realname->does('App::Embra::Role::ExtraListDeps') ) {
+            $realname->add_extra_deps( config => $config->{$pack}, reqs => $reqs )
         }
 
     }
