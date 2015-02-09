@@ -25,6 +25,12 @@ test 'adds favicon file' => method {
         undef,
         'added a favicon file'
     );
+    like(
+        $self->plugin->fragment,
+        qr/href="favicon.ico"/,
+        'HTML fragment for favicon looks sane'
+    );
+
 };
 
 run_me;

@@ -22,12 +22,19 @@ The name of the favicon. Defaults to F<favicon.ico>.
 
 has 'filename' => (
     is => 'ro',
-    default => sub{ 'favicon.ico' },
+    default => sub { 'favicon.ico' },
+);
+
+has 'file' => (
+    is => 'lazy',
+    default => method {
+        App::Embra::File->new( name => $self->filename )
+    },
 );
 
 has 'fragment' => (
     is => 'ro',
-    default => method { qq{<link rel="icon" type="image/x-icon" href="$self->filename">} },
+    default => method { qq{<link rel="icon" type="image/x-icon" href="${ \  $self->file->name }">} },
     init_arg => undef,
 );
 
