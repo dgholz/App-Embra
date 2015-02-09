@@ -3,6 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <title>[% title %]</title>
+[%- FOREACH hs IN snippets.head %]
+    [% hs %]
+[% END -%]
   </head>
   <body>
     <header>
