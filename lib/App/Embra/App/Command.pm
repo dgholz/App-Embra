@@ -21,6 +21,21 @@ sub embra {
     state $embra = App::Embra->from_config_mvp_sequence( sequence => $self->_create_seq );
 }
 
+sub _die_missing {
+    my ($package) = @_;
+
+    my $bundle = $package =~ /^@/ ? ' bundle' : '';
+    die <<"END_DIE";
+Required plugin$bundle [$package] isn't installed.
+
+Run 'embra listdeps' to see a list of all required plugins.
+You can pipe the list to your CPAN client to install or update them:
+
+    embra listdeps | cpanm
+
+END_DIE
+}
+
 # from Dist::Zilla::Dist::Build, where it is known as _load_config
 
 sub _create_seq {
@@ -38,22 +53,14 @@ sub _create_seq {
     } catch {
         my $e = $_;
         try {
-            $e->isa('Config::MVP:Error') and 'package not installed' eq $e->ident;
+            for($e) {
+                if($e->ident =~ /package not installed/) {
+                    _die_missing($e->package);
+                }
+            }
         } catch {
             die $e;
         };
-        my $package = $_->package;
-
-        my $bundle = $package =~ /^@/ ? ' bundle' : '';
-        die <<"END_DIE";
-Required plugin$bundle [$package] isn't installed.
-
-Run 'embra listdeps' to see a list of all required plugins.
-You can pipe the list to your CPAN client to install or update them:
-
-    embra listdeps | cpanm
-
-END_DIE
     };
 }
 

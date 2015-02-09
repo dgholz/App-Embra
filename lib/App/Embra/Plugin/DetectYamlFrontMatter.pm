@@ -40,7 +40,7 @@ method transform_files {
         } catch {
             die 'cannot read front-matter of '.$file->name.': '.$_;
         };
-        $file->update_notes( $notes );
+        $file->update_notes( %$notes );
         $file->content( ${^POSTMATCH} );
     }
 }

@@ -6,7 +6,9 @@ requires "Config::INI::Reader" => "0";
 requires "Config::MVP::Assembler" => "0";
 requires "Config::MVP::Assembler::WithBundles" => "0";
 requires "Config::MVP::Reader::Finder" => "0";
+requires "Config::MVP::Reader::INI" => "2";
 requires "File::Basename" => "0";
+requires "File::ShareDir" => "0";
 requires "File::Spec::Functions" => "0";
 requires "List::MoreUtils" => "0";
 requires "Log::Any" => "0";
@@ -40,6 +42,7 @@ on 'test' => sub {
 
 on 'configure' => sub {
   requires "ExtUtils::MakeMaker" => "0";
+  requires "File::ShareDir::Install" => "0.06";
 };
 
 on 'develop' => sub {

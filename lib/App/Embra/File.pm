@@ -133,14 +133,14 @@ method _read_file {
 
 =method update_notes
 
-    $file->update_notes( $more_notes );
+    $file->update_notes( %more_notes );
 
-Merges C<$more_notes> into the file's existing notes.
+Merges C<%more_notes> into the file's existing notes.
 
 =cut
 
-method update_notes( HashRef $more_notes ) {
-    @{ $self->notes }{ keys %$more_notes } = values %$more_notes;
+method update_notes( %notes ) {
+    @{ $self->notes }{ keys %notes } = values %notes;
 }
 
 1;

@@ -5,7 +5,7 @@ package App::Embra::Role::FilePruner;
 
 # ABSTRACT: something that stops files from appearing in a site
 
-use List::MoreUtils qw< indexes >;
+use List::MoreUtils qw< part >;
 use Method::Signatures;
 use Moo::Role;
 
@@ -31,12 +31,10 @@ Passes each of the site's files to the plugin's C<exclude_file> method, and remo
 
 method prune_files {
     my $files = $self->embra->files;
-    my @to_remove = indexes { $self->exclude_file( $_ ) } @{ $files };
+    my ($remove, $keep) = part { ! $self->exclude_file( $_ ) } @{ $files };
 
-    for my $i ( reverse sort { $a <=> $b } @to_remove ) {
-        $self->debug( "pruning ${ \ $files->[$i] }" );
-        splice @{ $files }, $i, 1;
-    }
+    $self->debug( "pruning $_" ) for @{ $remove };
+    splice @{ $files }, 0, @{ $files }, @{ $keep };
 
     return;
 }

@@ -14,7 +14,7 @@ has 'config' => (
 {
     package Dist::Zilla::Plugin::Hello;
     use Moo;
-    with 'Dist::Zilla::Role::BeforeRelease';
+    extends 'Dist::Zilla::Plugin::DoBeforeRelease';
     has 'files' => (
         is => 'ro',
         default => sub {[]},

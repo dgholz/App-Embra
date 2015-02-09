@@ -10,13 +10,9 @@ use Moo::Role;
 
 =head1 DESCRIPTION
 
-This role is used by plugins to add extra pacakges to the list of required dependencies when C<embra listdeps> is executed. This role is only checked when a package has a section name in config i.e.
+This role is used by plugins to add extra pacakges to the list of required dependencies when C<embra listdeps> is executed.
 
-    [SomePlugin] # will not get the chance to add extra dependencies
-
-    [SomePlugin / foo bar] # will get its extra dependencies added
-
-Plugins which consume this role must define C<extra_list_deps>, which will be passed the values from config for the associated section in config and returns a list of package names.
+Plugins which consume this role must define C<extra_list_deps>, which will be passed the values for the associated section in config and returns a list of package names.
 
 =cut
 
