@@ -47,7 +47,7 @@ has 'clipboard' => (
 with 'App::Embra::Role::Snippet';
 
 method gather_files {
-    $self->add_file( App::Embra::File->new( name => $self->filename ) );
+    $self->add_file( $self->file );
 }
 
 with 'App::Embra::Role::FileGatherer';
