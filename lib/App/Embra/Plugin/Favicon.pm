@@ -34,7 +34,7 @@ has 'file' => (
 
 has 'fragment' => (
     is => 'ro',
-    default => method { qq{<link rel="icon" type="image/x-icon" href="${ \  $self->file->name }">} },
+    default => method { qq{<link rel="shortcut icon" href="${ \ $self->file->name }">} },
     init_arg => undef,
 );
 
