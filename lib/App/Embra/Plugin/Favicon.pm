@@ -22,7 +22,7 @@ The name of the favicon. Defaults to F<favicon.ico>.
 
 has 'filename' => (
     is => 'ro',
-    default => sub { 'favicon.ico' },
+    default => 'favicon.ico',
 );
 
 has 'file' => (
