@@ -22,12 +22,6 @@ The source of the CSS file. Can be a path or a URL.
 
 =cut
 
-has 'src' => (
-    is       => 'ro',
-    required => 1,
-    coerce   => func($val) { URI->new( $val ) },
-);
-
 has 'fragment' => (
     is => 'lazy',
 );
@@ -43,19 +37,6 @@ has 'clipboard' => (
 );
 
 with 'App::Embra::Role::Snippet';
-
-has 'file' => (
-    is        => 'lazy',
-    predicate => 1,
-    default   => method { App::Embra::File->new( name => $self->src ) },
-);
-
-method gather_files {
-    if( not $self->src->has_recognized_scheme ) {
-        $self->add_file( $self->file );
-    }
-}
-
-with 'App::Embra::Role::FileGatherer';
+with 'App::Embra::Role::IncludeFromSrc';
 
 1;
