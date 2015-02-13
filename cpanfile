@@ -25,6 +25,7 @@ requires "String::RewritePrefix" => "0";
 requires "Template" => "0";
 requires "Text::Markdown" => "0";
 requires "Try::Tiny" => "0";
+requires "URI" => "0";
 requires "YAML::XS" => "0";
 requires "base" => "0";
 requires "feature" => "0";
