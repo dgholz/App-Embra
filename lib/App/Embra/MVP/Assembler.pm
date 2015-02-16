@@ -8,6 +8,7 @@ package App::Embra::MVP::Assembler;
 use App::Embra::Util qw< expand_config_package_name >;
 
 use Moo;
+use Method::Signatures;
 extends 'Config::MVP::Assembler';
 with 'Config::MVP::Assembler::WithBundles';
 
@@ -19,8 +20,7 @@ The Assembler's C<expand_package> method delegates to L<App::Embra::Util/expand_
 
 =cut
 
-sub expand_package {
-    my ( $self, $pkg_name ) = @_;
+method expand_package( $pkg_name ) {
     expand_config_package_name( $pkg_name );
 }
 
