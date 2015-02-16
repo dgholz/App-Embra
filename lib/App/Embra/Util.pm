@@ -22,8 +22,7 @@ Used by L<App::Embra::MVP::Assembler> and L<App::Embra::App::Command::listdeps>,
 
 =cut
 
-sub expand_config_package_name {
-    my( $class, $pkg_name ) = @_;
+func expand_config_package_name( $pkg_name ) {
     String::RewritePrefix->rewrite(
         {
           '=' => '',
