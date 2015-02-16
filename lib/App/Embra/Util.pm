@@ -6,6 +6,10 @@ package App::Embra::Util;
 # ABSTRACT: place for misc. code
 
 use String::RewritePrefix;
+require Exporter;
+use base qw( Exporter );
+use vars qw( @EXPORT_OK );
+@EXPORT_OK = qw< expand_config_package_name >;
 
 =method expand_config_package_name
 
