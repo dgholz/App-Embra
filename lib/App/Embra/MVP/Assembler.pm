@@ -5,7 +5,7 @@ package App::Embra::MVP::Assembler;
 
 # ABSTRACT: App::Embra-specific subclass of Config::MVP::Assembler
 
-use App::Embra::Util;
+use App::Embra::Util qw< expand_config_package_name >;
 
 use Moo;
 extends 'Config::MVP::Assembler';
@@ -21,7 +21,7 @@ The Assembler's C<expand_package> method delegates to L<App::Embra::Util/expand_
 
 sub expand_package {
     my ( $self, $pkg_name ) = @_;
-    App::Embra::Util->expand_config_package_name( $pkg_name );
+    expand_config_package_name( $pkg_name );
 }
 
 1;

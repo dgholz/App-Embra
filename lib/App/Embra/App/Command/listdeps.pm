@@ -9,7 +9,7 @@ use Class::Inspector qw<>;
 use Module::Runtime qw<>;
 
 use App::Embra::App -command;
-use App::Embra::Util;
+use App::Embra::Util qw< expand_config_package_name >;
 
 =head1 SYNOPSIS
 
@@ -105,7 +105,7 @@ sub _extract_deps {
         if(exists $config->{$pack} && exists $config->{$pack}->{':version'}) {
             $version = $config->{$pack}->{':version'};
         }
-        my $realname = App::Embra::Util->expand_config_package_name($pack);
+        my $realname = expand_config_package_name($pack);
         $reqs->add_minimum($realname => $version);
 
         if( not Class::Inspector->loaded( $realname ) ) {
