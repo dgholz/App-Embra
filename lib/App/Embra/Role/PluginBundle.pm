@@ -15,7 +15,16 @@ This role will allow the composer to be used as a L<Bundle|Config::MVP::Assemble
 
 =cut
 
-with 'App::Embra::Role::Plugin';
+=attr name
+
+The name of this plugin. Defaults to the name of the package.
+
+=cut
+
+has 'name' => (
+    is => 'ro',
+    default => method { ref $self },
+);
 
 =attr bundled_plugins
 
@@ -44,7 +53,7 @@ Constructs an instance of the composing class and returns the C< L</bundled_plug
 
 method bundled_plugins_config($class:, $args) {
     my( $name, $pkg, $ctor_args ) = @{ $args }{ qw< name package payload >};
-    my $bun = $class->new(name => $name, @{$ctor_args});
+    my $bun = $class->new(name => $name, %{$ctor_args});
     $bun->configure_bundle;
     return @{ $bun->bundled_plugins };
 }
