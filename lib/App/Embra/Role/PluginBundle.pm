@@ -17,7 +17,7 @@ This role will allow the composer to be used as a L<Bundle|Config::MVP::Assemble
 
 with 'App::Embra::Role::Plugin';
 
-=attr bundled_plugins_config
+=attr bundled_plugins
 
 A list of plugins to be included. Each element should be an arrayref of:
 
@@ -29,10 +29,25 @@ The helper method C< L</add_plugin> > provides a flexible way to populate this l
 
 =cut
 
-has 'bundled_plugins_config' => (
+has 'bundled_plugins' => (
     is => 'ro',
     default => method { [] },
 );
+
+=method bundled_plugins_config
+
+    $class->bundled_plugins_config( { $name, $pkg, [ $args ] } );
+
+Constructs an instance of the composing class and returns the C< L</bundled_plugins > >.
+
+=cut
+
+method bundled_plugins_config($class:, $args) {
+    my( $name, $pkg, $ctor_args ) = @{ $args }{ qw< name package payload >};
+    my $bun = $class->new(name => $name, @{$ctor_args});
+    $bun->configure_bundle;
+    return @{ $bun->bundled_plugins };
+}
 
 =method add_plugin
 
@@ -77,9 +92,5 @@ method add_plugin($pkg, @payload) {
 }
 
 requires 'configure_bundle';
-
-method BUILD($args) {}
-
-after 'BUILD' => method($args) { $self->configure_bundle };
 
 1;
