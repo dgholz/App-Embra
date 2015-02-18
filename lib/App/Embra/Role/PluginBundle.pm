@@ -21,9 +21,9 @@ with 'App::Embra::Role::Plugin';
 
 A list of plugins to be included. Each element should be an arrayref of:
 
-    [ $package_name, $plugin_name, [ @plugin_args ] ]
+    [ $plugin_name, $package_args [ @plugin_args ] ]
 
-where C<$package_name> is the name of the plugin package, C<$plugin_name> will be used for the name of the plugin, and C<@plaugin_args> will be passed to the plugin's constructor.
+where C<$plugin_name> will be used for the name of the plugin, C<$package_name> is the name of the plugin package, and C<@plugin_args> will be passed to the plugin's constructor.
 
 The helper method C< L</add_plugin> > provides a flexible way to populate this list.
 
@@ -73,7 +73,7 @@ method add_plugin($pkg, @payload) {
         $name ||= $pkg;
     }
     $pkg = expand_config_package_name($pkg);
-    push @{ $self->bundled_plugins_config }, [ $pkg, $name, [ %payload ] ];
+    push @{ $self->bundled_plugins }, [ $name, $pkg, [ %payload ] ];
 }
 
 requires 'configure_bundle';

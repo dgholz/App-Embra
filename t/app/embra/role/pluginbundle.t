@@ -35,7 +35,7 @@ test 'basic plugin bundle' => method {
     } '... add plugin ...';
     is_deeply(
         $self->plugin_bundle->bundled_plugins_config,
-        [ [ qw< Foo =Foo >, [] ] ],
+        [ [ qw< =Foo Foo >, [] ] ],
         '... and stored correct config for it'
     );
 };
@@ -46,7 +46,7 @@ test 'embra plugin bundle' => method {
     } 'add plugin ...';
     is_deeply(
         $self->plugin_bundle->bundled_plugins_config,
-        [ [ qw< App::Embra::Plugin::Foo Foo >, [] ] ],
+        [ [ qw< Foo App::Embra::Plugin::Foo >, [] ] ],
         '... and stored correct config for it'
     );
 };
@@ -57,7 +57,7 @@ test 'plugin with name' => method {
     } 'add plugin with name ...';
     is_deeply(
         $self->plugin_bundle->bundled_plugins_config,
-        [ [ qw< App::Embra::Plugin::Foo Bar >, [] ] ],
+        [ [ qw< Bar App::Embra::Plugin::Foo >, [] ] ],
         '... and stored correct config for it'
     );
 };
@@ -68,7 +68,7 @@ test 'plugin with payload' => method {
     } 'add plugin with extra named args ...';
     is_deeply(
         $self->plugin_bundle->bundled_plugins_config,
-        [ [ 'App::Embra::Plugin::Foo', 'Foo', [ 'hi', 'hello' ] ] ],
+        [ [ 'Foo', 'App::Embra::Plugin::Foo', [ 'hi', 'hello' ] ] ],
         '... and stored correct config for it'
     );
 };
@@ -79,7 +79,7 @@ test 'plugin with reference to payload' => method {
     } 'add plugin with hashref...';
     is_deeply(
         $self->plugin_bundle->bundled_plugins_config,
-        [ [ 'App::Embra::Plugin::Foo', 'Foo', [ 'hi', 'hello' ] ] ],
+        [ [ 'Foo', 'App::Embra::Plugin::Foo', [ 'hi', 'hello' ] ] ],
         '... and stored correct config for it'
     );
 };
@@ -90,7 +90,7 @@ test 'plugin with name and payload' => method {
     } 'add plugin with name and extra named args...';
     is_deeply(
         $self->plugin_bundle->bundled_plugins_config,
-        [ [ 'App::Embra::Plugin::Foo', 'Bar', [ 'hi', 'hello' ] ] ],
+        [ [ 'Bar', 'App::Embra::Plugin::Foo', [ 'hi', 'hello' ] ] ],
         '... and stored correct config for it'
     );
 };
@@ -101,7 +101,7 @@ test 'plugin with name and reference to payload' => method {
     } 'add plugin with name and hashref ...';
     is_deeply(
         $self->plugin_bundle->bundled_plugins_config,
-        [ [ 'App::Embra::Plugin::Foo', 'Bar', [ 'hi', 'hello' ] ] ],
+        [ [ 'Bar', 'App::Embra::Plugin::Foo', [ 'hi', 'hello' ] ] ],
         '... and stored correct config for it'
     );
 };
@@ -112,7 +112,7 @@ test 'plugin with name in payload' => method {
     } 'add plugin with named args including name ...';
     is_deeply(
         $self->plugin_bundle->bundled_plugins_config,
-        [ [ 'App::Embra::Plugin::Foo', 'Bar', [ 'hi', 'hello' ] ] ],
+        [ [ 'Bar', 'App::Embra::Plugin::Foo', [ 'hi', 'hello' ] ] ],
         '... and stored correct config for it'
     );
 };
@@ -123,7 +123,7 @@ test 'plugin with name in referenced payload' => method {
     } 'add plugin with name in hashref...';
     is_deeply(
         $self->plugin_bundle->bundled_plugins_config,
-        [ [ 'App::Embra::Plugin::Foo', 'Bar', [ 'hi', 'hello' ] ] ],
+        [ [ 'Bar', 'App::Embra::Plugin::Foo', [ 'hi', 'hello' ] ] ],
         '... and stored correct config for it'
     );
 };
@@ -135,7 +135,7 @@ test 'plugin with reference and payload' => method {
     my $payload = pop @{ $self->plugin_bundle->bundled_plugins_config->[0] };
     is_deeply(
         $self->plugin_bundle->bundled_plugins_config->[0],
-        [ 'App::Embra::Plugin::Foo', 'Foo' ],
+        [ 'Foo', 'App::Embra::Plugin::Foo' ],
         '... and stored correct package and name ...'
     );
     is_deeply(
