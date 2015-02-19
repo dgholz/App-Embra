@@ -36,6 +36,12 @@ You can pipe the list to your CPAN client to install or update them:
 END_DIE
 }
 
+sub _die_no_config {
+    die <<"END_DIE";
+No embra.ini found! Make sure you ran 'embra' in the same directory as your site settings file.
+END_DIE
+}
+
 # from Dist::Zilla::Dist::Build, where it is known as _load_config
 
 sub _create_seq {
@@ -56,6 +62,9 @@ sub _create_seq {
 
         if($msg =~ /package not installed/ ) {
             _die_missing($e->package);
+        }
+        if($msg =~ /no viable configuration/ ) {
+            _die_no_config();
         }
         die $e;
     };
