@@ -25,5 +25,8 @@
     <footer>
       [% site.copyright %]
     </footer>
+[% FOREACH bs IN snippets.body -%]
+    [% bs %]
+[% END -%]
   </body>
 </html>
