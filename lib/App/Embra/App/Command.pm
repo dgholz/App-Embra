@@ -52,15 +52,12 @@ sub _create_seq {
         );
     } catch {
         my $e = $_;
-        try {
-            for($e) {
-                if($e->ident =~ /package not installed/) {
-                    _die_missing($e->package);
-                }
-            }
-        } catch {
-            die $e;
-        };
+        my $msg = try { $e->ident } catch { $e };
+
+        if($msg =~ /package not installed/ ) {
+            _die_missing($e->package);
+        }
+        die $e;
     };
 }
 
