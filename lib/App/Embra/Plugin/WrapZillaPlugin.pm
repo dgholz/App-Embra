@@ -56,8 +56,8 @@ method _build_plugin {
         zilla => $self,
         plugin_name => $self->name,
         logger => App::Embra::Plugin::Zilla::WrapLog->new(
-            proxy_prefix => '['.$self->name.'] ',
-            logger => $self->embra->logger,
+            log_prefix => '['.$self->name.'] ',
+            logger => $self->logger,
         ),
         %{ $self->plugin_args },
     );
