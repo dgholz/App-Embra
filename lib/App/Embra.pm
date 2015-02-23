@@ -14,15 +14,9 @@ App::Embra collates your content into a static website. This class stores the st
 
 =cut
 
+method _build_log_prefix { "[Embra] " }
+
 with 'App::Embra::Role::Logging';
-
-around '_build_log_prefix' => func( $orig, $self ) {
-    return "[Embra] ";
-};
-
-around '_build_logger' => func( $orig, $self ) {
-    return Log::Any->get_logger;
-};
 
 =attr plugins
 
