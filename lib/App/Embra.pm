@@ -10,7 +10,7 @@ use Moo;
 
 =head1 DESCRIPTION
 
-App::Embra collates your content into a static website.
+App::Embra collates your content into a static website. This class stores the steps necessary to build your site, and can execute them.
 
 =cut
 
@@ -75,7 +75,7 @@ method from_config_mvp_sequence( $class:, Config::MVP::Sequence :$sequence ) {
 
     $embra->add_plugin( $plugin );
 
-Adds a plugin to L<C</plugins>>. C<$plugin> must implement L<App::Embra::Role::Plugin>.
+Adds a plugin to C<L</plugins>>. C<$plugin> must implement L<App::Embra::Role::Plugin>.
 
 =cut
 
@@ -99,16 +99,16 @@ method find_plugin( $class ) {
 
     $embra->collate;
 
-Assembles your site. Plugins are called in this order:
+Assembles your site. For each of these methods:
 
 =for :list
-* gather
-* prune
-* transform
-* assemble
-* publish
+* C<L<gather_files|App::Embra::Role::FileGatherer>>
+* C<L<prune_files|App::Embra::Role::FilePruner>>
+* C<L<transform_files|App::Embra::Role::FileTransformer>>
+* C<L<assemble_files|App::Embra::Role::FileAssembler>>
+* C<L<publish_site|App::Embra::Role::SitePublisher>>
 
-For each of the types, all plugins which implement C<< App::Embra::Role::File<Type> >> have their C<< <type>_files> >> method called, in ths same order as they appear in L<C</plugins>>.
+call the method on elements of C<L</plugins>> which consume the linked role.
 
 =cut
 
