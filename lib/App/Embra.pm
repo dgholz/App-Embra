@@ -26,7 +26,7 @@ The objects which will help you build your site. An array reference of objects w
 
 has 'plugins' => (
     is => 'ro',
-    default => sub{[]},
+    default => method { [] },
 );
 
 =attr files
@@ -37,7 +37,7 @@ Your site content. An array reference of L<App::Embra::File> instances. Plugins 
 
 has 'files' => (
     is => 'ro',
-    default => sub{[]},
+    default => method { [] },
 );
 
 =method from_config_mvp_sequence
@@ -74,7 +74,7 @@ Adds a plugin to C<L</plugins>>. C<$plugin> must implement L<App::Embra::Role::P
 =cut
 
 method add_plugin( $plugin where { $_->DOES( "App::Embra::Role::Plugin" ) } ) {
-    push @{ $self->plugins}, $plugin;
+    push @{ $self->plugins }, $plugin;
 }
 
 =method find_plugin
