@@ -4,11 +4,20 @@ use strict;
 use warnings;
 
 # PODNAME: embra
-# ABSTRACT: do stuff with your blog files
+
+# ABSTRACT: tool to build a site from parts
 
 =head1 OVERVIEW
 
-    embra commands
+    embra commands # lists available commands
+
+=cut
+
+=head1 DESCRiPTION
+
+This command dispatches the command-line args to L<App::Embra::App>, which will read the config file, create an L<App::Embra>, register the plugins, and execute the command.
+
+Commands are individually documented (run C<embra help <command>> to view it). They are defined in L<App::Embra::App::Command>.
 
 =cut
 
