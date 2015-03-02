@@ -121,7 +121,7 @@ method collate {
 
     say for $embra->plugins_with( $rolename );
 
-Returns all elements of L<C</plugins>> which implement C<$rolename>. Role names should be fully specified; as a shorthand, you can pass C<<-<relative_role_name> >> and it will be treated as if you had specified C<< App::Embra::Role::<relative_role_name> >>.
+Returns all elements of C<L</plugins>> which implement C<$rolename>. Role names should be fully specified; as a shorthand, you can pass C<< -<relative_role_name> >> and it will be treated as if you had specified C<< App::Embra::Role::<relative_role_name> >>.
 
 =cut
 
