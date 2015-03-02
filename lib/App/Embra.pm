@@ -73,6 +73,7 @@ Adds a plugin to C<L</plugins>>. C<$plugin> must implement L<App::Embra::Role::P
 
 =cut
 
+# UNIVERSAL::DOES works on non-refs, Moo->does does not
 method add_plugin( $plugin where { $_->DOES( "App::Embra::Role::Plugin" ) } ) {
     push @{ $self->plugins }, $plugin;
 }
