@@ -9,7 +9,36 @@ use App::Cmd::Setup -command;
 
 =method embra
 
-This returns the App::Embra object in use by the command. it will be constructed by calling C<< App::Embra->from_config_mvp_sequence >> with the settings from C< embra.ini >.
+Returns the L<App::Embra> that will be used to build the site. It will be constructed by calling L<< App::Embra->from_config_mvp_sequence >> with the settings from F<embra.ini> in the current working directory.
+
+The format for F<embra.ini> is:
+
+     # values for L<App::Embra> constructor
+     # these must come first in the file
+     name = My Cool Site
+     publisher = Your Name Here
+
+     # plugins to be used
+     [PluginName]
+     plugin_option = value
+     # shorthand for
+     [App::Embra::Plugin::PluginName]
+
+     # bundles of plugins to be used
+     [@BundleName]
+     bundle_option = value
+     # shorthand for
+     [App::Embra::PluginBundle::BundleName]
+
+Section headers can optionally have a name appended to the package name, separated by a slash:
+
+     [Plugin / first instance for foo]
+     file = foo
+
+     [Plugin / second instance for bar]
+     file = bar
+
+The name will be passed to the package as its C<name> attr (either for L<plugins|App::Embra::Role::Plugin> or L<bundles|App::Embra::Role::PluginBundle>).
 
 =cut
 

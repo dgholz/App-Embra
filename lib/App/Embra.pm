@@ -46,6 +46,8 @@ has 'files' => (
 
 Returns a new C<App::Embra> with its attributes & plugins taken from a L<Config::MVP::Sequence>. Called by the L<command-line base class|App::Embra::App::Command> whenever L<embra> is run.
 
+The L<Config::MVP::Sequence> can come from anywhere; L<App::Embra::App::Command> creates it by reading F<embra.ini>.
+
 =cut
 
 method from_config_mvp_sequence( $class:, Config::MVP::Sequence :$sequence ) {
