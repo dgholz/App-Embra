@@ -19,7 +19,7 @@ This command is a very thin layer over L<App::Embra/collate>, which does all the
 
 sub abstract { 'collate your site'; }
 
-=head1 example
+=head1 EXAMPLE
 
     $ embra collate
 
