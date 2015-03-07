@@ -27,7 +27,7 @@ sub abstract { 'collate your site'; }
 
 =head1 OPTIONS
 
-No options.
+No new options; the standard L<embra options|App::Embra::App::Command/GLOBAL OPTIONS> are available, including C<-g|--debug> to enable detailed progress logging.
 
 =cut
 

@@ -10,9 +10,25 @@ use App::Cmd::Setup -command;
 use Log::Any::Adapter;
 use Log::Any::Adapter::Dispatch;
 
-sub embra {
-    return $_[0]->app->embra;
-}
+=head1 DESCRIPTION
+
+Base class for commands for the L<embra> command-line tool. This class is based on L<App::Cmd::Command>.
+
+This class also configures logging from the internals of L<App::Embra> so they appear on standard out.
+
+=cut
+
+=head1 GLOBAL OPTIONS
+
+=for list
+
+* C<--debug>
+
+    embra -g|--debug # show debug messages
+
+Print debug-level messages to stdout when running the command.
+
+=cut
 
 sub opt_spec {
     my ( $class, $app ) = @_;
@@ -29,6 +45,23 @@ sub validate_args {
             [ 'Screen',  min_level => $min_level, newline => 1 ],
         ],
     );
+}
+
+=method embra
+
+    # in App::Embra::App::Command::frobnicate
+    sub execute {
+        for my $plugin ( @{ $self->embra->plugins } ) {
+
+        ...
+    }
+
+Returns the instance of L<App::Embra> being used to build your site. Delegates the method dispatch to C<< $self->app >>, which is an instance of L<App::Embra::App/embra>.
+
+=cut
+
+sub embra {
+    return $_[0]->app->embra;
 }
 
 1;
