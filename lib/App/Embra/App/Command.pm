@@ -12,9 +12,9 @@ use Log::Any::Adapter::Dispatch;
 
 =head1 DESCRIPTION
 
-Base class for commands for the L<embra> command-line tool. This class is based on L<App::Cmd::Command>.
+This is the base class for commands for the L<embra> command-line tool. This class is based on L<App::Cmd::Command>.
 
-This class also configures logging from the internals of L<App::Embra> so they appear on standard out.
+This class also specifies some global options for all commands (in L</GLOBAL OPTIONS>, and configures logging from the internals of L<App::Embra> so they appear on standard out.
 
 =cut
 
@@ -56,7 +56,13 @@ sub validate_args {
         ...
     }
 
-Returns the instance of L<App::Embra> being used to build your site. Delegates the method dispatch to C<< $self->app >>, which is an instance of L<App::Embra::App/embra>.
+Returns the instance of L<App::Embra> being used to build your site. Delegates the method dispatch to C<< $self->app >>, which is an instance of L<App::Embra::App/embra>. Thus, every instance of
+
+    $self->embra
+
+could instead be replace with
+
+    $self->app->embra
 
 =cut
 
