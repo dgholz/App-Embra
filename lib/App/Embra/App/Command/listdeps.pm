@@ -28,12 +28,10 @@ sub abstract { 'list required plugins' }
 
 =cut
 
-use Class::Method::Modifiers;
-
-around 'opt_spec' => sub {
-    my ( $orig, $self, @args ) = @_;
+sub opt_spec {
+    my ( $self, @args ) = @_;
     return (
-        $self->$orig(@args),
+        $self->SUPER::opt_spec(@args),
         [ 'root=s'   => 'where to find embra.ini; defaults to .' ],
         [ 'missing'  => 'list only the missing dependencies' ],
         [ 'versions' => 'include required version numbers in listing' ],

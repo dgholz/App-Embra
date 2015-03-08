@@ -2,7 +2,6 @@ requires "App::Cmd::Setup" => "0";
 requires "CPAN::Meta::Requirements" => "0";
 requires "Class::Inspector" => "0";
 requires "Class::Load" => "0";
-requires "Class::Method::Modifiers" => "0";
 requires "Config::INI::Reader" => "0";
 requires "Config::MVP::Assembler" => "0";
 requires "Config::MVP::Assembler::WithBundles" => "0";

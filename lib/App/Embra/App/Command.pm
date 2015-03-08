@@ -12,19 +12,15 @@ use Log::Any::Adapter::Dispatch;
 
 =head1 DESCRIPTION
 
-This is the base class for commands for the L<embra> command-line tool. This class is based on L<App::Cmd::Command>.
+This is the base class for commands for the L<embra> command-line tool. This class is based on L<App::Cmd::Command>, as directed from L<App::Cmd::Tutorial/Global Options>.
 
-This class also specifies some global options for all commands (in L</GLOBAL OPTIONS>, and configures logging from the internals of L<App::Embra> so they appear on standard out.
+This class specifies some global options for all commands (in L</GLOBAL OPTIONS>, and configures logging from the internals of L<App::Embra> so they appear on standard out.
 
 =cut
 
 =head1 GLOBAL OPTIONS
 
-=for list
-
-* C<--debug>
-
-    embra -g|--debug # show debug messages
+=head2 C<--debug>
 
 Print debug-level messages to stdout when running the command.
 
@@ -69,5 +65,34 @@ could instead be replace with
 sub embra {
     return $_[0]->app->embra;
 }
+
+=head1 IMPLEMENTING NEW COMMANDS
+
+Here's an example implementation for C<embra new_command --new_opt>:
+
+    package App::Embra::App::Command::new_command;
+    use App::Embra::App -command;
+
+    # add new options
+    sub opt_spec {
+        my ( $self, @args ) = @_;
+        return (
+            $self->SUPER::opt_spec(@args),
+            [ 'new_opt' => 'extra option just for my cool new command' ],
+        );
+    }
+
+    sub execute {
+        my ( $self, $opt, $arg ) = @_;
+        # perform the actions of the new_command
+        # $opt has the command-line options as a HashRef
+        # $arg has the remaining command line args as a ArrayRef
+        # the App::Embra in use is available as
+        my $embra = $self->embra;
+    }
+
+    1;
+
+=cut
 
 1;
