@@ -9,6 +9,10 @@ use App::Cmd::Setup -app;
 
 =head1 DESCRIPTION
 
+This class is instantiated from L<the command-line tool|embra>. It is based on L<App::Cmd>, so it performs all of its functions: notably, examining the command given to C<embra> and dispatching to the appropriate L<App::Embra::App::Command>.
+
+It also instantiates an instance of L<App::Embra>, configured from the F<embra.ini> config file. Read L<about the C<embra> attribute/embra> for further details.
+
 =cut
 
 =method embra
@@ -54,6 +58,14 @@ sub embra {
     state $embra = App::Embra->from_config_mvp_sequence( sequence => $self->_create_seq );
 }
 
+=func _missing_pkg
+
+    die _missing_pkg( $config_mvp_error );
+
+Returns a string explaining that the L<App::Embra> instance could not be created due to a missing package, and explains how to resolve the issue. Called from L</_reword_exception>.
+
+=cut
+
 sub _missing_pkg {
     my ($exception) = @_;
     my $package = $exception->package;
@@ -70,12 +82,28 @@ You can pipe the list to your CPAN client to install or update them:
 EOM
 }
 
+=func _no_config
+
+    die _no_config;
+
+Returns a string explaining that the L<App::Embra> instance could not be created because no F<embra.ini> file could be found to configure it, and reminds the user to run L<C<embra>|embra> in the same directory as their F<embra.ini> file. Called from L</_reword_exception>.
+
+=cut
+
 sub _no_config {
     return <<"EOM";
 No embra.ini found! Make sure you ran 'embra' in the same directory as your site settings file.
 
 EOM
 }
+
+=func _reword_exception
+
+    die _reword_exception( $config_mvp_error );
+
+Examines C<$config_mvp_error> (an instance of L<Config::MVP::Error>) to see if an alternative message could be shown to the command-line user (instead of a stack-trace).
+
+=cut
 
 sub _reword_exception {
     my( $e ) = @_;
@@ -92,6 +120,16 @@ sub _reword_exception {
 }
 
 # from Dist::Zilla::Dist::Build, where it is known as _load_config
+
+=func _create_seq
+
+    my $config_mvp_sequence = $self->_create_seq;
+
+Returns an instance of L<Config::MVP::Sequence> created from the contents of F<embra.ini>. It will die if it encounters an error, L<rewording the error|/_reword_exception> if it can.
+
+Uses L<App::Embra::MVP::Assembler> to transform section names to packages, and to expand bundles into their component plugins.
+
+=cut
 
 sub _create_seq {
     my ( $self ) = @_;
