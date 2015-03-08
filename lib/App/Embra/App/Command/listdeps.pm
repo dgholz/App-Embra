@@ -17,6 +17,8 @@ use App::Embra::Util qw< expand_config_package_name >;
 
 =head1 DESCRIPTION
 
+This command examines your F<embra.ini> and prints the packages required to collate your site. See L<App::Embra::App/embra> for more details of the format of F<embra.ini>
+
 =cut
 
 sub abstract { 'list required plugins' }
@@ -39,6 +41,8 @@ sub opt_spec {
 };
 
 =head1 OPTIONS
+
+The standard L<embra options|App::Embra::App::Command/GLOBAL OPTIONS> are available, plus the following.
 
 =head2 --root
 
