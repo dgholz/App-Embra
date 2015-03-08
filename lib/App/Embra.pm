@@ -86,6 +86,8 @@ Returns the first plugin in C<L</plugins>> whose package name is C<$package>. Re
 =cut
 
 method find_plugin( $package ) {
+    # this is a slice, since it's a subscript of a list, not a scalar
+    # so returns empty list when [0] doesn't exist
     ( grep { ref $_ eq $package } @{ $self->plugins } )[0];
 }
 
