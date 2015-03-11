@@ -10,7 +10,7 @@ use Moo;
 
 =head1 DESCRIPTION
 
-App::Embra collates your content into a static website. This class stores the steps necessary to build your site, and can execute them.
+This collates your content into a static website. It stores the steps necessary to build your site, and can execute them.
 
 =cut
 
@@ -20,7 +20,7 @@ with 'App::Embra::Role::Logging';
 
 =attr plugins
 
-The objects which will help you build your site. An array reference of objects which implement L<App::Embra::Role::Plugin>.
+The objects which will help you build your site. A reference to an array of objects which implement L<App::Embra::Role::Plugin>. Defaults to a reference to an empty array.
 
 =cut
 
@@ -31,7 +31,7 @@ has 'plugins' => (
 
 =attr files
 
-Your site content. An array reference of L<App::Embra::File> instances. Plugins add, remove, read, and alter files via this attribute.
+The files which will make up your site. A reference to an array of L<App::Embra::File> instances. Plugins use this attribute to add, remove, read, and alter the files in your site. Defaults to a reference to an empty array.
 
 =cut
 
@@ -46,7 +46,7 @@ has 'files' => (
 
 Returns a new C<App::Embra> with its attributes & plugins taken from a L<Config::MVP::Sequence>. Called by the L<command-line base class|App::Embra::App::Command> whenever L<embra> is run.
 
-The L<Config::MVP::Sequence> can come from anywhere; L<App::Embra::App::Command> creates it by reading F<embra.ini>.
+The L<Config::MVP::Sequence> can come from anywhere; L<App::Embra::App> creates it by reading F<embra.ini>. The format of F<embra.ini> is described in L<App::Embra::App/embra>.
 
 =cut
 
@@ -107,7 +107,7 @@ Assembles your site. For each of these methods:
 * C<L<assemble_files|App::Embra::Role::FileAssembler>>
 * C<L<publish_site|App::Embra::Role::SitePublisher>>
 
-call the method on elements of C<L</plugins>> which consume the linked role.
+call the method on elements of C<L</plugins>> which consume the associated role.
 
 =cut
 
