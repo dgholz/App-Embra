@@ -15,9 +15,11 @@ use warnings;
 
 =head1 DESCRiPTION
 
-This command dispatches the command-line args to L<App::Embra::App>, which will read the config file, create an L<App::Embra>, register the plugins, and execute the command.
+This tool creates an instance of L<App::Embra::App>, and executes it with the current command-line arguments.
 
-Commands are individually documented (run C<embra help <command>> to view it). They are defined in L<App::Embra::App::Command>.
+The first argument is intepreted as a command. Run C<< embra help <command> >> to view the available options for a command. L<App::Embra::App::Command/DEFAULT INCLUDED COMMANDS> include further documentation for the commands packaged with C<embra> by default.
+
+This tool is configured from the <embra.ini> config file; its format is described in L<App::Embra::App/embra>.
 
 =cut
 
