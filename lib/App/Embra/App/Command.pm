@@ -18,6 +18,15 @@ This class specifies some global options for all commands (in L</GLOBAL OPTIONS>
 
 =cut
 
+=head1 DEFAULT INCLUDED COMMANDS
+
+These commands are distributed with L<App::Embra> and are always available, as well as the L<App::Cmd>-provided C<commands> and C<help>.
+
+=for :list
+
+* L<C<collate>|App::Embra::App::Command::collate>
+* L<C<listdeps>|App::Embra::App::Command::listdeps>
+
 =head1 GLOBAL OPTIONS
 
 =head2 C<--debug>
