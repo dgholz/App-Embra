@@ -11,17 +11,17 @@ use App::Cmd::Setup -app;
 
 This class is instantiated from L<the command-line tool|embra>. It is based on L<App::Cmd>, so it performs all of its functions: notably, examining the command given to C<embra> and dispatching to the appropriate L<App::Embra::App::Command>.
 
-It also instantiates an instance of L<App::Embra>, configured from the F<embra.ini> config file. Read L<about the C<embra> attribute/embra> for further details.
+It also instantiates an instance of L<App::Embra>, configured from the F<embra.ini> config file. Read L<about the C<embra> attribute|/embra> for further details.
 
 =cut
 
 =method embra
 
-Returns the L<App::Embra> that will be used to build the site. It will be constructed by calling L<< App::Embra->from_config_mvp_sequence >> with the settings from F<embra.ini> in the current working directory.
+Returns the L<App::Embra> that will be used to build the site. It will be constructed by calling L<App::Embra/from_config_mvp_sequence> with the settings from F<embra.ini> in the current working directory.
 
 The format for F<embra.ini> is:
 
-     # values for L<App::Embra> constructor
+     # values for App::Embra constructor
      # these must come first in the file
      name = My Cool Site
      publisher = Your Name Here
@@ -38,7 +38,7 @@ The format for F<embra.ini> is:
      # shorthand for
      [App::Embra::PluginBundle::BundleName]
 
-Section headers can optionally have a name appended to the package name, separated by a slash:
+Each section has an associated name, which defaults to the section header (the package name inside square brackets). Names must be unique (a requirement of L<Config::MVP::Sequence>). To add a plugin more than once, specify an alternative name for its sections by appending it after the package name, separated by a slash:
 
      [Plugin / first instance for foo]
      file = foo
@@ -46,7 +46,7 @@ Section headers can optionally have a name appended to the package name, separat
      [Plugin / second instance for bar]
      file = bar
 
-The name will be passed to the package as its C<name> attr (either for L<plugins|App::Embra::Role::Plugin> or L<bundles|App::Embra::Role::PluginBundle>).
+The name will be passed to the plugin as its C<L<name|App::Embra::Role::Plugin/name>> attribute (likewise for L<plugin bundles|App::Embra::Role::PluginBundle/name>).
 
 =cut
 
