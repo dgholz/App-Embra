@@ -112,6 +112,10 @@ method _split_name {
     fileparse( $self->name, qr{ (?<= [.] ) [^.]+ $ }x );
 }
 
+method _trigger_ext( $old_ext ) {
+    $self->name( $self->with_ext( $self->ext ) );
+}
+
 =method with_ext
 
     $file->with_ext( $ext );
@@ -125,10 +129,6 @@ method with_ext( $ext ) {
     my ($f, $d, $e) = $self->_split_name;
     return $self->name if $e eq $ext;
     return canonpath( $d . $f . $ext );
-}
-
-method _trigger_ext( $old_ext ) {
-    $self->name( $self->with_ext( $self->ext ) );
 }
 
 =method update_notes
