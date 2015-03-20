@@ -23,7 +23,7 @@ use overload fallback => 1,
 
 =attr name
 
-The name of the file. Change this to change where the file will appear in the site. If only one argument is provided to the constructor, C<name> will be set to it.
+The path to the file. Change this to change where the file will appear in the site. If only one argument is provided to the constructor, C<name> will be set to it.
 
 =cut
 
@@ -89,7 +89,7 @@ method BUILD( $args ) {
 
 =attr notes
 
-A hash ref which stores extra values associated with the file. Transform plugins will read and write notes, and Assemble plugins will read notes.
+A hash ref which stores extra values associated with the file. L<Transform|App::Embra::Role::FileTransformer> plugins read and write notes, and L<Assemble|App::Embra:Role::FileAssembler> plugins read notes.
 
 =cut
 
@@ -100,7 +100,7 @@ has 'notes' => (
 
 =attr ext
 
-The extention of the file's C<name>. Changing this will cause the file's C<name> to be updated to match.
+The extension of the file's C<L</name>>. Changing this will cause the file's C<L</name>> attribute to be updated to match.
 
 =cut
 
@@ -123,7 +123,7 @@ method _build_ext {
 
     $file->with_ext( $ext );
 
-Returns file's name with its extension changed to <$ext>.
+Returns L</name> with its extension changed to C<$ext>.
 
 =cut
 
@@ -142,7 +142,7 @@ method _trigger_ext( $old_ext ) {
 
     $file->update_notes( %more_notes );
 
-Merges C<%more_notes> into the file's existing notes.
+Merges C<%more_notes> into the file's notes.
 
 =cut
 
