@@ -11,13 +11,17 @@ use Moo;
 
 =head1 DESCRIPTION
 
-This plugin will check each gathered file for L<YAML front-matter|http://jekyllrb.com/docs/frontmatter/>. Any keys & values found will be added to the file's notes.
+This plugin will check each gathered file for L<YAML front-matter|http://jekyllrb.com/docs/frontmatter/>. The front-matter will be parsed as YAML, and the resulting data will be added to the file's L<notes|App::Embra::File/notes>.
 
-Files must start with YAML front-matter for it to be detected. The format is:
+Typical YAML front matter looks similar to:
 
     ---
     key: value
     key2: value2
+    other_yaml:
+     - and
+     - so
+     - on
     ---
     << rest of file … >>
 
