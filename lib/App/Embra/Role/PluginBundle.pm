@@ -47,7 +47,7 @@ has 'bundled_plugins' => (
 
     $class->bundled_plugins_config( { $name, $pkg, [ $args ] } );
 
-Constructs an instance of the composing class and returns the C< L</bundled_plugins > >.
+Constructs an instance of the composing class and returns the C< L</bundled_plugins> >.
 
 =cut
 
