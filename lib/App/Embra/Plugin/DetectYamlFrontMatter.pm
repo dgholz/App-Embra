@@ -27,10 +27,10 @@ method transform_files {
     for my $file ( @{ $self->embra->files } ) {
         my ( $yaml_front_matter ) =
             $file->content =~ m/
-              \A        # beginning of file
-              --- \s* ^ # first line is three dashes
-              ( .*? ) ^ # then the smallest amount of stuff until
-              --- \s* ^ # the next line of three dashes
+              \A         # beginning of file
+              --- \s* \n # first line is three dashes
+              ( .*? ) \n # then the smallest amount of stuff until
+              --- \s* \n # the next line of three dashes
             /xmsp;
         next if not $yaml_front_matter;
         my $notes;
