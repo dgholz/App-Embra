@@ -22,7 +22,7 @@ The name of the favicon. Defaults to F<favicon.ico>.
 
 has 'filename' => (
     is => 'ro',
-    default => sub { 'favicon.ico' },
+    default => 'favicon.ico',
 );
 
 has 'file' => (
@@ -34,7 +34,7 @@ has 'file' => (
 
 has 'fragment' => (
     is => 'ro',
-    default => method { qq{<link rel="icon" type="image/x-icon" href="${ \  $self->file->name }">} },
+    default => method { qq{<link rel="shortcut icon" href="${ \ $self->file->name }">} },
     init_arg => undef,
 );
 
@@ -47,7 +47,7 @@ has 'clipboard' => (
 with 'App::Embra::Role::Snippet';
 
 method gather_files {
-    $self->add_file( App::Embra::File->new( name => $self->filename ) );
+    $self->add_file( $self->file );
 }
 
 with 'App::Embra::Role::FileGatherer';
