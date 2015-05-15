@@ -9,6 +9,13 @@ use Try::Tiny;
 use Method::Signatures;
 use Moo;
 
+=head1 SYNOPSIS
+
+    # embra.ini
+    [DetectYamlFrontMatter]
+
+=cut
+
 =head1 DESCRIPTION
 
 This plugin will check each gathered file for L<YAML front-matter|http://jekyllrb.com/docs/frontmatter/>. The front-matter will be parsed as YAML, and the resulting data will be added to the file's L<notes|App::Embra::File/notes>.

@@ -10,6 +10,14 @@ use Method::Signatures;
 use App::Embra::File;
 use Moo;
 
+=head1 SYNOPSIS
+
+    # embra.ini
+    [Cname]
+    domain = site.example.org
+
+=cut
+
 =head1 DESCRIPTION
 
 This plugin will add a F<CNAME> file to the site. Use this plugin if you are hosting the site L<on GitHub with a custom domain name|https://help.github.com/articles/setting-up-a-custom-domain-with-pages#setting-the-domain-in-your-repo>.
