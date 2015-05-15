@@ -24,12 +24,15 @@ method _build_plugin_bundle {
 
 with 'App::Embra::Role::TestPluginBundle';
 
-test 'basic plugin bundle' => method {
+test 'plugin bundle ctor' => method {
     isa_ok(
         $self->plugin_bundle,
         'TestPluginBundle',
         'PluginBundle ctor ...'
     );
+};
+
+test 'basic plugin bundle' => method {
     lives_ok {
         $self->plugin_bundle->add_plugin( '=Foo' );
     } '... add plugin ...';
