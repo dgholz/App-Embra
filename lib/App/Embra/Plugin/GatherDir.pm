@@ -39,7 +39,6 @@ The directory to gather files from. Defaults to F<.> (the current directory).
 
 has 'from' => (
     is => 'ro',
-    required => 1,
     default => sub { '.' },
     coerce => sub { Path::Class::Dir->new( $_[0] )->absolute },
 );
