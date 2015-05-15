@@ -40,4 +40,3 @@ method prune_files {
 }
 
 1;
-

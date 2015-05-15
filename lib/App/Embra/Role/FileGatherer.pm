@@ -34,4 +34,3 @@ method add_file( App::Embra::File $file ) {
 }
 
 1;
-

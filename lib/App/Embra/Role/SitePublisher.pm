@@ -21,4 +21,3 @@ with 'App::Embra::Role::Plugin';
 requires 'publish_site';
 
 1;
-

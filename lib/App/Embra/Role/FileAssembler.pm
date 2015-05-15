@@ -21,4 +21,3 @@ with 'App::Embra::Role::Plugin';
 requires 'assemble_files';
 
 1;
-

@@ -21,4 +21,3 @@ with 'App::Embra::Role::Plugin';
 requires 'transform_files';
 
 1;
-
