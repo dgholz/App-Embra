@@ -5,9 +5,9 @@ package App::Embra::Plugin::TemplateToolkit;
 
 # ABSTRACT: use Template::Toolkit to turn file content into HTML
 
+use Template;
 use Path::Class qw<>;
 use Method::Signatures;
-use Template;
 use Moo;
 
 =head1 DESCRIPTION

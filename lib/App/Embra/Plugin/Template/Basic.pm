@@ -5,9 +5,9 @@ package App::Embra::Plugin::Template::Basic;
 
 # ABSTRACT: simple HTML5 template
 
-use Method::Signatures;
 use App::Embra::Plugin::TemplateToolkit;
 use File::ShareDir;
+use Method::Signatures;
 use Moo;
 
 =head1 DESCRIPTION

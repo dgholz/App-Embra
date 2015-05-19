@@ -8,9 +8,9 @@ package App::Embra::Plugin::WrapZillaPlugin;
 use Class::Inspector qw<>;
 use Module::Runtime qw<>;
 use Method::Signatures;
+use Moo;
 
 use App::Embra::Plugin::Zilla::WrapLog;
-use Moo;
 
 =head1 DESCRIPTION
 
