@@ -10,7 +10,7 @@ use Method::Signatures;
 
 =head1 DESCRIPTION
 
-This plugin will add the HTML to the site to include a favicon. You must add the file separately, and then pass the filename to this plugin.
+This plugin creates a favicon L<snippet|App::Embra::Role::Snippet>, suitable for inserting into the HTML files of your site. It doesn't add the snippet to your HTML files; include L<C<[SnippetsToNotes]>|App::Embra::Plugin::SnippetsToNotes> & a snippet-aware template (like L<C<[Template::Basic]>|App::Embra::Plugin::Template::Basic>) in your F<embra.ini> to insert your snippets in your files.
 
 =cut
 
@@ -32,11 +32,23 @@ has 'file' => (
     },
 );
 
+=attr fragment
+
+The HTML fragment which links to the favicon. Set automatically to follow L<HTML5 best practices|http://www.diveintohtml5.com/semantics.html#new-relations> & can't be changed. Required by L<App::Embra::Role::Snippet>.
+
+=cut
+
 has 'fragment' => (
     is => 'ro',
     default => method { qq{<link rel="shortcut icon" href="${ \ $self->file->name }">} },
     init_arg => undef,
 );
+
+=attr clipboard
+
+Where the L<C<fragment>|/fragment> should end up in the file. Defaults to 'head'. Required by L<App::Embra::Role::Snippet>.
+
+=cut
 
 has 'clipboard' => (
     is => 'ro',
