@@ -14,23 +14,14 @@ This plugin creates a favicon L<snippet|App::Embra::Role::Snippet>, suitable for
 
 =cut
 
-=attr filename
+=attr src
 
 The name of the favicon. Defaults to F<favicon.ico>.
 
 =cut
 
-has 'filename' => (
-    is => 'ro',
-    default => 'favicon.ico',
-);
+# hi I'm src I'm defined in App::Embra::Role::IncludeFromSrc
 
-has 'file' => (
-    is => 'lazy',
-    default => method {
-        App::Embra::File->new( name => $self->filename )
-    },
-);
 
 =attr fragment
 
@@ -39,8 +30,8 @@ The HTML fragment which links to the favicon. Set automatically to follow L<HTML
 =cut
 
 has 'fragment' => (
-    is => 'ro',
-    default => method { qq{<link rel="shortcut icon" href="${ \ $self->file->name }">} },
+    is => 'lazy',
+    default => method { qq{<link rel="shortcut icon" href="${ \ $self->href }">} },
     init_arg => undef,
 );
 
@@ -56,11 +47,7 @@ has 'clipboard' => (
     init_arg => undef,
 );
 
-method gather_files {
-    $self->add_file( $self->file );
-}
-
 with 'App::Embra::Role::Snippet';
-with 'App::Embra::Role::FileGatherer';
+with 'App::Embra::Role::IncludeFromSrc';
 
 1;
