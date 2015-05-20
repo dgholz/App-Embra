@@ -12,13 +12,13 @@ use URI;
 
 =head1 DESCRIPTION
 
-This role provides a L</src> and L</file> attribute to its consumer, and augments L</gather_files> to add the local files to your site.
+This role provides a L</src> and L</file> attribute to its consumer, and augments L</gather_files> to add C<file> to your site (if it is local).
 
 =cut
 
 =attr src
 
-The source for the file. Can be a path or a URL.
+The source for the file. Can be a path or a URL. The attribute is coerced into a L<URI>.
 
 =cut
 
