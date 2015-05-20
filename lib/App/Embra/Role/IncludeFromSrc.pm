@@ -28,6 +28,7 @@ has 'src' => (
     required => 1,
     alias    => [ qw< href > ],
     coerce   => func($val) { URI->new( $val ) },
+    builder  => 1,
 );
 
 has 'file' => (
