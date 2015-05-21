@@ -11,6 +11,7 @@ with 'App::Embra::Role::IncludeFromSrc';
 
 package main;
 
+use List::Util qw< first >;
 use Method::Signatures;
 use Test::Roo;
 
@@ -30,12 +31,22 @@ test 'composes' => method {
     is(
         $self->plugin->href,
         'hi',
-        '... and href ...'
+        '... and href'
     );
-    is(
-        $self->plugin->file->name,
-        'hi',
-        '... and file points to src'
+};
+
+test 'gathers local file' => method {
+
+    ok(
+        $self->plugin->is_local,
+        'has a local file ...'
+    );
+    $self->plugin->gather_files;
+    my $hi_file = first { defined and $_->name eq 'hi' } @{ $self->embra->files };
+    isnt(
+        $hi_file,
+        undef,
+        '... and is added when files are gathered'
     );
 };
 
