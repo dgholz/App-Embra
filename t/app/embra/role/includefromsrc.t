@@ -37,16 +37,12 @@ test 'composes' => method {
 
 test 'gathers local file' => method {
 
-    ok(
-        $self->plugin->is_local,
-        'has a local file ...'
-    );
     $self->plugin->gather_files;
     my $hi_file = first { defined and $_->name eq 'hi' } @{ $self->embra->files };
     isnt(
         $hi_file,
         undef,
-        '... and is added when files are gathered'
+        'adds local file when files are gathered'
     );
 };
 

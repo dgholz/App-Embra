@@ -28,10 +28,7 @@ has 'fragment' => (
     is => 'lazy',
 );
 
-method _build_fragment {
-    my $src = $self->has_file ? $self->file->name : $self->src;
-    return qq{<script src="$src"></script>};
-}
+method _build_fragment { qq{<script src="${ \ $self->src }"></script>} }
 
 has 'clipboard' => (
     is      => 'ro',

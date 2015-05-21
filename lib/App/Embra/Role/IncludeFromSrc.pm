@@ -19,7 +19,7 @@ This role provides a L</src> and L</file> attribute to its consumer, and augment
 
 =attr src
 
-The source for the file. Can be a path or a URL. The attribute is coerced into a L<URI>.
+The source for the file. Can be a path or a URL. If the former, it will be a L<App::Embra::File>; if the latter, a L<URI>.
 
 =cut
 
@@ -27,15 +27,19 @@ has 'src' => (
     is       => 'ro',
     required => 1,
     alias    => [ qw< href > ],
-    coerce   => func($val) { URI->new( $val ) },
+    coerce   => func($val) {
+                   my $v = URI->new( $val );
+                   return $v->has_recognized_scheme ? $v
+                                                    : App::Embra::File->new( $val );
+                },
     builder  => 1,
 );
 
-has 'file' => (
-    is        => 'lazy',
-    predicate => 1,
-    default   => method { App::Embra::File->new( name => $self->src ) },
-);
+=attr href
+
+An alias for C<src>.
+
+=cut
 
 =attr href
 
@@ -46,8 +50,8 @@ An alias for C<src>.
 method gather_files {}
 
 around 'gather_files' => func( $orig, $self ) {
-    if( not $self->src->has_recognized_scheme ) {
-        $self->add_file( $self->file );
+    if( $self->src->DOES('App::Embra::File') ) {
+        $self->add_file( $self->src );
     }
 };
 

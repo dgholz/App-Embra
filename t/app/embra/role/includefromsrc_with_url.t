@@ -37,16 +37,12 @@ test 'composes' => method {
 
 test q{doesn't gather local file} => method {
 
-    ok(
-        ! $self->plugin->is_local,
-        'src is not local ...'
-    );
     $self->plugin->gather_files;
     my $hello_file = first { defined and $_->name =~ /hello/ } @{ $self->embra->files };
     is(
         $hello_file,
         undef,
-        q{... and file isn't added when files are gathered}
+        q{does't add anything when files are gathered}
     );
 };
 
