@@ -41,12 +41,6 @@ An alias for C<src>.
 
 =cut
 
-=attr href
-
-An alias for C<src>.
-
-=cut
-
 method gather_files {}
 
 around 'gather_files' => func( $orig, $self ) {
