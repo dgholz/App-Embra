@@ -23,7 +23,7 @@ use overload fallback => 1,
 
 =attr name
 
-The name of the file. Change this to change where the file will appear in the site.
+The name of the file. Change this to change where the file will appear in the site. If only one argument is provided to the constructor, C<name> will be set to it.
 
 =cut
 
@@ -120,6 +120,13 @@ method _trigger_ext( $old_ext ) {
 
 method BUILD( $args ) {
   $self->{_original_name} = $self->name;
+}
+
+method BUILDARGS( @args ) {
+    if( @args == 1 ) {
+        unshift @args, 'name';
+    }
+    return { @args };
 }
 
 method _read_file {
