@@ -14,7 +14,7 @@ use Moo;
 
 =head1 DESCRIPTION
 
-This represents a file to be included in your site.
+This represents a file to be included in your site. In string context, returns the path to the file.
 
 =cut
 

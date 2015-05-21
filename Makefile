@@ -8,3 +8,6 @@ authordeps:
 
 update:
 	carton update
+
+test:
+	@carton exec dzil test
