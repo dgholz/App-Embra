@@ -48,7 +48,6 @@ has 'name' => (
 
 method BUILDARGS( @args ) {
     my %args = @args;
-    my %attrs;
     for my $attr ( qw< name > ) {
         if( not defined $args{$attr} ) {
             delete $args{$attr};
