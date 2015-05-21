@@ -22,9 +22,7 @@ The name of the favicon. Defaults to F<favicon.ico>.
 
 # hi I'm src I'm defined in App::Embra::Role::IncludeFromSrc
 
-method _build_src() {
-    'favicon.ico';
-}
+method _build_src { 'favicon.ico' }
 
 =attr fragment
 
