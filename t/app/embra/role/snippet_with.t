@@ -6,10 +6,8 @@ use App::Embra::Role::Snippet;
 package Foo;
 use Moo;
 
-has 'fragment' => (
-    is => 'ro',
-    default => 'hi',
-);
+sub _build_fragment  { 'hi' }
+sub _build_clipboard { 'hello' }
 
 with 'App::Embra::Role::Snippet';
 

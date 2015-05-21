@@ -28,9 +28,7 @@ The HTML fragment which links to the favicon. Set automatically & can't be chang
 
 =cut
 
-has 'fragment' => (
-    is => 'lazy',
-);
+# hi I'm fragment I'm defined in App::Embra::Role::Snippet
 
 method _build_fragment { qq{<script src="${ \ $self->src }"></script>} }
 
@@ -40,10 +38,9 @@ Where the L<C<fragment>|/fragment> should end up in files in your site. Defaults
 
 =cut
 
-has 'clipboard' => (
-    is      => 'ro',
-    default => 'body',
-);
+# hi I'm clipboard I'm defined in App::Embra::Role::Snippet
+
+method _build_clipboard { 'body' }
 
 with 'App::Embra::Role::Snippet';
 with 'App::Embra::Role::IncludeFromSrc';

@@ -39,9 +39,7 @@ The HTML fragment which links to the CSS file. Defaults to a C<link> element wit
 
 =cut
 
-has 'fragment' => (
-    is => 'lazy',
-);
+# hi I'm fragment I'm defined in App::Embra::Role::Snippet
 
 method _build_fragment { qq{<link rel="stylesheet" href="${ \ $self->href }" />} }
 
@@ -51,10 +49,9 @@ Where the L<C<fragment>|/fragment> should end up in files in your site. Defaults
 
 =cut
 
-has 'clipboard' => (
-    is      => 'ro',
-    default => 'head',
-);
+# hi I'm clipboard I'm defined in App::Embra::Role::Snippet
+
+method _build_clipboard { 'head' }
 
 with 'App::Embra::Role::Snippet';
 with 'App::Embra::Role::IncludeFromSrc';

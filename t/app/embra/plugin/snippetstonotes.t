@@ -10,15 +10,8 @@ use App::Embra::Role::Plugin;
 package TestSnippet;
 use Moo;
 
-has 'fragment' => (
-    is => 'ro',
-    default => 'TestSnippet',
-);
-
-has 'clipboard' => (
-    is => 'ro',
-    default => 'test',
-);
+sub _build_fragment  { 'TestSnippet' }
+sub _build_clipboard { 'test' }
 
 with 'App::Embra::Role::Snippet';
 with 'App::Embra::Role::Plugin';
