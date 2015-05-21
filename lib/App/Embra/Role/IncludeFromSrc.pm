@@ -7,6 +7,7 @@ package App::Embra::Role::IncludeFromSrc;
 
 use App::Embra::File;
 use Moo::Role;
+use MooX::Aliases;
 use Method::Signatures;
 use URI;
 
@@ -25,6 +26,7 @@ The source for the file. Can be a path or a URL. The attribute is coerced into a
 has 'src' => (
     is       => 'ro',
     required => 1,
+    alias    => [ qw< href > ],
     coerce   => func($val) { URI->new( $val ) },
 );
 
@@ -33,6 +35,12 @@ has 'file' => (
     predicate => 1,
     default   => method { App::Embra::File->new( name => $self->src ) },
 );
+
+=attr href
+
+An alias for C<src>.
+
+=cut
 
 method gather_files {}
 
