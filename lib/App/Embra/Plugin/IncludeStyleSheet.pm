@@ -5,10 +5,8 @@ package App::Embra::Plugin::IncludeStyleSheet;
 
 # ABSTRACT: adds a CSS file to your site
 
-use App::Embra::File;
 use Moo;
 use Method::Signatures;
-use URI;
 
 =head1 DESCRIPTION
 
