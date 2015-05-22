@@ -6,20 +6,13 @@ package App::Embra::Plugin::Snippet;
 # ABSTRACT: declare some HTML which files can include
 
 use Method::Signatures;
-
 use Moo;
 
-=head1 DESCRIPTION
-
-This plugin will save a fragment of text, and a clipboard name which other plugins can use to retrieve the text.
-
-=cut
-
-=head1 EXAMPLE
+=head1 SYNOPSIS
 
     # embra.ini
     [Snippet]
-    fragment = <link rel="stylesheet" src="my_cool_style.css">
+    fragment = <link rel="alternate" type="application/atom+xml" title="My Weblog feed" href="/feed/" />
     clipboard = head
 
     [Snippet / hidden_comment]
@@ -31,9 +24,15 @@ This plugin will save a fragment of text, and a clipboard name which other plugi
 
 =cut
 
+=head1 DESCRIPTION
+
+This plugin will save a fragment of HTML, and a clipboard name which other plugins can use to retrieve the HTML.
+
+=cut
+
 =attr fragment
 
-HTML to be made available for other plugins to insert.
+HTML for other plugins to read.
 
 =cut
 
