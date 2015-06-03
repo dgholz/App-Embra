@@ -3,27 +3,29 @@ use warnings;
 
 package App::Embra::Plugin::PruneFiles;
 
-# ABSTRACT: exclude files from the site
+# ABSTRACT: stops chosen files from being published
 
 use List::MoreUtils qw< any >;
 use Method::Signatures;
 use Moo;
 
+=head1 SYNOPSIS
+
+    [PruneFiles]
+    filename = not_this_file
+    filename = dont_even_think_about_publishing_this
+
+=cut
+
 =head1 DESCRIPTION
 
-This plugin will remove files from the site and prevent them from being processed.
-
-In your F<embra.ini>:
-
-  [PruneFiles]
-  filename = not_this_file
-  filename = dont_even_think_about_publishing_this
+This plugin will remove files matching C<L</filename>> from the site before the site is processed and published.
 
 =cut
 
 =attr filename
 
-Name of file to exclude. May be used multiple times to exclude multiple files.
+Exact name of file to exclude. May be used multiple times to exclude multiple files.
 
 =cut
 
@@ -32,7 +34,7 @@ has 'filename' => (
     default => sub { [] },
 );
 
-method mvp_multivalue_args() { qw< filename >; }
+method mvp_multivalue_args() { qw< filename > }
 
 method exclude_file( $file ) {
     return 1 if any { $_ eq $file->name } @{ $self->filename };
