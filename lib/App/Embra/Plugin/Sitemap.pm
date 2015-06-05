@@ -5,15 +5,23 @@ package App::Embra::Plugin::Sitemap;
 
 # ABSTRACT: adds a file which lists the pages in the site
 
-use Method::Signatures;
 use Template;
 
 use App::Embra::File;
+use Method::Signatures;
 use Moo;
+
+=head1 SYNOPSIS
+
+    # embra.ini
+    [Sitemap]
+    filename = My_pages.html
+
+=cut
 
 =head1 DESCRIPTION
 
-This plugin will add a F<sitemap.html> file to the site, with a list of links to all the HTML pages in your site.
+This plugin will add a F<sitemap.html> file to your site, with a list of links to all the HTML pages in your site.
 
 =cut
 
