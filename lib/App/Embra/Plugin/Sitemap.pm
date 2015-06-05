@@ -36,7 +36,7 @@ The L<App::Embra::File> for the sitemap. It will be created automatically with t
 
 has 'sitemap_file' => (
     is => 'lazy',
-    default => method { App::Embra::File->new( name => $self->filename ) },
+    default => method { App::Embra::File->new( name => $self->filename, content => '' ) },
 );
 
 # not sure about this, might remove
