@@ -8,6 +8,14 @@ package App::Embra::Plugin::Favicon;
 use Moo;
 use Method::Signatures;
 
+=head1 SYNOPSIS
+
+    # embra.ini
+    [Favicon]
+    src = my_cool_fav.ico
+
+=cut
+
 =head1 DESCRIPTION
 
 This plugin creates a favicon L<snippet|App::Embra::Role::Snippet>, suitable for inserting into the HTML files of your site. It doesn't add the snippet to your HTML files; include L<C<[SnippetsToNotes]>|App::Embra::Plugin::SnippetsToNotes> & a snippet-aware template (like L<C<[Template::Basic]>|App::Embra::Plugin::Template::Basic>) in your F<embra.ini> to insert your snippets in your files.
