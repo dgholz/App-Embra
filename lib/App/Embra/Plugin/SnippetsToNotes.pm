@@ -3,16 +3,52 @@ use warnings;
 
 package App::Embra::Plugin::SnippetsToNotes;
 
-# ABSTRACT: add fragments of HTML from plugins to file notes
+# ABSTRACT: adds snippets of data from plugins to file notes
 
 use Method::Signatures;
 use Moo;
 
+=head1 SYNOPSIS
+
+    # embra.ini
+    [SnippetsToNotes]
+
+=cut
+
 =head1 DESCRIPTION
 
-This plugin will find all the plugins which have L<snippets|App::Embra::Plugin::Snippets>, and then add their HTML fragments as notes to the files in your site.
+This plugin examines all plugins for L<snippets|App::Embra::Plugin::Snippets>, and adds them as notes to the files in your site. Snippets are grouped by L<C<clipboard>|App::Embra::Plugin::Snippets/clipboard>, and are appended to C<$file->notes->{snippets}->{<clipboard>}>
 
 This is a L<FileTransformer|App::Embra::Role::FileTransformer> plugin.
+
+=cut
+
+=head1 EXAMPLE
+
+    # embra.ini
+    [Template::My::Cool::Template]
+
+    [Snippet / foo]
+    clipboard = head
+    fragment = <!-- made with foo by bar -->
+
+    [Snippet / charset]
+    clipboard = head
+    fragment = <meta charset="UTF-8">
+
+    [SnippetsToNotes]
+
+    [GatherDir]
+    from = site_directory
+
+    # then in the Template::My::Cool::Template templates
+    # assuming the file's notes are available as 'notes'
+    <html><head><% for head_snippet in notes.snippets.head %><%= head_snippet %><% end %></head>
+    ... etc.
+
+    # results in the templated files from site_directory starting like
+    <html><head><!-- made with foo by bar --><meta charset="UTF-8"></head> ... etc.
+
 
 =cut
 
