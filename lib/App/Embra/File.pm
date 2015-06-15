@@ -79,10 +79,13 @@ The original name of this file. This is automatically saved from the C<L</name>>
 =cut
 
 has '_original_name' => (
-  is  => 'ro',
+  is  => 'rwp',
   init_arg => undef,
-  builder => method { $self->name },
 );
+
+method BUILD( @args ) {
+    $self->_set__original_name( $self->name );
+}
 
 =attr notes
 
