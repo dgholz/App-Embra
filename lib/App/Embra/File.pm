@@ -67,7 +67,7 @@ has 'mode' => (
 
 =attr _original_name
 
-The original name of this file. This is automatically saved from the C<name> attributes used to construct the object, and can't be altered.
+The original name of this file. This is automatically saved from the C<L</name>> attribute used to construct the object, and can't be altered.
 
 =cut
 
