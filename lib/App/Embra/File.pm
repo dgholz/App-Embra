@@ -34,7 +34,7 @@ has 'name' => (
 
 =attr content
 
-The content of the file. Change this to change the content of the file when it appears in the site. Defaults to the contents of C<_original_name>.
+The contents of the file in the site. Defaults to the contents of C<L</_original_name>>.
 
 =cut
 
