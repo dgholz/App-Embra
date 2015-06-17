@@ -39,10 +39,19 @@ The contents of the file in the site. Defaults to the contents of C<L</_original
 =cut
 
 has 'content' => (
-  is  => 'rw',
-  lazy => 1,
-  default => method { $self->_read_file },
+  is      => 'rw',
+  lazy    => 1,
+  builder => 1,
 );
+
+method _build_content {
+  my $fname = $self->_original_name;
+  open my $fh, '<', $fname or die "can't open $fname for reading: $!";
+
+  binmode $fh, ':raw';
+
+  my $content = do { local $/; <$fh> };
+}
 
 =attr mode
 
@@ -127,15 +136,6 @@ method BUILDARGS( @args ) {
         unshift @args, 'name';
     }
     return { @args };
-}
-
-method _read_file {
-  my $fname = $self->_original_name;
-  open my $fh, '<', $fname or die "can't open $fname for reading: $!";
-
-  binmode $fh, ':raw';
-
-  my $content = do { local $/; <$fh> };
 }
 
 =method update_notes
