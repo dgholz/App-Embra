@@ -32,6 +32,13 @@ has 'name' => (
     required => 1,
 );
 
+method BUILDARGS( @args ) {
+    if( @args == 1 ) {
+        unshift @args, 'name';
+    }
+    return { @args };
+}
+
 =attr content
 
 The contents of the file in the site. Defaults to the contents of C<L</_original_name>>.
@@ -129,13 +136,6 @@ method with_ext( $ext ) {
 
 method _trigger_ext( $old_ext ) {
     $self->name( $self->with_ext( $self->ext ) );
-}
-
-method BUILDARGS( @args ) {
-    if( @args == 1 ) {
-        unshift @args, 'name';
-    }
-    return { @args };
 }
 
 =method update_notes
