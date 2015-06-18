@@ -10,9 +10,17 @@ use Path::Class qw<>;
 use Method::Signatures;
 use Moo;
 
+=head1 SYNOPSIS
+
+    # embra.ini
+    [TemplateToolkit]
+    include_path = templates # default
+
+=cut
+
 =head1 DESCRIPTION
 
-This plugin will process site files through Template Toolkit. For each file with a C<.html> extension, it will look for a template in the C<include_path> with a matching name and use it to process the contents of the file into an assembled HTML document.
+This plugin will process site files through Template Toolkit. For each file with an C<html> extension, it will look for a template in the C<templates_path> with a matching name and use it to process the contents of the file into an assembled HTML document.
 
 Templates will be passed the file's content and body as variables, as well as each of the file's notes.
 
@@ -20,7 +28,7 @@ Templates will be passed the file's content and body as variables, as well as ea
 
 =attr include_path
 
-Where to find templates. Defaults to F<templates> in the current directory. All files within the path will be pruned.
+Where to find templates. Defaults to F<templates> in the current directory. All files within the path will be pruned, to prevent them from appearing in the published version of the site.
 
 =cut
 
@@ -32,7 +40,7 @@ has 'include_path' => (
 
 =attr default_template
 
-Template to use if a file doesn't have a matching template. Defaults to F<default.tt>.
+Which template to use if a file doesn't have a matching template. Defaults to F<default.tt>.
 
 =cut
 
