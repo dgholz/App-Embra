@@ -81,11 +81,8 @@ The original name of this file. This is automatically saved from the C<L</name>>
 has '_original_name' => (
   is  => 'ro',
   init_arg => undef,
+  builder => method { $self->name },
 );
-
-method BUILD( $args ) {
-  $self->{_original_name} = $self->name;
-}
 
 =attr notes
 
@@ -107,16 +104,12 @@ The extension of the file's C<L</name>>. Changing this will cause the file's C<L
 has 'ext' => (
     is => 'rw',
     lazy => 1,
-    builder => 1,
+    builder => method { ($self->_split_name)[2] },
     trigger => 1,
 );
 
 method _split_name {
     fileparse( $self->name, qr{ (?<= [.] ) [^.]+ $ }x );
-}
-
-method _build_ext {
-    ($self->_split_name)[2];
 }
 
 =method with_ext
