@@ -18,6 +18,23 @@ The templates are stored as a L<File::ShareDir>, which in the source of the dist
 
 =cut
 
+=attr templates_path
+
+Where to look for templates.
+
+This plugin defines some minimal templates in a L<File::ShareDir>. They are (in source of the distribution) at C<share/Plugin/Template/Basic>, and (installed on you host) at C<perl -MApp::Embra::Plugin::Template::Basic -e'print App::Embra::Plugin::Template::Basic->_build_templates_path, "\n"'>.
+
+=cut
+
+has 'templates_path' => (
+    is      => 'ro',
+    builder => 1,
+);
+
+func _build_templates_path($cls) {
+    File::ShareDir::module_dir(__PACKAGE__),
+}
+
 =attr assembler
 
 The object used to assemble files. Defaults to an instance of L<App::Embra::Plugin::TemplateToolkit>.
