@@ -10,11 +10,17 @@ use File::ShareDir;
 use Method::Signatures;
 use Moo;
 
+=head1 SYNOPSIS
+
+    # embra.ini
+    [Template::Basic]
+
+=cut
+
 =head1 DESCRIPTION
 
-This plugin will process site files through Template Toolkit with a pre-defined set of templates. For each file with a C<.html> extension, it will look for a template with a matching name and use it to process the contents of the file into an assembled HTML document.
+This plugin will process site files through L<Template Toolkit|Template> with a pre-defined set of templates. For each file with a C<.html> extension, it will look for a template with a matching name (or use the default template). That template is then used to process the contents of the file into an assembled HTML document.
 
-The templates are stored as a L<File::ShareDir>, which in the source of the distribution are located at C<share/Plugin/Template/Basic>.
 
 =cut
 
@@ -22,7 +28,9 @@ The templates are stored as a L<File::ShareDir>, which in the source of the dist
 
 Where to look for templates.
 
-This plugin defines some minimal templates in a L<File::ShareDir>. They are (in source of the distribution) at C<share/Plugin/Template/Basic>, and (installed on you host) at C<perl -MApp::Embra::Plugin::Template::Basic -e'print App::Embra::Plugin::Template::Basic->_build_templates_path, "\n"'>.
+This plugin defines some minimal templates in a L<File::ShareDir>. They are (in source of the distribution) at C<share/Plugin/Template/Basic>, and (installed on your host) at C<perl -MApp::Embra::Plugin::Template::Basic -e'print App::Embra::Plugin::Template::Basic->_build_templates_path, "\n"'>.
+
+If you want to use your own templates. use L<TemplateToolkit|App::Embra::Plugin::TemplateToolkit> directly.
 
 =cut
 
@@ -37,7 +45,7 @@ func _build_templates_path($cls) {
 
 =attr assembler
 
-The object used to assemble files. Defaults to an instance of L<App::Embra::Plugin::TemplateToolkit>.
+The object used to assemble files. Defaults to an instance of L<App::Embra::Plugin::TemplateToolkit> with its C<INCLUDE_PATH> set to L<C<templates_path>|/templates_path>. This plugin delegates L<C<assemble_files>|App::Embra::Role::FileAssembler> to the assembler.
 
 =cut
 
@@ -51,7 +59,7 @@ method _build_assembler {
         embra        => $self->embra,
         logger       => $self,
         name         => 'TemplateToolkit',
-        include_path => File::ShareDir::module_dir(__PACKAGE__),
+        include_path => $self->templates_path,
     );
 }
 
