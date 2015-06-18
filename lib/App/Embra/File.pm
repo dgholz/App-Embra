@@ -76,6 +76,10 @@ has '_original_name' => (
   init_arg => undef,
 );
 
+method BUILD( $args ) {
+  $self->{_original_name} = $self->name;
+}
+
 =attr notes
 
 A hash ref which stores extra values associated with the file. Transform plugins will read and write notes, and Assemble plugins will read notes.
@@ -125,10 +129,6 @@ method with_ext( $ext ) {
 
 method _trigger_ext( $old_ext ) {
     $self->name( $self->with_ext( $self->ext ) );
-}
-
-method BUILD( $args ) {
-  $self->{_original_name} = $self->name;
 }
 
 method BUILDARGS( @args ) {
