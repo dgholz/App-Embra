@@ -3,11 +3,19 @@ use warnings;
 
 package App::Embra::Plugin::TransformMarkdown;
 
-# ABSTRACT: turn markdown files into html
+# ABSTRACT: turn markdown files in your site into into html files
 
 use File::Basename;
 use Method::Signatures;
 use Moo;
+
+=head1 SYNOPSIS
+
+    # embra.ini
+    [TransformMarkdown]
+    extension = md # default
+
+=cut
 
 =head1 DESCRIPTION
 
@@ -17,7 +25,7 @@ This plugin will transform the content of Markdown files into HTML and change th
 
 =attr extension
 
-Files ending with this extension will be treated as Markdown files. Defualts to C<.md>.
+Transform files whose extension matches this. Defaults to C<md>.
 
 =cut
 
@@ -29,6 +37,10 @@ has 'extension' => (
 =attr converter
 
 The object to use to convert the file content from Markdown to HTML. Defaults to an instance of L<Text::Markdown>.
+
+This attribute should provide a method C<markdown>, which works like:
+
+    my $hmtl_content = $self->converter->markdown( $markdown_content );
 
 =cut
 
