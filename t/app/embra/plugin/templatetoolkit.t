@@ -12,7 +12,7 @@ use Test::Roo;
 method _build_plugin {
     return App::Embra::Plugin::TemplateToolkit->new(
         embra => $self->embra,
-        include_path => 't/corpus/tt_templates',
+        templates_path => 't/corpus/tt_templates',
     );
 }
 
@@ -59,7 +59,7 @@ test 'assembles from non-default template' => method {
     );
 };
 
-test 'prunes files in include_path' => method {
+test 'prunes files in templates_path' => method {
     my $should_be_pruned = first { defined and $_->name eq 't/corpus/tt_templates/prune me' } @{ $self->embra->files };
 
     is(

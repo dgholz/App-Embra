@@ -56,10 +56,10 @@ has 'assembler' => (
 
 method _build_assembler {
     App::Embra::Plugin::TemplateToolkit->new(
-        embra        => $self->embra,
-        logger       => $self,
-        name         => 'TemplateToolkit',
-        include_path => $self->templates_path,
+        embra          => $self->embra,
+        logger         => $self,
+        name           => 'TemplateToolkit',
+        templates_path => $self->templates_path,
     );
 }
 

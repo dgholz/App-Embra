@@ -14,7 +14,7 @@ use Moo;
 
     # embra.ini
     [TemplateToolkit]
-    include_path = templates # default
+    templates_path = templates # default
 
 =cut
 
@@ -26,13 +26,13 @@ Templates will be passed the file's content and body as variables, as well as ea
 
 =cut
 
-=attr include_path
+=attr templates_path
 
 Where to find templates. Defaults to F<templates> in the current directory. All files within the path will be pruned, to prevent them from appearing in the published version of the site.
 
 =cut
 
-has 'include_path' => (
+has 'templates_path' => (
     is => 'ro',
     default => sub { 'templates' },
     coerce => sub { Path::Class::dir( $_[0] ) },
@@ -72,7 +72,7 @@ has 'assembler' => (
 
 method _build_assembler {
     Template->new({
-        INCLUDE_PATH => $self->include_path,
+        INCLUDE_PATH => $self->templates_path,
         DEFAULT => $self->default_template,
         TRIM => 1,
     });
@@ -101,7 +101,7 @@ method assemble_files {
 }
 
 method exclude_file( $file ) {
-    return 1 if $self->include_path->subsumes( $file->name );
+    return 1 if $self->templates_path->subsumes( $file->name );
     return;
 }
 
