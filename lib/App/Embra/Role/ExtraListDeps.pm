@@ -27,7 +27,7 @@ Static method which adds all of the plugin's extra dependencies to C<$reqs>, whi
 =cut
 
 method add_extra_deps( $class:, HashRef :$config, CPAN::Meta::Requirements :$reqs ) {
-    for my $extra ( $class->extra_list_deps( config => $config )) {
+    for my $extra ( $class->extra_list_deps( config => $config ) ) {
         my ($p, $ver) = split qr{[ ]* = [ ]*}xms, $extra;
         if( ! defined $ver ) {
             $ver = 0;
