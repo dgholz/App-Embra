@@ -10,7 +10,7 @@
   <body>
     <header>
       <hgroup>
-        [% site.name %]
+        [%- site.name %]
       </hgroup>
     </header>
     <article>
@@ -23,7 +23,7 @@
       [% content %]
     </article>
     <footer>
-      [% site.copyright %]
+      [%- site.copyright %]
     </footer>
 [% FOREACH bs IN snippets.body -%]
     [% bs %]
