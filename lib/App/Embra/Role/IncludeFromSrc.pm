@@ -19,7 +19,7 @@ This role provides a L</src> and L</file> attribute to its consumer, and augment
 
 =attr src
 
-The source for the file. Can be a path or a URL. If the former, it will be a L<App::Embra::File>; if the latter, a L<URI>.
+The source for the file. Can be a path or a URL. If the former, it will be an L<App::Embra::File>; if the latter, a L<URI>.
 
 =cut
 
