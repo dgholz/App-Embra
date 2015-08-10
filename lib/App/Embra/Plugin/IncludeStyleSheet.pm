@@ -12,24 +12,23 @@ use URI;
 
 =head1 DESCRIPTION
 
-This plugin will add the CSS file named in L</src> to your site. If C<src> is a URL, it will be linked to directly, and not included in the site.
+This plugin will add a L<snippet|App::Embra::Role::Snippet> to your site which links to the CSS file L<C<src>|/src>. If C<src> is a URL, it will be linked to directly; if it is a local file, it will be included in the site.
 
 =cut
 
 =attr src
 
-The source of the CSS file. Can be a path or a URL.
+Where to find the CSS file. Can be a path or a URL.
 
 =cut
+
+# hi I'm src I'm defined in App::Embra::Role::IncludeFromSrc
 
 has 'fragment' => (
     is => 'lazy',
 );
 
-method _build_fragment {
-    my $src = $self->has_file ? $self->file->name : $self->src;
-    return qq{<link rel="stylesheet" href="$src" />};
-}
+method _build_fragment { qq{<link rel="stylesheet" href="${ \ $self->href }" />} }
 
 has 'clipboard' => (
     is      => 'ro',

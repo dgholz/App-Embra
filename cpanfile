@@ -19,6 +19,7 @@ requires "Method::Signatures" => "0";
 requires "Module::Runtime" => "0";
 requires "Moo" => "0";
 requires "Moo::Role" => "0";
+requires "MooX::Aliases" => "0";
 requires "Path::Class" => "0";
 requires "Path::Class::Dir" => "0";
 requires "String::RewritePrefix" => "0";
