@@ -22,9 +22,7 @@ The name of the favicon. Defaults to F<favicon.ico>.
 
 # hi I'm src I'm defined in App::Embra::Role::IncludeFromSrc
 
-method _build_src() {
-    'favicon.ico';
-}
+method _build_src { 'favicon.ico' }
 
 =attr fragment
 
@@ -32,11 +30,9 @@ The HTML fragment which links to the favicon. Set automatically to follow L<HTML
 
 =cut
 
-has 'fragment' => (
-    is => 'lazy',
-    default => method { qq{<link rel="shortcut icon" href="${ \ $self->href }">} },
-    init_arg => undef,
-);
+# hi I'm fragment I'm defined in App::Embra::Role::Snippet
+
+method _build_fragment { qq{<link rel="shortcut icon" href="${ \ $self->href }">} }
 
 =attr clipboard
 
@@ -44,11 +40,9 @@ Where the L<C<fragment>|/fragment> should end up in the file. Defaults to 'head'
 
 =cut
 
-has 'clipboard' => (
-    is => 'ro',
-    default => 'head',
-    init_arg => undef,
-);
+# hi I'm clipboard I'm defined in App::Embra::Role::Snippet
+
+method _build_clipboard { 'head' }
 
 with 'App::Embra::Role::Snippet';
 with 'App::Embra::Role::IncludeFromSrc';

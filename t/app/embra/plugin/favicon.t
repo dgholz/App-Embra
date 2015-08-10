@@ -30,6 +30,11 @@ test 'adds favicon file' => method {
         qr/href="favicon.ico"/,
         'HTML fragment for favicon looks sane'
     );
+    is(
+        $self->plugin->clipboard,
+        'head',
+        'fragment says it wants to go in head element'
+    );
 
 };
 

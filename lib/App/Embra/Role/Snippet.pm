@@ -21,9 +21,11 @@ The HTML to insert into a page.
 =cut
 
 has 'fragment' => (
-    is => 'ro',
-    default => '',
+    is => 'lazy',
+    builder => 1,
 );
+
+requires '_build_fragment';
 
 =attr clipboard
 
@@ -32,8 +34,10 @@ Where the fragment belongs.
 =cut
 
 has 'clipboard' => (
-    is => 'ro',
-    default => '',
+    is => 'lazy',
+    builder => 1,
 );
+
+requires '_build_clipboard';
 
 1;

@@ -5,10 +5,19 @@ package App::Embra::Plugin::IncludeStyleSheet;
 
 # ABSTRACT: adds a CSS file to your site
 
-use App::Embra::File;
 use Moo;
 use Method::Signatures;
-use URI;
+
+=head1 SYNOPSIS
+
+    # embra.ini
+    [IncludeStyleSheet]
+    src = css/local_file.css
+
+    [IncludeStyleSheet / Example.com retro theme]
+    src = http://example.com/css/retro.css
+
+=cut
 
 =head1 DESCRIPTION
 
@@ -24,16 +33,25 @@ Where to find the CSS file. Can be a path or a URL.
 
 # hi I'm src I'm defined in App::Embra::Role::IncludeFromSrc
 
-has 'fragment' => (
-    is => 'lazy',
-);
+=attr fragment
+
+The HTML fragment which links to the CSS file. Defaults to a C<link> element with C<rel="stylesheet">. Required by L<App::Embra::Role::Snippet>.
+
+=cut
+
+# hi I'm fragment I'm defined in App::Embra::Role::Snippet
 
 method _build_fragment { qq{<link rel="stylesheet" href="${ \ $self->href }" />} }
 
-has 'clipboard' => (
-    is      => 'ro',
-    default => 'head',
-);
+=attr clipboard
+
+Where the L<C<fragment>|/fragment> should end up in files in your site. Defaults to 'head'. Required by L<App::Embra::Role::Snippet>.
+
+=cut
+
+# hi I'm clipboard I'm defined in App::Embra::Role::Snippet
+
+method _build_clipboard { 'head' }
 
 with 'App::Embra::Role::Snippet';
 with 'App::Embra::Role::IncludeFromSrc';

@@ -37,11 +37,19 @@ HTML to be made available for other plugins to insert.
 
 =cut
 
+# hi I'm fragment I'm defined in App::Embra::Role::Snippet
+
+method _build_fragment {}
+
 =attr clipboard
 
 The name other plugins should use to find this fragment. The value can be any string, so please check with the template you are using to see which clipboard values it recognises. E.g. the L<Template::Basic|App::Embra::Plugin::Template::Basic> plugin will insert snippets in the C<head> clipboard into the C<< <head> >> element of its templates.
 
 =cut
+
+# hi I'm clipboard I'm defined in App::Embra::Role::Snippet
+
+method _build_clipboard {}
 
 with 'App::Embra::Role::Snippet';
 

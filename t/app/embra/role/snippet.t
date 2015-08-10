@@ -6,6 +6,9 @@ use App::Embra::Role::Snippet;
 package Foo;
 use Moo;
 
+sub _build_fragment  {}
+sub _build_clipboard {}
+
 with 'App::Embra::Role::Snippet';
 
 package main;

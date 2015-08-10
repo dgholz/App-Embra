@@ -5,10 +5,8 @@ package App::Embra::Plugin::IncludeJavaScript;
 
 # ABSTRACT: adds a JS file to your site
 
-use App::Embra::File;
 use Moo;
 use Method::Signatures;
-use URI;
 
 =head1 DESCRIPTION
 
@@ -24,16 +22,25 @@ Where to find the JavaScript file. Can be a path or a URL.
 
 # hi I'm src I'm defined in App::Embra::Role::IncludeFromSrc
 
-has 'fragment' => (
-    is => 'lazy',
-);
+=attr fragment
+
+The HTML fragment which links to the favicon. Set automatically & can't be changed. Required by L<App::Embra::Role::Snippet>.
+
+=cut
+
+# hi I'm fragment I'm defined in App::Embra::Role::Snippet
 
 method _build_fragment { qq{<script src="${ \ $self->src }"></script>} }
 
-has 'clipboard' => (
-    is      => 'ro',
-    default => 'body',
-);
+=attr clipboard
+
+Where the L<C<fragment>|/fragment> should end up in files in your site. Defaults to 'head'. Required by L<App::Embra::Role::Snippet>.
+
+=cut
+
+# hi I'm clipboard I'm defined in App::Embra::Role::Snippet
+
+method _build_clipboard { 'body' }
 
 with 'App::Embra::Role::Snippet';
 with 'App::Embra::Role::IncludeFromSrc';
