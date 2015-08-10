@@ -30,7 +30,7 @@ has 'name' => (
 
 A list of plugins to be included. Each element should be an arrayref of:
 
-    [ $plugin_name, $package_args [ @plugin_args ] ]
+    [ $plugin_name, $package_name, [ @plugin_args ] ]
 
 where C<$plugin_name> is the name attribute for the plugin, C<$package_name> is the plugin's package, and C<@plugin_args> will be passed to the plugin's constructor.
 
