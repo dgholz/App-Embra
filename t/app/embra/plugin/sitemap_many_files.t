@@ -28,7 +28,7 @@ before 'setup' => method {
 test 'lists all HTML files' => method {
     is(
         $self->plugin->sitemap_file->content,
-        '<ul><li><a href="hello.html">hello.html</a></li><li><a href="hey.html">hey.html</a></li><li><a href="sitemap.html">sitemap.html</a></li></ul>',
+        '<ul><li><a href="hello.html">hello.html</a></li><li><a href="hey.html">hey.html</a></li><li><a href="sitemap.html">Sitemap</a></li></ul>',
         'sitemap has list of links to all pages in the site'
     );
 };

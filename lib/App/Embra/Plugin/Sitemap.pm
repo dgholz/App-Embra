@@ -44,7 +44,18 @@ The L<App::Embra::File> for the sitemap. It will be created automatically with t
 
 has 'sitemap_file' => (
     is => 'lazy',
-    default => method { App::Embra::File->new( name => $self->filename, content => '' ) },
+    default => method { App::Embra::File->new( name => $self->filename, content => '', notes => { title => $self->title, }, ) },
+);
+
+=attr title
+
+The title for the sitemap page. Defaults to C<Sitemap>.
+
+=cut
+
+has 'title' => (
+    is      => 'lazy',
+    default => 'Sitemap',
 );
 
 # not sure about this, might remove

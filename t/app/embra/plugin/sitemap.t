@@ -27,7 +27,7 @@ test 'adds sitemap file' => method {
     );
     is(
         $sitemap_file->content,
-        '<ul><li><a href="sitemap.html">sitemap.html</a></li></ul>',
+        '<ul><li><a href="sitemap.html">Sitemap</a></li></ul>',
         '... with a list of links to the pages on the site as its cotents'
     );
 };
