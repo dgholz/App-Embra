@@ -23,7 +23,7 @@ use overload fallback => 1,
 
 =attr name
 
-The name of the file. Change this to change where the file will appear in the site. If only one argument is provided to the constructor, C<name> will be set to it.
+The path to the file. Change this to change where the file will appear in the site. If only one argument is provided to the constructor, C<name> will be set to it.
 
 =cut
 
@@ -32,17 +32,33 @@ has 'name' => (
     required => 1,
 );
 
+method BUILDARGS( @args ) {
+    if( @args == 1 ) {
+        unshift @args, 'name';
+    }
+    return { @args };
+}
+
 =attr content
 
-The content of the file. Change this to change the content of the file when it appears in the site. Defaults to the contents of C<_original_name>.
+The contents of the file in the site. Defaults to the contents of C<L</_original_name>>.
 
 =cut
 
 has 'content' => (
-  is  => 'rw',
-  lazy => 1,
-  default => method { $self->_read_file },
+  is      => 'rw',
+  lazy    => 1,
+  builder => 1,
 );
+
+method _build_content {
+  my $fname = $self->_original_name;
+  open my $fh, '<', $fname or die "can't open $fname for reading: $!";
+
+  binmode $fh, ':raw';
+
+  my $content = do { local $/; <$fh> };
+}
 
 =attr mode
 
@@ -58,18 +74,22 @@ has 'mode' => (
 
 =attr _original_name
 
-The original name of this file. This is automatically saved from the C<name> attributes used to construct the object, and can't be altered.
+The original name of this file. This is automatically saved from the C<L</name>> attribute used to construct the object, and can't be altered.
 
 =cut
 
 has '_original_name' => (
-  is  => 'ro',
+  is  => 'rwp',
   init_arg => undef,
 );
 
+method BUILD( @args ) {
+    $self->_set__original_name( $self->name );
+}
+
 =attr notes
 
-A hash ref which stores extra values associated with the file. Transform plugins will read and write notes, and Assemble plugins will read notes.
+A hash ref which stores extra values associated with the file. L<Transform|App::Embra::Role::FileTransformer> plugins read and write notes, and L<Assemble|App::Embra:Role::FileAssembler> plugins read notes.
 
 =cut
 
@@ -80,14 +100,14 @@ has 'notes' => (
 
 =attr ext
 
-The extention of the file's C<name>. Changing this will cause the file's C<name> to be updated to match.
+The extension of the file's C<L</name>>. Changing this will cause the file's C<L</name>> attribute to be updated to match.
 
 =cut
 
 has 'ext' => (
     is => 'rw',
     lazy => 1,
-    builder => 1,
+    builder => method { ($self->_split_name)[2] },
     trigger => 1,
 );
 
@@ -95,15 +115,15 @@ method _split_name {
     fileparse( $self->name, qr{ (?<= [.] ) [^.]+ $ }x );
 }
 
-method _build_ext {
-    ($self->_split_name)[2];
+method _trigger_ext( $old_ext ) {
+    $self->name( $self->with_ext( $self->ext ) );
 }
 
 =method with_ext
 
     $file->with_ext( $ext );
 
-Returns file's name with its extension changed to <$ext>.
+Returns L</name> with its extension changed to C<$ext>.
 
 =cut
 
@@ -114,35 +134,11 @@ method with_ext( $ext ) {
     return canonpath( $d . $f . $ext );
 }
 
-method _trigger_ext( $old_ext ) {
-    $self->name( $self->with_ext( $self->ext ) );
-}
-
-method BUILD( $args ) {
-  $self->{_original_name} = $self->name;
-}
-
-method BUILDARGS( @args ) {
-    if( @args == 1 ) {
-        unshift @args, 'name';
-    }
-    return { @args };
-}
-
-method _read_file {
-  my $fname = $self->_original_name;
-  open my $fh, '<', $fname or die "can't open $fname for reading: $!";
-
-  binmode $fh, ':raw';
-
-  my $content = do { local $/; <$fh> };
-}
-
 =method update_notes
 
     $file->update_notes( %more_notes );
 
-Merges C<%more_notes> into the file's existing notes.
+Merges C<%more_notes> into the file's notes.
 
 =cut
 

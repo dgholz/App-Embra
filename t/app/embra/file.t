@@ -22,6 +22,15 @@ test 'update notes on file' => method {
     );
 };
 
+test '_original_name saves name given to constructor' => method {
+    $self->file->name( 'hello, me am file' );
+    is(
+        $self->file->_original_name,
+        'hi im file',
+        '_original_name matches name given to ctor'
+    );
+};
+
 run_me;
 
 done_testing;
