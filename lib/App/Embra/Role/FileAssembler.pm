@@ -5,7 +5,6 @@ package App::Embra::Role::FileAssembler;
 
 # ABSTRACT: something that assembles file content into its publishable form
 
-use Method::Signatures;
 use Moo::Role;
 
 =head1 DESCRIPTION
