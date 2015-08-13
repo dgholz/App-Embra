@@ -17,4 +17,13 @@ with 'App::Embra::Role::Plugin';
 
 requires 'assemble_files';
 
+=head1 OTHER ROLES FOR WORKING WITH FILES
+
+=for :list
+* L<FileGatherer|App::Embra::Role::FileGatherer> to add new files
+* L<FilePruner|App::Embra::Role::FilePruner> to remove already-added files
+* L<FileTransformer|App::Embra::Role::FileTransformer> to significantly change files
+
+=cut
+
 1;

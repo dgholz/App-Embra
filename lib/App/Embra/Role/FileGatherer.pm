@@ -33,4 +33,13 @@ method add_file( App::Embra::File $file ) {
     push @{ $self->embra->files }, $file;
 }
 
+=head1 OTHER ROLES FOR WORKING WITH FILES
+
+=for :list
+* L<FilePruner|App::Embra::Role::FilePruner> to remove already-added files
+* L<FileTransformer|App::Embra::Role::FileTransformer> to significantly change files
+* L<FileAssembler|App::Embra::Role::FileAssembler> to prepare files to be published
+
+=cut
+
 1;

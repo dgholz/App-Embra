@@ -20,4 +20,13 @@ with 'App::Embra::Role::Plugin';
 
 requires 'transform_files';
 
+=head1 OTHER ROLES FOR WORKING WITH FILES
+
+=for :list
+* L<FileGatherer|App::Embra::Role::FileGatherer> to add new files
+* L<FilePruner|App::Embra::Role::FilePruner> to remove already-added files
+* L<FileAssembler|App::Embra::Role::FileAssembler> to prepare files to be published
+
+=cut
+
 1;
