@@ -3,7 +3,7 @@ use warnings;
 
 package App::Embra::Plugin::TransformMarkdown;
 
-# ABSTRACT: turn markdown files in your site into into html files
+# ABSTRACT: turn markdown files in your site into html files
 
 use File::Basename;
 use Method::Signatures;
