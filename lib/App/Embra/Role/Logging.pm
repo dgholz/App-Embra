@@ -11,54 +11,33 @@ use Moo::Role;
 
 =head1 DESCRIPTION
 
-This role adds some basic logging methods to its implementer. It provides L<a C<logger> attribute|/logger>r which handles all of the standard log methods.
+This role adds some basic logging methods to consuming classes. It provides L<a C<logger> attribute|/logger>, which handles all of the standard log methods.
 
 =cut
 
 =attr log_prefix
 
-A string to prefix to all logged messages. Defaults to the empty string.
+A string to prefix to all logged messages. Defaults to the empty string. If the consuming class declares a C<_build_log_prefix> method, its return value will be used as the default instead.
 
 =cut
 
 has 'log_prefix' => (
-    is => 'lazy',
+    is      => 'lazy',
+    builder => method { q{} },
 );
-
-=method _build_log_prefix
-
-    say $app_embra_role_logging->_build_log_prefix;
-
-Returns the log prefix. Present only so it can be modified by implementors with L<around|Method::Modifiers/around>.
-
-=cut
-
-method _build_log_prefix { 
-    return q{};
-}
 
 =attr logger
 
-The object which handles all the logging. It must accept any of L<Log::Any's logging methods|Log::Any/logging_methods>.
+The object which handles all the logging. Defaults to the logger returned by C<< Log::Any->get_logger >>. If the consuming class declares a C<_build_logger> method, its return value will be used as the default instead.
 
+It should respond to L<Log::Any's logging methods|Log::Any/"LOG LEVELS">.
 =cut
 
 has 'logger' => (
-    is => 'lazy',
+    is      => 'lazy',
     handles => [ Log::Any->logging_methods ],
+    builder => method { Log::Any->get_logger },
 );
-
-=method _build_logger
-
-    my $logger = $app_embra_role_logging->_build_logger;
-
-Returns a new instance of L<Log::Any>. Present only so it can be modified by implementors with L<around|Method::Modifiers/around>.
-
-=cut
-
-method _build_logger {
-    return Log::Any->get_logger;
-}
 
 for my $logging_method ( Log::Any->logging_methods ) {
     around $logging_method => func( $orig, $self, $log_msg ) {
