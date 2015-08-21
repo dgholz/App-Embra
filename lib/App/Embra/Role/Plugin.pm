@@ -14,15 +14,15 @@ This role provides a few key methods and attributes which all plugins for App::E
 
 =cut
 
-with 'App::Embra::Role::Logging';
-
-around '_build_log_prefix' => func( $orig, $self ) {
+method _build_log_prefix {
     return "[${ \ $self->name }] ";
-};
+}
 
-around '_build_logger' => func( $orig, $self ) {
+method _build_logger {
     $self->embra->logger;
-};
+}
+
+with 'App::Embra::Role::Logging';
 
 =attr embra
 
