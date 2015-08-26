@@ -39,7 +39,7 @@ has 'embra' => (
 
 =attr name
 
-The name of the plugin, generally set to the name used in the configuration file when read by L<App::Embra::MVP::Assembler>. Defaults to the class name of the implementer.
+The name of the plugin. Defaults to the plugin's full class name.
 
 =cut
 
@@ -54,6 +54,7 @@ has 'name' => (
 
 This static method creates a new instance of the consuming class, plugs it into C<$embra>, and returns it. The new instance is created with its C<name> set to C<$name>, C<embra> set to C<$embra>, and each entry of the C<$payload> hash ref passed as an argument to the constructor.
 
+This is called from L<App::Embra::from_config_mvp_sequence>, using the section name from the config as the name for the plugin.
 =cut
 
 method register_plugin( $class:, App::Embra :$embra, :$name, HashRef :$payload = {} ) {
