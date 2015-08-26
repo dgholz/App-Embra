@@ -59,9 +59,8 @@ method from_config_mvp_sequence( $class:, Config::MVP::Sequence :$sequence ) {
     for my $plugin_section ( $sequence->sections ) {
         next if $plugin_section->name eq '_';
         $plugin_section->package->register_plugin(
-            name => $plugin_section->name,
-            args => $plugin_section->payload,
             embra => $creatura,
+            map { $_, $plugin_section->$_ } qw< name payload >,
         );
     }
     $creatura;

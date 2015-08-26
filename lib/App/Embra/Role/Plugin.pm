@@ -59,15 +59,15 @@ method BUILDARGS( @args ) {
 
 =method register_plugin
 
-    App::Embra::Role::Plugin->register_plugin( $class, $name, $args, $embra );
+    App::Embra::Role::Plugin->register_plugin( $embra, $name, $payload );
 
-Static method which creates a new instance of the implementing plugin with its C<name> set to C<$name>, C<embra> set to C<$embra>, and each entry of the C<$args> hash ref passed as an argument to the constructor. It then plugs new instance into C<$embra>. Returns the created instance.
+This static method creates a new instance of the consuming class, plugs it into C<$embra>, and returns it. The new instance is created with its C<name> set to C<$name>, C<embra> set to C<$embra>, and each entry of the C<$payload> hash ref passed as an argument to the constructor.
 
 =cut
 
-method register_plugin( $class:, :$name, HashRef :$args = {}, App::Embra :$embra ) {
-    my $self = $class->new( embra => $embra, name => $name, %{ $args } );
-    $self->logger->debugf( '%sregistered with %s', $self->log_prefix, $args );
+method register_plugin( $class:, App::Embra :$embra, :$name, HashRef :$payload = {} ) {
+    my $self = $class->new( embra => $embra, name => $name, %{ $payload } );
+    $self->logger->debugf( '%sregistered with %s', $self->log_prefix, $payload );
     $embra->add_plugin( $self );
     return $self;
 }
