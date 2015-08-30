@@ -24,7 +24,6 @@ The content to insert into a file.
 
 has 'fragment' => (
     is => 'lazy',
-    builder => 1,
 );
 
 requires '_build_fragment';
@@ -37,7 +36,6 @@ Where the content should be inserted. This will be used by whatever actually ins
 
 has 'clipboard' => (
     is => 'lazy',
-    builder => 1,
 );
 
 requires '_build_clipboard';
