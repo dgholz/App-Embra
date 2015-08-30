@@ -10,7 +10,9 @@ use Moo::Role;
 
 =head1 DESCRIPTION
 
-This role provides a few key methods and attributes which all plugins for App::Embra should implement. It consumes the L<Logging role|App::Embra::Role::Logging>, altering L<C<log prefix>|App::Embra::Role::Logging/log_prefix> to include the plugin's name, and L<C<logger>|App::Embra::Role::Logging/logger> to reuse the C<logger> from the instance of App::Embra being plugged into.
+This should be consumed by classes who want to be configured and plugged into an L<App::Embra>. Classes which consume just this role will not get any of their methods called when collating the site. If your plugin want to change which files are included or how they appear in the site, then it should instead consume one (or more) of L<the roles used to collate the site|App::Embra/collate>.
+
+This role consumes the L<Logging role|App::Embra::Role::Logging>, altering L<C<log prefix>|App::Embra::Role::Logging/log_prefix> to include the plugin's name, and L<C<logger>|App::Embra::Role::Logging/logger> to reuse the C<logger> from the instance of App::Embra being plugged into.
 
 =cut
 
