@@ -7,75 +7,101 @@ package App::Embra::App::Command;
 
 use App::Cmd::Setup -command;
 
+use Log::Any::Adapter;
+use Log::Any::Adapter::Dispatch;
+
+=head1 DESCRIPTION
+
+This is the base class for commands for the L<embra> command-line tool. This class is based on L<App::Cmd::Command>, as directed from L<App::Cmd::Tutorial/Global Options>.
+
+This class specifies some global options for all commands (in L</GLOBAL OPTIONS>, and configures logging from the internals of L<App::Embra> so they appear on standard out.
+
+=cut
+
+=head1 DEFAULT INCLUDED COMMANDS
+
+These commands are distributed with L<App::Embra> and are always available, as well as the L<App::Cmd>-provided C<commands> and C<help>.
+
+=for :list
+
+* L<C<collate>|App::Embra::App::Command::collate>
+* L<C<listdeps>|App::Embra::App::Command::listdeps>
+
+=head1 GLOBAL OPTIONS
+
+=head2 C<--debug>
+
+Print debug-level messages to stdout when running the command.
+
+=cut
+
+sub opt_spec {
+    my ( $class, $app ) = @_;
+    return (
+        [ 'debug|g' => 'show debug messages' ],
+    );
+}
+
+sub validate_args {
+    my ( $self, $opts, $args ) = @_;
+    my $min_level = $opts->debug ? 'debug' : 'info';
+    Log::Any::Adapter->set( 'Dispatch',
+        outputs => [
+            [ 'Screen',  min_level => $min_level, newline => 1 ],
+        ],
+    );
+}
+
 =method embra
 
-This returns the App::Embra object in use by the command. it will be constructed by calling C<< App::Embra->from_config_mvp_sequence >> with the settings from C< embra.ini >.
+    # in App::Embra::App::Command::frobnicate
+    sub execute {
+        for my $plugin ( @{ $self->embra->plugins } ) {
+
+        ...
+    }
+
+Returns the instance of L<App::Embra> being used to build your site. Delegates the method dispatch to C<< $self->app >>, which is an instance of L<App::Embra::App/embra>. Thus, every instance of
+
+    $self->embra
+
+could instead be replace with
+
+    $self->app->embra
 
 =cut
 
 sub embra {
-    my ( $self ) = @_;
-    use 5.010;
-    require App::Embra;
-    use feature qw< state >;
-    state $embra = App::Embra->from_config_mvp_sequence( sequence => $self->_create_seq );
+    return $_[0]->app->embra;
 }
 
-sub _missing_pkg {
-    my ($exception) = @_;
-    my $package = $exception->package;
+=head1 IMPLEMENTING NEW COMMANDS
 
-    my $bundle = $package =~ /^@/ ? ' bundle' : '';
-    return <<"EOM";
-Required plugin$bundle [$package] isn't installed.
+Here's an example implementation for C<embra new_command --new_opt>:
 
-Run 'embra listdeps' to see a list of all required plugins.
-You can pipe the list to your CPAN client to install or update them:
+    package App::Embra::App::Command::new_command;
+    use App::Embra::App -command;
 
-    embra listdeps | cpanm
-
-EOM
-}
-
-sub _no_config {
-    return <<"EOM";
-No embra.ini found! Make sure you ran 'embra' in the same directory as your site settings file.
-
-EOM
-}
-
-sub _reword_exception {
-    my( $e ) = @_;
-    my %match = (
-        'package not installed'   => \&_missing_pkg,
-        'no viable configuration' => \&_no_config,
-    );
-    while( my( $msg, $error_sub ) = each %match ) {
-        if( $e->ident =~ /$msg/ ) {
-            return $error_sub->($e);
-        }
-    }
-    return $e;
-}
-
-# from Dist::Zilla::Dist::Build, where it is known as _load_config
-
-sub _create_seq {
-    my ( $self ) = @_;
-    require Config::MVP::Reader::Finder;
-    require App::Embra::MVP::Assembler;
-    use Try::Tiny;
-    try {
-        Config::MVP::Reader::Finder->read_config(
-            'embra',
-            {
-                assembler => App::Embra::MVP::Assembler->new,
-            }
+    # add new options
+    sub opt_spec {
+        my ( $self, @args ) = @_;
+        return (
+            $self->SUPER::opt_spec(@args),
+            [ 'new_opt' => 'extra option just for my cool new command' ],
         );
-    } catch {
-        die $_ if not try { $_->isa('Config::MVP::Error') };
-        die _reword_exception($_);
-    };
-}
+    }
+
+    sub execute {
+        my ( $self, $opt, $arg ) = @_;
+        # perform the actions of the new_command
+        # $opt has the command-line options as a HashRef
+        # $arg has the remaining command line args as a ArrayRef
+        # the App::Embra in use is available as
+        my $embra = $self->embra;
+    }
+
+    1;
+
+=cut
 
 1;

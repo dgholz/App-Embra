@@ -14,6 +14,17 @@ use Moo;
 
 method mvp_multivalue_args() { qw< exclude_match >; }
 
+=head1 SYNOPSIS
+
+    # in embra.ini
+    [GatherDir]
+    from = my_site_dir
+    include_dotfiles = 0
+    exclude_match = _draft$
+    exclude_match = ^secret
+
+=cut
+
 =head1 DESCRIPTION
 
 This plugin recursively add all files in a directory to the site.
@@ -28,7 +39,6 @@ The directory to gather files from. Defaults to F<.> (the current directory).
 
 has 'from' => (
     is => 'ro',
-    required => 1,
     default => sub { '.' },
     coerce => sub { Path::Class::Dir->new( $_[0] )->absolute },
 );

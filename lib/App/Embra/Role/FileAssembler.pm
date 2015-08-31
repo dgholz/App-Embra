@@ -5,14 +5,11 @@ package App::Embra::Role::FileAssembler;
 
 # ABSTRACT: something that assembles file content into its publishable form
 
-use Method::Signatures;
 use Moo::Role;
 
 =head1 DESCRIPTION
 
-This role should be implemented by any plugin which alters a file's content into its final format. It requires plugins provide a C<assemble_files> method, which will be called late in the process of collating your site.
-
-Plugins which implement this role can access the site's files via the C<L<files|App::Embra/files>> attribute of its C<L<embra|App::Embra::Role::Plugin/embra>> attribute.
+This should be consumed by plugins who want their C<assemble_files> method called just before the site is published. That method should examine C<< $self->embra->files >> to find files which meet the criteria of the plugin, and alter them into their final publishable form.
 
 =cut
 
@@ -20,5 +17,13 @@ with 'App::Embra::Role::Plugin';
 
 requires 'assemble_files';
 
-1;
+=head1 OTHER ROLES FOR WORKING WITH FILES
 
+=for :list
+* L<FileGatherer|App::Embra::Role::FileGatherer> to add new files
+* L<FilePruner|App::Embra::Role::FilePruner> to remove already-added files
+* L<FileTransformer|App::Embra::Role::FileTransformer> to significantly change files
+
+=cut
+
+1;

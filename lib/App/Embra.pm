@@ -10,40 +10,34 @@ use Moo;
 
 =head1 DESCRIPTION
 
-App::Embra collates your content into a static website.
+This collates your content into a static website. It stores the steps necessary to build your site, and can execute them.
 
 =cut
 
+method _build_log_prefix { "[Embra] " }
+
 with 'App::Embra::Role::Logging';
-
-around '_build_log_prefix' => func( $orig, $self ) {
-    return "[Embra] ";
-};
-
-around '_build_logger' => func( $orig, $self ) {
-    return Log::Any->get_logger;
-};
 
 =attr plugins
 
-The objects which will help you build your site. An array reference of objects which implement L<App::Embra::Role::Plugin>.
+The objects which will help you build your site. A reference to an array of objects which implement L<App::Embra::Role::Plugin>. Defaults to a reference to an empty array.
 
 =cut
 
 has 'plugins' => (
     is => 'ro',
-    default => sub{[]},
+    default => method { [] },
 );
 
 =attr files
 
-Your site content. An array reference of L<App::Embra::File> instances. Plugins add, remove, read, and alter files via this attribute.
+The files which will make up your site. A reference to an array of L<App::Embra::File> instances. Plugins use this attribute to add, remove, read, and alter the files in your site. Defaults to a reference to an empty array.
 
 =cut
 
 has 'files' => (
     is => 'ro',
-    default => sub{[]},
+    default => method { [] },
 );
 
 =method from_config_mvp_sequence
@@ -51,6 +45,8 @@ has 'files' => (
     my $embra = App::Embra->from_config_mvp_sequence( $sequence );
 
 Returns a new C<App::Embra> with its attributes & plugins taken from a L<Config::MVP::Sequence>. Called by the L<command-line base class|App::Embra::App::Command> whenever L<embra> is run.
+
+The L<Config::MVP::Sequence> can come from anywhere; L<App::Embra::App> creates it by reading F<embra.ini>. The format of F<embra.ini> is described in L<App::Embra::App/embra>.
 
 =cut
 
@@ -63,9 +59,8 @@ method from_config_mvp_sequence( $class:, Config::MVP::Sequence :$sequence ) {
     for my $plugin_section ( $sequence->sections ) {
         next if $plugin_section->name eq '_';
         $plugin_section->package->register_plugin(
-            name => $plugin_section->name,
-            args => $plugin_section->payload,
             embra => $creatura,
+            map { $_, $plugin_section->$_ } qw< name payload >,
         );
     }
     $creatura;
@@ -75,40 +70,43 @@ method from_config_mvp_sequence( $class:, Config::MVP::Sequence :$sequence ) {
 
     $embra->add_plugin( $plugin );
 
-Adds a plugin to L<C</plugins>>. C<$plugin> must implement L<App::Embra::Role::Plugin>.
+Adds a plugin to C<L</plugins>>. C<$plugin> must implement L<App::Embra::Role::Plugin>.
 
 =cut
 
+# UNIVERSAL::DOES works on non-refs, Moo->does does not
 method add_plugin( $plugin where { $_->DOES( "App::Embra::Role::Plugin" ) } ) {
-    push @{ $self->plugins}, $plugin;
+    push @{ $self->plugins }, $plugin;
 }
 
 =method find_plugin
 
-    my $plugin = $embra->find_plugin( $class );
+    my $plugin = $embra->find_plugin( $package );
 
-Returns the first plugin in L<C</plugins>> with class C<$class>. Returns an emtpy list if no plugin with class C<$class> is present
+Returns the first plugin in C<L</plugins>> whose package name is C<$package>. Returns an empty list if no plugin is found.
 
 =cut
 
-method find_plugin( $class ) {
-    ( grep { ref $_ eq $class } @{ $self->plugins } )[0];
+method find_plugin( $package ) {
+    # this is a slice, since it's a subscript of a list, not a scalar
+    # so returns empty list when [0] doesn't exist
+    ( grep { ref $_ eq $package } @{ $self->plugins } )[0];
 }
 
 =method collate
 
     $embra->collate;
 
-Assembles your site. Plugins are called in this order:
+Assembles your site. For each of these methods:
 
 =for :list
-* gather
-* prune
-* transform
-* assemble
-* publish
+* C<L<gather_files|App::Embra::Role::FileGatherer>>
+* C<L<prune_files|App::Embra::Role::FilePruner>>
+* C<L<transform_files|App::Embra::Role::FileTransformer>>
+* C<L<assemble_files|App::Embra::Role::FileAssembler>>
+* C<L<publish_site|App::Embra::Role::SitePublisher>>
 
-For each of the types, all plugins which implement C<< App::Embra::Role::File<Type> >> have their C<< <type>_files> >> method called, in ths same order as they appear in L<C</plugins>>.
+call the method on elements of C<L</plugins>> which consume the associated role.
 
 =cut
 
@@ -125,7 +123,7 @@ method collate {
 
     say for $embra->plugins_with( $rolename );
 
-Returns all elements of L<C</plugins>> which implement C<$rolename>. Role names should be fully specified; as a shorthand, you can pass C<<-<relative_role_name> >> and it will be treated as if you had specified C<< App::Embra::Role::<relative_role_name> >>.
+Returns all elements of C<L</plugins>> which implement C<$rolename>. Role names should be fully specified; as a shorthand, you can pass C<< -<relative_role_name> >> and it will be treated as if you had specified C<< App::Embra::Role::<relative_role_name> >>.
 
 =cut
 

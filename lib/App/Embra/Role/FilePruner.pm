@@ -3,7 +3,7 @@ use warnings;
 
 package App::Embra::Role::FilePruner;
 
-# ABSTRACT: something that stops files from appearing in a site
+# ABSTRACT: something that prevents files from being published in your site
 
 use List::MoreUtils qw< part >;
 use Method::Signatures;
@@ -11,9 +11,9 @@ use Moo::Role;
 
 =head1 DESCRIPTION
 
-This role should be implemented by any plugin which prevents files from appearing in your site. It provides one method (C<L</prune_files>>), and requires plugins provide an C<exclude_file> method, which accepts a single L<App::Embra::File> object and return true if the file should be removed.
+This should be consumed by plugins who want their C<exclude_file> method called for every file gathered into your site. That method should accept a single L<App::Embra::File> object, and return true if the file should not be published (otherwise it should return false).
 
-C<prune_files> will be called after all L<FileGatherer|App::Embra::Role::FileGatherer>-type plugins have added files, and will remove from the site all files which cause C<L</exclude_file>> to return true.
+The C<exclude_file> method will be called from the role's C<prune_files> method; this makes this role different to the other FileFoo roles, which expect the consuming plugin to provied a C<foo_files> method & call the role's C<foo_file> method.
 
 =cut
 
@@ -25,7 +25,9 @@ requires 'exclude_file';
 
     $plugin->prune_files;
 
-Passes each of the site's files to the plugin's C<exclude_file> method, and removes the file from the site if the method returns true.
+Calls C<< $self->exclude_file >> for each elemnt in C<< $self->embra->files >>, and removes the element if the method returns true.
+
+This method handles updating C<< $self->embra->files >> in-place (since it's a read-only attribute of L<App::Embra>).
 
 =cut
 
@@ -39,5 +41,13 @@ method prune_files {
     return;
 }
 
-1;
+=head1 OTHER ROLES FOR WORKING WITH FILES
 
+=for :list
+* L<FileGatherer|App::Embra::Role::FileGatherer> to add new files
+* L<FileTransformer|App::Embra::Role::FileTransformer> to significantly change files
+* L<FileAssembler|App::Embra::Role::FileAssembler> to prepare files to be published
+
+=cut
+
+1;

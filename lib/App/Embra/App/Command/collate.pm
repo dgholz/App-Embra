@@ -19,7 +19,7 @@ This command is a very thin layer over L<App::Embra/collate>, which does all the
 
 sub abstract { 'collate your site'; }
 
-=head1 example
+=head1 EXAMPLE
 
     $ embra collate
 
@@ -27,7 +27,7 @@ sub abstract { 'collate your site'; }
 
 =head1 OPTIONS
 
-No options.
+No new options; the standard L<embra options|App::Embra::App::Command/GLOBAL OPTIONS> are available, including C<-g|--debug> to enable detailed progress logging.
 
 =cut
 

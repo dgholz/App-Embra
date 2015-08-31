@@ -8,6 +8,17 @@ package App::Embra::Plugin::IncludeJavaScript;
 use Moo;
 use Method::Signatures;
 
+=head1 SYNOPSIS
+
+    # embra.ini
+    [IncludeJavaScript]
+    src = js/local_file.js
+
+    [IncludeJavaScript / Example.com datepicker]
+    src = http://example.com/js/datepicker.js
+
+=cut
+
 =head1 DESCRIPTION
 
 This plugin will add a L<snippet|App::Embra::Role::Snippet> to your site which links to the JavaScript file L<C<src>|/src>. If C<src> is a URL, it will be linked to directly; if it is a local file, it will be included in the site.

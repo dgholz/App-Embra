@@ -3,16 +3,14 @@ use warnings;
 
 package App::Embra::Role::FileGatherer;
 
-# ABSTRACT: something that adds file to your site
+# ABSTRACT: something that adds files to your site
 
 use Method::Signatures;
 use Moo::Role;
 
 =head1 DESCRIPTION
 
-This role should be implemented by any plugin which plans to add files to your site. It provides one method (C<L</add_file>>), and requires plugins provide a C<gather_files> method.
-
-C<gather_files> will be called early in the site collation process, and is expected to call the provided C<L</add_file>> method for each file it wishes to include in the site.
+This should be consumed by plugins who want their C<gather_files> method called as soon as the site collation starts. That method should call C<< L<$self->add_file( $file )|/add_file> >> (provided by this role) to include files in the site when it is published.
 
 =cut
 
@@ -33,5 +31,13 @@ method add_file( App::Embra::File $file ) {
     push @{ $self->embra->files }, $file;
 }
 
-1;
+=head1 OTHER ROLES FOR WORKING WITH FILES
 
+=for :list
+* L<FilePruner|App::Embra::Role::FilePruner> to remove already-added files
+* L<FileTransformer|App::Embra::Role::FileTransformer> to significantly change files
+* L<FileAssembler|App::Embra::Role::FileAssembler> to prepare files to be published
+
+=cut
+
+1;

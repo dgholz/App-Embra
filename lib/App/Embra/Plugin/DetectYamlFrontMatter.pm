@@ -9,15 +9,26 @@ use Try::Tiny;
 use Method::Signatures;
 use Moo;
 
+=head1 SYNOPSIS
+
+    # embra.ini
+    [DetectYamlFrontMatter]
+
+=cut
+
 =head1 DESCRIPTION
 
-This plugin will check each gathered file for L<YAML front-matter|http://jekyllrb.com/docs/frontmatter/>. Any keys & values found will be added to the file's notes.
+This plugin will check each gathered file for L<YAML front-matter|http://jekyllrb.com/docs/frontmatter/>. The front-matter will be parsed as YAML, and the resulting data will be added to the file's L<notes|App::Embra::File/notes>.
 
-Files must start with YAML front-matter for it to be detected. The format is:
+Typical YAML front matter looks similar to:
 
     ---
     key: value
     key2: value2
+    other_yaml:
+     - and
+     - so
+     - on
     ---
     << rest of file … >>
 
@@ -27,10 +38,10 @@ method transform_files {
     for my $file ( @{ $self->embra->files } ) {
         my ( $yaml_front_matter ) =
             $file->content =~ m/
-              \A        # beginning of file
-              --- \s* ^ # first line is three dashes
-              ( .*? ) ^ # then the smallest amount of stuff until
-              --- \s* ^ # the next line of three dashes
+              \A         # beginning of file
+              --- \s* \n # first line is three dashes
+              ( .*? ) \n # then the smallest amount of stuff until
+              --- \s* \n # the next line of three dashes
             /xmsp;
         next if not $yaml_front_matter;
         my $notes;

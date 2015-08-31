@@ -38,8 +38,10 @@ requires "warnings" => "0";
 
 on 'test' => sub {
   requires "Config::MVP::Reader::Hash" => "0";
+  requires "FindBin" => "0";
   requires "List::Util" => "0";
   requires "Test::Exception" => "0";
+  requires "Test::File::ShareDir" => "0";
   requires "Test::Roo" => "0";
   requires "Test::Roo::Role" => "0";
   requires "lib" => "0";
@@ -52,6 +54,7 @@ on 'configure' => sub {
 
 on 'develop' => sub {
   requires "Pod::Coverage::TrustPod" => "0";
+  requires "Test::More" => "0.88";
   requires "Test::Pod" => "1.41";
   requires "Test::Pod::Coverage" => "1.08";
 };

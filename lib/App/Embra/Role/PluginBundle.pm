@@ -30,11 +30,11 @@ has 'name' => (
 
 A list of plugins to be included. Each element should be an arrayref of:
 
-    [ $plugin_name, $package_args [ @plugin_args ] ]
+    [ $plugin_name, $package_name, [ @plugin_args ] ]
 
-where C<$plugin_name> will be used for the name of the plugin, C<$package_name> is the name of the plugin package, and C<@plugin_args> will be passed to the plugin's constructor.
+where C<$plugin_name> is the name attribute for the plugin, C<$package_name> is the plugin's package, and C<@plugin_args> will be passed to the plugin's constructor.
 
-The helper method C< L</add_plugin> > provides a flexible way to populate this list.
+The helper method L<C<add_plugin>|/add_plugin> provides a flexible way to populate this list.
 
 =cut
 
@@ -47,7 +47,7 @@ has 'bundled_plugins' => (
 
     $class->bundled_plugins_config( { $name, $pkg, [ $args ] } );
 
-Constructs an instance of the composing class and returns the C< L</bundled_plugins > >.
+Constructs an instance of the composing class and returns the L<C<bundled_plugins>|/bundled_plugins>.
 
 =cut
 
@@ -60,17 +60,28 @@ method bundled_plugins_config($class:, $args) {
 
 =method add_plugin
 
+    add_plugin($pkg, @payload);
+    add_plugin($pkg, $name, @payload);
+    add_plugin($pkg, $name, HashRef $payload);
+    add_plugin($pkg, HashRef $payload, @payload);
+
     $self->add_plugin('Foo');
+    $self->add_plugin('Foo', name => 'Foo with special name');
+    $self->add_plugin('Foo', { name => 'Foo with special name' });
+
+    # also recognise name as second parameter
     $self->add_plugin('Foo', 'Foo with special name');
+    $self->add_plugin('Foo', 'Foo with name', extra => 'args', for => 'Foo ctor');
+    $self->add_plugin('Foo', 'Foo with another name', { or => 'args', as => 'hashref' });
 
-    # also recognised name as second parameter
-    $self->add_plugin('Foo', extra => 'args', for => 'Foo ctor');
-    $self->add_plugin('Foo', { or => 'args', as => 'hashref' });
+    # won't recognise name as second parameter if @payload and $payload passed
+    $self->add_plugin('Foo', 'Foo no name', { with => 'hashref' }, and => 'named args'); # ✘
+    $self->add_plugin('Foo', { with => 'hashref', name => 'Foo hashref name' }, and => 'named args'); # ✔
+    $self->add_plugin('Foo', { with => 'hashref' }, and => 'named args', name => 'Foo param name'); # ✔
 
-    # won't recognised name as second parameter
-    $self->add_plugin('Foo', { with => 'hashref' }, and => 'named args');
+Adds the details of a plugin to be included in the bundle. Call this from your L</configure_bundle> method.
 
-Adds the details of a plugin to be included in the bundle. Call this from your C</configure_bundle> method.
+C<$pkg> will be expanded into a fully-qualified package by L<App::Embra::Util/expand_config_package_name>. C<$name> defaults to the value of the C<name> key in C<$payload> or C<@payload>, then the unexpanded value of C<$pkg>.
 
 =cut
 

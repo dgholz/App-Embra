@@ -24,12 +24,15 @@ method _build_plugin_bundle {
 
 with 'App::Embra::Role::TestPluginBundle';
 
-test 'basic plugin bundle' => method {
+test 'plugin bundle ctor' => method {
     isa_ok(
         $self->plugin_bundle,
         'TestPluginBundle',
         'PluginBundle ctor ...'
     );
+};
+
+test 'basic plugin bundle' => method {
     lives_ok {
         $self->plugin_bundle->add_plugin( '=Foo' );
     } '... add plugin ...';
@@ -132,14 +135,16 @@ test 'plugin with reference and payload' => method {
     lives_ok {
         $self->plugin_bundle->add_plugin( 'Foo', { hi => 'hello' }, hey => 'howdy' );
     } 'add plugin with hashref and named args';
-    my $payload = pop @{ $self->plugin_bundle->bundled_plugins->[0] };
+    # pop off payload, since we won't know what order the key-values
+    # will be in, and we have to turn it into a hash
+    my %payload = ( @{ pop @{ $self->plugin_bundle->bundled_plugins->[0] } } );
     is_deeply(
         $self->plugin_bundle->bundled_plugins->[0],
         [ 'Foo', 'App::Embra::Plugin::Foo' ],
-        '... and stored correct package and name ...'
+        '... and stored correct package and name and config for it'
     );
     is_deeply(
-        { @{ $payload } },
+        \ %payload,
         { qw< hi hello hey howdy > },
         '... and config for it'
     );
