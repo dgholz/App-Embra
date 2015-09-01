@@ -13,11 +13,22 @@ use Moo;
 
 use App::Embra::Plugin::Zilla::WrapLog;
 
+=head1 SYNOPSIS
+
+    # embra.ini
+    [Zilla / =Dist::Zilla::Plugin]
+    dist_zilla_plugin_option = this is passed through to D::Z::P
+
+    [Zilla / ShortName::For::Plugin]
+    passed_option = this goes to Dist::Zilla::Plugin::Shortname::For::Plugin
+
+=cut
+
 =head1 DESCRIPTION
 
-This plugin wraps a L<Dist::Zilla plugin|Dist::Zilla::Role::Plugin> so it can use C< L<App::Embra> > as if it were C< L<Dist::Zilla> >. This allows you to use some C<Dist::Zilla> plugins when building your site. Set this plugin's C< L<name|App::Embra::Role::Plugin/name> > to the name of the module it should wrap.
-
 This wraps something which does L<Dist::Zilla::Role::Plugin> so it can treat an L<App::Embra> as if it were a L<Dist::Zilla>. Not all Dist::Zilla plugin roles are supported!
+
+You can then use some C<Dist::Zilla> plugins when building your site. Set this plugin's C< L<name|App::Embra::Role::Plugin/name> > to the name of the module it should wrap.
 
 You can pass options through to the wrapped plugin by setting them for this plugin. Any options not recognised by this plugin will be collected in C< L</plugin_args> >, and passed to the wrapped plugin.
 
@@ -93,7 +104,7 @@ around 'isa' => func ( $orig, $self, $class ) {
 
 =method publish_site
 
-    $self->publish_site();
+    $self->publish_site;
 
 Calls the appropriate method on the C< L</plugin> >, if it consumes L<Dist::Zilla::Role::AfterBuild> or L<Dist::Zilla::Role::BeforeRelease>.
 
@@ -130,7 +141,7 @@ has '+embra' => (
 
 =attr name
 
-The module to construct C< L</plugin> > from. As a shorthand, when C<plugin> is created, it will replace a leading C<-> in C<name> with C<Dist::Zilla::Plugin::>.
+The name of the C<Dist::Zilla> package to use to construct C< L</plugin> >.
 
 =cut
 
