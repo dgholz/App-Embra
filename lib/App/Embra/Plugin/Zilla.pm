@@ -12,6 +12,7 @@ use Method::Signatures;
 use Moo;
 
 use App::Embra::Plugin::Zilla::WrapLog;
+use App::Embra::PluginBundle::WrapZillaPlugin;
 
 =head1 SYNOPSIS
 
@@ -158,13 +159,7 @@ has '_dzil_pkg' => (
 );
 
 method _build__dzil_pkg {
-    String::RewritePrefix->rewrite(
-        {
-          '=' => '',
-          ''  => 'Dist::Zilla::Plugin::',
-        },
-        $self->name
-    );
+    App::Embra::PluginBundle::WrapZillaPlugin::expand_dist_zilla_plugin_name( $self->name );
 }
 
 1;
