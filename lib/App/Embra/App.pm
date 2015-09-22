@@ -132,7 +132,7 @@ Uses L<App::Embra::MVP::Assembler> to transform section names to packages, and t
 =cut
 
 sub _create_seq {
-    my ( $self ) = @_;
+    my ( $self, %assembler_args ) = @_;
     require Config::MVP::Reader::Finder;
     require App::Embra::MVP::Assembler;
     use Try::Tiny;
@@ -140,7 +140,7 @@ sub _create_seq {
         Config::MVP::Reader::Finder->read_config(
             'embra',
             {
-                assembler => App::Embra::MVP::Assembler->new,
+                assembler => App::Embra::MVP::Assembler->new( %assembler_args ),
             }
         );
     } catch {
