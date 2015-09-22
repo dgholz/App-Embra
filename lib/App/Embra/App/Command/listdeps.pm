@@ -62,6 +62,20 @@ sub execute {
     my ( $self, $opt, $arg ) = @_;
     require Path::Class;
 
+    my $deps_from_seq = _format_deps(
+        _deps_from_seq(
+            $self->app->_create_seq(
+                section_class => 'App::Embra::App::Command::Listdeps::Section',
+            ),
+            $opt->missing
+        ),
+        $opt->versions
+    );
+
+    if( $deps_from_seq ) {
+        print $deps_from_seq, "\n";
+    }
+
     my $deps = _format_deps(
         _extract_deps(
             Path::Class::dir(defined $opt->root ? $opt->root : '.'),
@@ -73,6 +87,23 @@ sub execute {
     if( $deps ) {
         print $deps, "\n";
     }
+}
+
+sub _deps_from_seq {
+    my ($seq, $missing) = @_;
+    my @deps;
+    my %seen;
+    for my $plugin_section ( $seq->sections ) {
+        next if $plugin_section->name eq '_';
+        next if $seen{$plugin_section->package};
+        next if $missing and not $plugin_section->is_missing;
+        push @deps, {
+            $plugin_section->package,
+            $plugin_section->payload->{version} // 0,
+        };
+        ++$seen{$plugin_section->package};
+    }
+    return \@deps;
 }
 
 # straight from the mouth of App::Zilla::Util
