@@ -7,6 +7,7 @@ requires "Config::MVP::Assembler" => "0";
 requires "Config::MVP::Assembler::WithBundles" => "0";
 requires "Config::MVP::Reader::Finder" => "0";
 requires "Config::MVP::Reader::INI" => "2";
+requires "Config::MVP::Section" => "0";
 requires "Exporter" => "0";
 requires "File::Basename" => "0";
 requires "File::ShareDir" => "0";
