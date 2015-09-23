@@ -10,7 +10,7 @@ use App::Embra::Util qw< expand_config_package_name >;
 
 =head1 SYNOPSIS
 
-    embra listdeps [ --root /path/to/site/ ] [ --missing ] [ --versions ]
+    embra listdeps [ --missing ] [ --versions ]
 
 =head1 DESCRIPTION
 
@@ -31,7 +31,6 @@ sub opt_spec {
     my ( $self, @args ) = @_;
     return (
         $self->SUPER::opt_spec(@args),
-        [ 'root=s'   => 'where to find embra.ini; defaults to .' ],
         [ 'missing'  => 'list only the missing dependencies' ],
         [ 'versions' => 'include required version numbers in listing' ],
     );
@@ -40,10 +39,6 @@ sub opt_spec {
 =head1 OPTIONS
 
 The standard L<embra options|App::Embra::App::Command/GLOBAL OPTIONS> are available, plus the following.
-
-=head2 --root
-
-Specifies the directory to find the site's C<embra.ini>. Defaults to the current directory.
 
 =head2 --missing
 
