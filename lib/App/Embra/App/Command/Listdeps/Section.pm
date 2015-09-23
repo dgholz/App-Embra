@@ -9,4 +9,13 @@ use App::Embra::App -ignore;
 use Moo;
 extends 'Config::MVP::Section';
 
+has 'missing' => (
+    is        => 'rw',
+    predicate => 'is_missing',
+);
+
+sub missing_package {
+    shift->missing(1);
+}
+
 1;
