@@ -15,14 +15,6 @@ This bundle will add a L<Dist::Zilla> plugin to your site, and wrap it with C< L
 
 =cut
 
-has 'plugin_name' => (
-    is => 'lazy',
-);
-
-method _build_plugin_name {
-    expand_dist_zilla_plugin_name( $self->name );
-}
-
 after 'BUILDARGS' => method( @args ) {
     my %args = @args;
     if( $args{name} eq ref $self ) {
