@@ -19,7 +19,7 @@ This represents a file to be included in your site. In string context, returns t
 =cut
 
 use overload fallback => 1,
-    '""' => method( $other, $swap ) { $self->name };
+    '""' => method( @_ ) { $self->name };
 
 =attr name
 
