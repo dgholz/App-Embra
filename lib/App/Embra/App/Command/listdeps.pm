@@ -53,6 +53,7 @@ List the required version number for the required plugins.
 sub execute {
     my ( $self, $opt, $arg ) = @_;
 
+    local $App::Embra::MODE = 'deps';
     my $deps_from_seq = _format_deps(
         _deps_from_seq(
             $self->app->_create_seq(

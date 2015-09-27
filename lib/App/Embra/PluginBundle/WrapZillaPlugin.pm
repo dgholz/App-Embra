@@ -41,13 +41,17 @@ func expand_dist_zilla_plugin_name( $plugin_name ) {
     );
 }
 
+method add_dependency( @_ )  {
+    if( $App::Embra::MODE // q{} eq 'deps' ) {
+        $self->add_plugin( @_ );
+    }
+}
+
 method configure_bundle {
-    $self->add_plugin( $self->plugin_name,
+    $self->add_plugin( 'Zilla',
         name => $self->name,
     );
-    $self->add_plugin( 'Zilla',
-        name => $self->plugin_name,
-    );
+    $self->add_dependency( q{=}.expand_dist_zilla_plugin_name( $self->name ) );
 }
 
 with 'App::Embra::Role::PluginBundle';
