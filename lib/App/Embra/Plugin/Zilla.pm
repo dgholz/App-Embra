@@ -150,7 +150,7 @@ The name of the C<Dist::Zilla> package to use to construct C< L</plugin> >.
 
 =attr _dzil_pkg
 
-The full package name of the wrapped Dist::Zilla plugin. Set to the L<C<name>|/name> of this plugin, prefixed by C<Dist::Zilla::Plugin::>. If the first charater of the C<name> is <=>, it is tripped and used verbatim.
+The full package name of the wrapped Dist::Zilla plugin. Set to the L<C<name>|/name> of this plugin, prefixed by C<Dist::Zilla::Plugin::>. If the first charater of the C<name> is <=>, it is stripped and used verbatim.
 
 =cut
 
