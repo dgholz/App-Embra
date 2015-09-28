@@ -58,7 +58,7 @@ test 'prunes files in publish dir' => method {
     );
 };
 
-before '_build_embra' => method( @_ ) {
+after 'setup' => method( @_ ) {
     push @{ $self->embra_files }, App::Embra::File->new(
         name => $self->output_dir.'/prune me',
     );
