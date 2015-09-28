@@ -38,6 +38,7 @@ test 'fake enough of Dist::Zilla to fool a plugin' => method {
 };
 
 with 'App::Embra::FromConfigMVP';
+with 'App::Embra::Role::EmbraWithFiles';
 
 run_me( {
     embra_files => [
