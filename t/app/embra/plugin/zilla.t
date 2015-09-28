@@ -32,7 +32,7 @@ test 'fake enough of Dist::Zilla to fool a plugin' => method {
     my $foo = $self->embra->find_plugin( 'App::Embra::Plugin::Zilla' );
     is_deeply(
         $foo->plugin->files,
-        [],
+        [ qw< hi > ],
     );
 
 };
