@@ -41,7 +41,7 @@ Returns the method name to invoke on C<$pkg> to get the config for its bundled p
 =cut
 
 method package_bundle_method( $pkg ) {
-    return if not $pkg->does('App::Embra::Role::PluginBundle');
+    return if not $pkg->DOES('App::Embra::Role::PluginBundle');
     return 'bundled_plugins_config';
 }
 
