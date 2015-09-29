@@ -20,7 +20,9 @@ has 'config_mvp_sequence' => (
     },
 );
 
-requires 'config';
+has 'config' => (
+    is => 'ro',
+);
 
 has 'embra' => (
     is => 'ro',

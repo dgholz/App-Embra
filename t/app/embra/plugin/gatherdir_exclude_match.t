@@ -6,10 +6,6 @@ use lib 't/lib';
 use Method::Signatures;
 use Test::Roo;
 
-has 'config' => (
-    is => 'ro',
-);
-
 test 'excluded the right files' => method {
     $self->embra->collate;
     my @filesnames = sort map { $_->name } @{ $self->embra->files };
