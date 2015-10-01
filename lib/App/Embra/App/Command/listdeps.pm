@@ -53,24 +53,32 @@ List the required version number for the required plugins.
 sub execute {
     my ( $self, $opt, $arg ) = @_;
 
-    local $App::Embra::MODE = 'deps';
-    my $deps_from_seq = _format_deps(
-        _deps_from_seq(
-            $self->app->_create_seq(
-                section_class => 'App::Embra::App::Command::Listdeps::Section',
-            ),
-            $opt->missing
-        ),
-        $opt->versions
-    );
-
-    if( $deps_from_seq ) {
-        print $deps_from_seq, "\n";
+    my $deps_from_seq = $self->_get_deps( $opt->missing );
+    if( @{ $deps_from_seq } ) {
+        print _format_deps(
+            $deps_from_seq,
+            $opt->versions
+        ), "\n";
     }
 }
 
+sub _get_deps {
+    my ( $self, $missing ) = @_;
+    my $seq = $self->_get_seq;
+    return _deps_from_seq( $seq, $missing );
+}
+
+sub _get_seq {
+    my ( $self ) = @_;
+    local $App::Embra::MODE = 'deps';
+    require App::Embra::App::Command::Listdeps::Section;
+    $self->app->_create_seq(
+        section_class => 'App::Embra::App::Command::Listdeps::Section',
+    );
+}
+
 sub _deps_from_seq {
-    my ($seq, $missing) = @_;
+    my ( $seq, $missing ) = @_;
     my @deps;
     my %seen;
     for my $plugin_section ( $seq->sections ) {
