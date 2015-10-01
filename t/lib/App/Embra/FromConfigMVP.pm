@@ -32,7 +32,7 @@ has 'config' => (
 );
 
 has 'embra' => (
-    is => 'ro',
+    is => 'lazy',
     default => method {
         App::Embra->from_config_mvp_sequence( sequence => $self->config_mvp_sequence );
     },
