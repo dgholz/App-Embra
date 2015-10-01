@@ -46,7 +46,7 @@ run_me( {
     ],
     config => {
         'Hello' => {
-            __package => 'App::Embra::Plugin::Zilla',
+            __package => 'Zilla',
         }
     },
 } );

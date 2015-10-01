@@ -20,7 +20,7 @@ with 'App::Embra::FromConfigMVP';
 
 run_me( {
     config => {
-        'App::Embra::Plugin::GatherDir' => {
+        'GatherDir' => {
             from => 't/corpus/gatherdir',
             include_dotfiles => 1,
         }

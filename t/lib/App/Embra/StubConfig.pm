@@ -10,7 +10,7 @@ has config => (
     is => 'ro',
     default => method {
         {
-            'App::Embra::Plugin::Test' => {
+            'Test' => {
                 greeting => 'howdy',
             },
         };
