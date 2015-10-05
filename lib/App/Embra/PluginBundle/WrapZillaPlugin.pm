@@ -15,12 +15,11 @@ This bundle will add a L<Dist::Zilla> plugin to your site, and wrap it with C< L
 
 =cut
 
-after 'BUILDARGS' => method( @args ) {
-    my %args = @args;
-    if( $args{name} eq ref $self ) {
+method BUILD( $unknown_ctor_args ) {
+    if( $self->name eq ref $self ) {
         $self->warning('not given a Dist::Zilla plugin to wrap! Expect an error soon...');
     }
-};
+}
 
 func expand_dist_zilla_plugin_name( $plugin_name ) {
     String::RewritePrefix->rewrite(
