@@ -18,7 +18,7 @@ This bundle will add a L<Dist::Zilla> plugin to your site, and wrap it with C< L
 after 'BUILDARGS' => method( @args ) {
     my %args = @args;
     if( $args{name} eq ref $self ) {
-        $self->warn('not given a Dist::Zilla plugin to wrap! Expect an error soon...');
+        $self->warning('not given a Dist::Zilla plugin to wrap! Expect an error soon...');
     }
 };
 

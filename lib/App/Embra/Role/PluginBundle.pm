@@ -8,6 +8,7 @@ package App::Embra::Role::PluginBundle;
 use Method::Signatures;
 use App::Embra::Util qw< expand_config_package_name >;
 use Moo::Role;
+with 'App::Embra::Role::Logging';
 
 =head1 DESCRIPTION
 
