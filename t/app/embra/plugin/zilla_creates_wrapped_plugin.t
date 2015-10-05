@@ -21,16 +21,25 @@ package main;
 
 method _build_plugin {
     return App::Embra::Plugin::Zilla->new(
-        embra => $self->embra,
-        name => 'For::Sure',
+        embra     => $self->embra,
+        name      => 'For::Sure',
+        certainty => 'a lot',
     );
 }
 
 with 'App::Embra::Role::TestPlugin';
 
-test 'creates instance of wrapped plugin ...' => method {
-    isa_ok $self->plugin->plugin, 'Dist::Zilla::Plugin::For::Sure';
+test 'creates wrapped plugin' => method {
+    isa_ok $self->plugin->plugin,
+       'Dist::Zilla::Plugin::For::Sure',
+       'wrapped Dist::Zilla plugin';
+
+    is $self->plugin->plugin->certainty,
+       'a lot',
+       'created plugin gets passed payload';
+
 };
+
 
 run_me();
 
