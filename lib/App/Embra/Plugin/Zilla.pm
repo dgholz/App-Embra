@@ -31,7 +31,7 @@ This wraps something which does L<Dist::Zilla::Role::Plugin> so it can treat an 
 
 You can then use some C<Dist::Zilla> plugins when building your site. Set this plugin's C< L<name|App::Embra::Role::Plugin/name> > to the name of the module it should wrap.
 
-You can pass options through to the wrapped plugin by setting them for this plugin. Any options not recognised by this plugin will be collected in C< L</plugin_args> >, and passed to the wrapped plugin.
+This plugin will save any unrecognised constructor arguments in C< L</payload> >, and use them as the arguments for the constructor of the wrapped plugin.
 
 The plugin maps L<App::Embra::Role::PublishSite> to some C<Dist::Zilla> roles in C< L</publish_files> >.
 
@@ -64,31 +64,23 @@ method _build_plugin {
         logger => App::Embra::Plugin::Zilla::WrapLog->new(
             logger => $self,
         ),
-        %{ $self->plugin_args },
+        %{ $self->payload },
     );
 }
 
-=attr plugin_args
+=attr payload
 
-The options for C< L</plugin> >. Defaults to the arguments passed to this class's constructor, except for C<embra>, C<name>, & C<plugin>.
+The options for C< L</plugin> >. This will collect any arguments not recognised by the constructor (i.e. C<embra>, C<name>, & C<plugin>), and pass them to the wrapped plugin's constructor (via L<App::Embra::Plugin::Zilla>). Defaults to an empty hashref.
 
 =cut
 
-has 'plugin_args' => (
+has 'payload' => (
     is => 'ro',
-    default => func { {} },
+    default => method { {} },
 );
 
-method BUILDARGS( @args ) {
-    my %args = @args;
-    my %attrs;
-    for my $attr ( qw< embra name plugin > ) {
-        if( exists $args{$attr} ) {
-            $attrs{$attr} = delete $args{$attr};
-        }
-    }
-
-    return { %attrs, plugin_args => \%args };
+method BUILD( $unknown_ctor_args ) {
+    @{ $self->payload }{keys %{ $unknown_ctor_args }} = values %{ $unknown_ctor_args };
 }
 
 =method isa
