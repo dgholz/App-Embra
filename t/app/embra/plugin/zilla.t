@@ -29,23 +29,24 @@ test 'fake enough of Dist::Zilla to fool a plugin' => method {
 
     $self->embra->collate;
 
-    my $foo = $self->embra->find_plugin( 'App::Embra::Plugin::WrapZillaPlugin' );
+    my $foo = $self->embra->find_plugin( 'App::Embra::Plugin::Zilla' );
     is_deeply(
         $foo->plugin->files,
-        [],
+        [ qw< hi > ],
     );
 
 };
 
 with 'App::Embra::FromConfigMVP';
+with 'App::Embra::Role::EmbraWithFiles';
 
 run_me( {
     embra_files => [
         App::Embra::File->new( name => "hi", content => "hello" ),
     ],
     config => {
-        '-Hello' => {
-            __package => 'App::Embra::Plugin::WrapZillaPlugin',
+        'Hello' => {
+            __package => 'Zilla',
         }
     },
 } );

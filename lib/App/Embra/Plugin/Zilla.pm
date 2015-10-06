@@ -1,33 +1,37 @@
 use strict;
 use warnings;
 
-package App::Embra::Plugin::WrapZillaPlugin;
+package App::Embra::Plugin::Zilla;
 
 # ABSTRACT: adapts a Dist::Zilla plugin to work with App::Embra
 
 use Class::Inspector qw<>;
 use Module::Runtime qw<>;
+use String::RewritePrefix;
 use Method::Signatures;
 use Moo;
 
 use App::Embra::Plugin::Zilla::WrapLog;
+use App::Embra::PluginBundle::WrapZillaPlugin;
 
 =head1 SYNOPSIS
 
     # embra.ini
-    [WrapZillaPlugin / A::Dist::Zilla::Plugin]
-    dist_zilla_plugin_option = this is passed through
+    [Zilla / =Dist::Zilla::Plugin]
+    dist_zilla_plugin_option = this is passed through to D::Z::P
 
-    [WrapZillaPlugin / -ShortName::For::Plugin]
+    [Zilla / ShortName::For::Plugin]
     passed_option = this goes to Dist::Zilla::Plugin::Shortname::For::Plugin
 
 =cut
 
 =head1 DESCRIPTION
 
-This plugin wraps a L<Dist::Zilla plugin|Dist::Zilla::Role::Plugin> so it can use C< L<App::Embra> > as if it were C< L<Dist::Zilla> >. This allows you to use some C<Dist::Zilla> plugins when building your site. Set this plugin's C< L<name|App::Embra::Role::Plugin/name> > to the name of the module it should wrap.
+This wraps something which does L<Dist::Zilla::Role::Plugin> so it can treat an L<App::Embra> as if it were a L<Dist::Zilla>. Not all Dist::Zilla plugin roles are supported!
 
-You can pass options through to the wrapped plugin by setting them for this plugin. Any options not recognised by this plugin will be collected in C< L</plugin_args> >, and passed to the wrapped plugin.
+You can then use some C<Dist::Zilla> plugins when building your site. Set this plugin's C< L<name|App::Embra::Role::Plugin/name> > to the name of the module it should wrap.
+
+This plugin will save any unrecognised constructor arguments in C< L</payload> >, and use them as the arguments for the constructor of the wrapped plugin.
 
 The plugin maps L<App::Embra::Role::PublishSite> to some C<Dist::Zilla> roles in C< L</publish_files> >.
 
@@ -48,44 +52,35 @@ has 'plugin' => (
 );
 
 method _build_plugin {
-    ( my $plugin_class = $self->name ) =~ s/^-/Dist::Zilla::Plugin::/xms;
 
-    if( not Class::Inspector->loaded( $plugin_class ) ) {
-        Module::Runtime::require_module $plugin_class;
+    my $dzil_pkg = $self->_dzil_pkg;
+    if( not Class::Inspector->loaded( $dzil_pkg ) ) {
+        Module::Runtime::require_module $dzil_pkg;
     }
 
-    return $plugin_class->new(
+    return $dzil_pkg->new(
         zilla       => $self,
         plugin_name => $self->name,
-        logger      => App::Embra::Plugin::Zilla::WrapLog->new(
-            log_prefix => '['.$self->name.'] ',
-            logger     => $self->logger,
+        logger => App::Embra::Plugin::Zilla::WrapLog->new(
+            logger => $self,
         ),
-        %{ $self->plugin_args },
+        %{ $self->payload },
     );
 }
 
-=attr plugin_args
+=attr payload
 
-The options for C< L</plugin> >. Defaults to the arguments passed to this class's constructor, except for C<embra>, C<name>, & C<plugin>.
+The options for C< L</plugin> >. This will collect any arguments not recognised by the constructor (i.e. C<embra>, C<name>, & C<plugin>), and pass them to the wrapped plugin's constructor (via L<App::Embra::Plugin::Zilla>). Defaults to an empty hashref.
 
 =cut
 
-has 'plugin_args' => (
+has 'payload' => (
     is => 'ro',
-    default => func { {} },
+    default => method { {} },
 );
 
-method BUILDARGS( @args ) {
-    my %args = @args;
-    my %attrs;
-    for my $attr ( qw< embra name plugin > ) {
-        if( exists $args{$attr} ) {
-            $attrs{$attr} = delete $args{$attr};
-        }
-    }
-
-    return { %attrs, plugin_args => \%args };
+method BUILD( $unknown_ctor_args ) {
+    @{ $self->payload }{keys %{ $unknown_ctor_args }} = values %{ $unknown_ctor_args };
 }
 
 =method isa
@@ -102,7 +97,7 @@ around 'isa' => func ( $orig, $self, $class ) {
 
 =method publish_site
 
-    $self->publish_site();
+    $self->publish_site;
 
 Calls the appropriate method on the C< L</plugin> >, if it consumes L<Dist::Zilla::Role::AfterBuild> or L<Dist::Zilla::Role::BeforeRelease>.
 
@@ -125,19 +120,6 @@ method publish_site {
 
 with 'App::Embra::Role::SitePublisher';
 
-=method extra_list_deps
-
-Required by L<App::Embra::Role::ExtraListDeps>. Adds the wrapped plugin as an extra requirement to show when C< L<embra listdeps|App::Embra::Command::listdeps> > is run.
-
-=cut
-
-method extra_list_deps($class:, HashRef :$config) {
-    ( my $plugin_class = $config->{_name} ) =~ s/^-/Dist::Zilla::Plugin::/xms;
-    return $plugin_class;
-}
-
-with 'App::Embra::Role::ExtraListDeps';
-
 =attr embra
 
 The instance of L<App::Embra> which is building the site. This is provided by L<App::Embra::Role::Plugin>, and we amend it to delegate calls to C<files> to it.
@@ -152,10 +134,24 @@ has '+embra' => (
 
 =attr name
 
-The module to construct C< L</plugin> > from. As a shorthand, when C<plugin> is created, it will replace a leading C<-> in C<name> with C<Dist::Zilla::Plugin::>.
+The name of the C<Dist::Zilla> package to use to construct C< L</plugin> >.
 
 =cut
 
 # hi im name im declared in App::Embra::Role::Plugin
+
+=attr _dzil_pkg
+
+The full package name of the wrapped Dist::Zilla plugin. Set to the L<C<name>|/name> of this plugin, prefixed by C<Dist::Zilla::Plugin::>. If the first charater of the C<name> is <=>, it is stripped and used verbatim.
+
+=cut
+
+has '_dzil_pkg' => (
+    is => 'lazy',
+);
+
+method _build__dzil_pkg {
+    App::Embra::PluginBundle::WrapZillaPlugin::expand_dist_zilla_plugin_name( $self->name );
+}
 
 1;

@@ -12,17 +12,11 @@ has plugin => (
     is => 'lazy',
 );
 
-has embra_files => (
-    is => 'ro',
-    default => sub { [] },
+has 'embra' => (
+    is      => 'ro',
+    default => sub { App::Embra->new },
 );
 
-has embra => (
-    is => 'lazy',
-);
-
-sub _build_embra {
-    App::Embra->new( files => shift->embra_files );
-}
+with 'App::Embra::Role::EmbraWithFiles';
 
 1;

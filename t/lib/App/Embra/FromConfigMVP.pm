@@ -7,23 +7,32 @@ use Test::Roo::Role;
 use App::Embra;
 use Method::Signatures;
 
-has 'config_mvp_sequence' => (
-    is => 'lazy',
-    default => method {
-        use Config::MVP::Reader::Hash;
-        Config::MVP::Reader::Hash->read_config( {
+method _build_config_mvp_sequence( %assembler_args ) {
+    require Config::MVP::Reader::Hash;
+    require App::Embra::MVP::Assembler;
+    Config::MVP::Reader::Hash->read_config(
+        {
             _ => {
-                __package => 'App::Embra',
+                __package => '=App::Embra',
             },
             %{ $self->config }
-        } );
-    },
+        },
+        {
+            assembler => App::Embra::MVP::Assembler->new( %assembler_args ),
+        },
+    );
+}
+
+has 'config_mvp_sequence' => (
+    is => 'lazy',
 );
 
-requires 'config';
+has 'config' => (
+    is => 'ro',
+);
 
 has 'embra' => (
-    is => 'ro',
+    is => 'lazy',
     default => method {
         App::Embra->from_config_mvp_sequence( sequence => $self->config_mvp_sequence );
     },

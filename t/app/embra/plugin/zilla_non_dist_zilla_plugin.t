@@ -2,16 +2,16 @@ use strict;
 use warnings;
 
 use lib 't/lib';
-use App::Embra::Plugin::WrapZillaPlugin;
+use App::Embra::Plugin::Zilla;
 
 use Test::Exception;
 use Method::Signatures;
 use Test::Roo;
 
 method _build_plugin {
-    return App::Embra::Plugin::WrapZillaPlugin->new(
+    return App::Embra::Plugin::Zilla->new(
         embra => $self->embra,
-        name => 'Dist::Zilla::Not::A::Plugin',
+        name => '=Dist::Zilla::Not::A::Plugin',
     );
 }
 

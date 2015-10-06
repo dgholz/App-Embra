@@ -24,10 +24,10 @@ with 'App::Embra::FromConfigMVP';
 
 run_me( {
     config => {
-        'App::Embra::Plugin::GatherDir' => {
+        'GatherDir' => {
             from => 't/corpus/gatherdir',
         },
-        'App::Embra::Plugin::PruneFiles' => {
+        'PruneFiles' => {
             filename => [ qw< xzxxy > ],
         },
     }
