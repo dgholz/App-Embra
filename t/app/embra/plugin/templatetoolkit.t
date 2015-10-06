@@ -16,7 +16,7 @@ method _build_plugin {
     );
 }
 
-with 'App::Embra::Role::TestAssemblePlugin';
+with 'App::Embra::Role::TestTransformPlugin';
 with 'App::Embra::Role::TestPrunePlugin';
 
 test 'assembles from default template' => method {
