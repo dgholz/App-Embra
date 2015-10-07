@@ -19,7 +19,7 @@ use Moo;
 
 =head1 DESCRIPTION
 
-This plugin will process site files through L<Template Toolkit|Template> with a pre-defined set of templates. For each file with a C<.html> extension, it will look for a template with a matching name (or use the default template). That template is then used to process the contents of the file into an assembled HTML document.
+This plugin will process site files through L<Template Toolkit|Template> with a pre-defined set of templates. For each file with a C<.html> extension, it will look for a template with a matching name (or use the default template). That template is then used to process the contents of the file into an transformd HTML document.
 
 
 =cut
@@ -43,18 +43,18 @@ func _build_templates_path($cls) {
     File::ShareDir::module_dir(__PACKAGE__),
 }
 
-=attr assembler
+=attr transformer
 
-The object used to assemble files. Defaults to an instance of L<App::Embra::Plugin::TemplateToolkit> with its C<INCLUDE_PATH> set to L<C<templates_path>|/templates_path>. This plugin delegates L<C<assemble_files>|App::Embra::Role::FileAssembler> to the assembler.
+The object used to transform files. Defaults to an instance of L<App::Embra::Plugin::TemplateToolkit> with its C<INCLUDE_PATH> set to L<C<templates_path>|/templates_path>. This plugin delegates L<C<transform_files>|App::Embra::Role::Filetransformer> to the transformer.
 
 =cut
 
-has 'assembler' => (
+has 'transformer' => (
     is => 'lazy',
-    handles => [ 'assemble_files' ],
+    handles => [ 'transform_files' ],
 );
 
-method _build_assembler {
+method _build_transformer {
     App::Embra::Plugin::TemplateToolkit->new(
         embra          => $self->embra,
         logger         => $self,
@@ -63,6 +63,6 @@ method _build_assembler {
     );
 }
 
-with 'App::Embra::Role::FileAssembler';
+with 'App::Embra::Role::FileTransformer';
 
 1;
