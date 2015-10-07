@@ -25,7 +25,7 @@ method _build_plugin {
     );
 }
 
-with 'App::Embra::Role::TestAssemblePlugin';
+with 'App::Embra::Role::TestTransformPlugin';
 
 test 'ctor' => method {
     ok( $self->plugin );

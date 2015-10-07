@@ -20,7 +20,7 @@ use Moo;
 
 =head1 DESCRIPTION
 
-This plugin will process site files through Template Toolkit. For each file with an C<html> extension, it will look for a template in the C<templates_path> with a matching name and use it to process the contents of the file into an assembled HTML document.
+This plugin will process site files through Template Toolkit. For each file with an C<html> extension, it will look for a template in the C<templates_path> with a matching name and use it to process the contents of the file into an transformed HTML document.
 
 Templates will be passed the file's content and body as variables, as well as each of the file's notes.
 
@@ -60,17 +60,17 @@ has 'extension' => (
     default => sub { '.tt' },
 );
 
-=attr assembler
+=attr transformer
 
-The object used to assemble files. Defaults to an instance of L<Template Toolkit|Template>.
+The object used to transform files. Defaults to an instance of L<Template Toolkit|Template>.
 
 =cut
 
-has 'assembler' => (
+has 'transformer' => (
     is => 'lazy',
 );
 
-method _build_assembler {
+method _build_transformer {
     Template->new({
         INCLUDE_PATH => $self->templates_path,
         DEFAULT => $self->default_template,
@@ -78,12 +78,12 @@ method _build_assembler {
     });
 }
 
-method assemble_files {
+method transform_files {
     for my $file ( @{ $self->embra->files } ) {
         next if $file->ext ne 'html';
 
         my $template = $file->with_ext( $self->extension );
-        my $assembled;
+        my $transformed;
         my $notes = {
             content => $file->content,
             name    => $file->name,
@@ -91,12 +91,12 @@ method assemble_files {
         };
         use Try::Tiny;
         try {
-            $self->assembler->process( $template, $notes, \$assembled ) or $self->debug( $self->assembler->error );
+            $self->transformer->process( $template, $notes, \$transformed ) or $self->debug( $self->transformer->error );
         } catch {
             $self->debug( $_ );
         };
-        $file->content( $assembled );
-        $file->notes->{assembled_by} = __PACKAGE__;
+        $file->content( $transformed );
+        $file->notes->{transformed_by} = __PACKAGE__;
     }
 }
 
@@ -105,7 +105,7 @@ method exclude_file( $file ) {
     return;
 }
 
-with 'App::Embra::Role::FileAssembler';
+with 'App::Embra::Role::FileTransformer';
 with 'App::Embra::Role::FilePruner';
 
 1;
