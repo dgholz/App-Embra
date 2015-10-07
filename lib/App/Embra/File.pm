@@ -89,7 +89,7 @@ method BUILD( @args ) {
 
 =attr notes
 
-A hash ref which stores extra values associated with the file. L<Transform|App::Embra::Role::FileTransformer> plugins read and write notes, and L<Assemble|App::Embra:Role::FileAssembler> plugins read notes.
+A hash ref which stores extra values associated with the file. It is read and written by L<Transform|App::Embra::Role::FileTransformer> plugins. Defaults to an empty hash ref.
 
 =cut
 

@@ -97,13 +97,12 @@ method find_plugin( $package ) {
 
     $embra->collate;
 
-Assembles your site. For each of these methods:
+Collates your site. For each of these methods:
 
 =for :list
 * C<L<gather_files|App::Embra::Role::FileGatherer>>
 * C<L<prune_files|App::Embra::Role::FilePruner>>
 * C<L<transform_files|App::Embra::Role::FileTransformer>>
-* C<L<assemble_files|App::Embra::Role::FileAssembler>>
 * C<L<publish_site|App::Embra::Role::SitePublisher>>
 
 call the method on elements of C<L</plugins>> which consume the associated role.
@@ -115,7 +114,6 @@ method collate {
     $_->gather_files    for $self->plugins_with( -FileGatherer );
     $_->prune_files     for $self->plugins_with( -FilePruner );
     $_->transform_files for $self->plugins_with( -FileTransformer );
-    $_->assemble_files  for $self->plugins_with( -FileAssembler );
     $_->publish_site    for $self->plugins_with( -SitePublisher );
 }
 

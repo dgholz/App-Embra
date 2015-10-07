@@ -46,7 +46,6 @@ method prune_files {
 =for :list
 * L<FileGatherer|App::Embra::Role::FileGatherer> to add new files
 * L<FileTransformer|App::Embra::Role::FileTransformer> to significantly change files
-* L<FileAssembler|App::Embra::Role::FileAssembler> to prepare files to be published
 
 =cut
 
