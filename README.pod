@@ -14,82 +14,55 @@ See how the development is progressing at L<the Trello board|https://trello.com/
 
 =end html
 
-=head1 HOW TO INSTALL
-
-=head2 Set up your Perl environment
-
-=over
-
-=item *
-
-Windows
+=head1 HOW TO USE
 
 =over
 
 =item 1.
 
-Install L<Strawberry Perl|http://strawberryperl.com/> (version 5.10 or higher)
+L</Set up your Perl environment>
 
 =item 2.
 
-Install cpanm with C<cpan App::cpanminus>
-
-=back
-
-=item *
-
-Mac/Linux
-
-=over
-
-=item 1.
-
-Use L<perlbrew|http://perlbrew.pl/> to install version 5.10 or higher. Don't forget to run C<perlbrew switch <version\>>
-
-=item 2.
-
-Install cpanm with C<perlbrew install-cpanm>
+L</Install App::Embra>
 
 =item 3.
 
-Set up a separate perl library with C<perlbrew lib create app-embra; perlbrew use @app-embra>
+L<Configure your site>
+
+=item 4.
+
+L<Write content & build your site>
 
 =back
 
-=back
+=head2 Set up your Perl environment
 
-=head2 Set up developement environment
+You must use version 5.10 (or higher) of Perl, and have C<Carton> installed.
 
-C<cpanm dzil; dzil authordeps | cpanm>
+If you are using Windows, I recommend using  L<Strawberry Perl|http://strawberryperl.com/> (version 5.10 or higher). Install Carton with C<cpan install Carton>
+
+For Mac & Linux, you probably have Perl 5.10 or higher already installed. If not, use L<plenv|http://plenv> to install a specific version. Install Carton with C<curl http://cpanmin.us/instal | perl - -- cpanm -l ~/perl5 Carton>.
 
 =head2 Install App::Embra
 
-C<dzil listdeps | cpanm; dzil install>
+Make a directory for your site, and create a file F<cpanfile> in that directory with this content:
 
-=head2 Create a simple configuration file
+    requires 'App::Embra'
 
-in embra.ini:
+Then open a terminal, change to your site's directory, and run C<carton> to install App::Embra & its dependencies.
 
-    [GatherDir]
-    [DetectYamlFrontMatter]
-    [TransformMarkdown]
-    [TemplateToolkit]
-    [PublishFiles]
-    to = site
+=head2 Configure your site
 
-=head2 Make some files
+Run C<carton exec embra init>; it will create a skeleton config in F<embra.ini>. Edit it to check that it guessed the right values (you probably want to change C<name> at least).
 
-hi.md:
+=head2 Write content & build your site
+
+In your site's directory, create F<hello.md> with this content:
 
     ---
     title: greetings
     ----
     *HI THERE*
 
-templates/default.tt:
-
-    <html><head><title>[% title %]</title></head><body>[% content %]</body></html>
-
-=head2 Run App::Embra
-
-C<embra collate>
+Then, from the same terminal, run C<carton exec embra collate>. Your site's files will appear in F<site/>; open C<file:///path/to/your/sites/directory/site/hello.html> to view the build site.
