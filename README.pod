@@ -54,7 +54,9 @@ Then open a terminal, change to your site's directory, and run C<carton> to inst
 
 =head2 Configure your site
 
-Run C<carton exec embra init>; it will create a skeleton config in F<embra.ini>. Edit it to check that it guessed the right values (you probably want to change C<name> at least).
+Run C<carton exec embra init>; it will create a skeleton config in F<embra.ini>. Edit it to check that it guessed the right values (you probably want to change C<name> at least). More documentation for the format of F<embra.ini> is available at L<https://metacpan.org/pod/App::Embra::App>.
+
+Once you're finished editing F<embra.ini>, run C<carton exec embra listdeps | carton exec cpanm --local-lib local --notest> to install any missing dependencies.
 
 =head2 Write content & build your site
 
