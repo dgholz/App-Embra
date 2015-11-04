@@ -12,9 +12,10 @@ use Moo;
 
 =head1 SYNOPSIS
 
-    # embra.ini
+In your F<embra.ini>:
+
     [TemplateToolkit]
-    templates_path = templates # default
+    templates_path = templates ; this is the default
 
 =cut
 

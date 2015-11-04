@@ -10,7 +10,8 @@ use Method::Signatures;
 
 =head1 SYNOPSIS
 
-    # embra.ini
+In your F<embra.ini>:
+
     [IncludeJavaScript]
     src = js/local_file.js
 

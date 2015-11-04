@@ -21,22 +21,27 @@ Returns the L<App::Embra> that will be used to build the site. It will be constr
 
 The format for F<embra.ini> is:
 
-     # values for App::Embra constructor
-     # these must come first in the file
+     ; values for App::Embra constructor
+     ; these must come first in the file
      name = My Cool Site
      publisher = Your Name Here
 
-     # plugins to be used
+     ; plugins to be used
      [PluginName]
      plugin_option = value
-     # shorthand for
-     [App::Embra::Plugin::PluginName]
 
-     # bundles of plugins to be used
+     ; shorthand for
+     [App::Embra::Plugin::PluginName]
+     plugin_option = value
+
+
+     ; bundles of plugins to be used
      [@BundleName]
      bundle_option = value
-     # shorthand for
+
+     ; shorthand for
      [App::Embra::PluginBundle::BundleName]
+     bundle_option = value
 
 Each section has an associated name, which defaults to the section header (the package name inside square brackets). Names must be unique (a requirement of L<Config::MVP::Sequence>). To add a plugin more than once, specify an alternative name for its sections by appending it after the package name, separated by a slash:
 

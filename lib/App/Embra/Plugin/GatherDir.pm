@@ -16,7 +16,8 @@ method mvp_multivalue_args() { qw< exclude_match >; }
 
 =head1 SYNOPSIS
 
-    # in embra.ini
+In your F<embra.ini>:
+
     [GatherDir]
     from = my_site_dir
     include_dotfiles = 0

@@ -11,7 +11,8 @@ use Moo;
 
 =head1 SYNOPSIS
 
-    # embra.ini
+In your F<embra.ini>:
+
     [PublishFiles]
     to = heres_my_site_directory
 

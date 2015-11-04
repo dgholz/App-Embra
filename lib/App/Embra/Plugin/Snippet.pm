@@ -10,7 +10,8 @@ use Moo;
 
 =head1 SYNOPSIS
 
-    # embra.ini
+In your F<embra.ini>:
+
     [Snippet]
     fragment = <link rel="alternate" type="application/atom+xml" title="My Weblog feed" href="/feed/" />
     clipboard = head

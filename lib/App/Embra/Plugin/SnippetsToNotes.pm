@@ -10,7 +10,8 @@ use Moo;
 
 =head1 SYNOPSIS
 
-    # embra.ini
+In your F<embra.ini>:
+
     [SnippetsToNotes]
 
 =cut
@@ -25,7 +26,8 @@ This is a L<FileTransformer|App::Embra::Role::FileTransformer> plugin.
 
 =head1 EXAMPLE
 
-    # embra.ini
+In your F<embra.ini>:
+
     [Template::My::Cool::Template]
 
     [Snippet / foo]
