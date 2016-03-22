@@ -17,3 +17,7 @@ install:
 
 script:
   - carton exec dzil smoke --release --author
+
+cache:
+  directories:
+    - local
