@@ -20,3 +20,6 @@ update:
 
 test:
 	@carton exec dzil test
+
+build:
+	@carton exec dzil build
