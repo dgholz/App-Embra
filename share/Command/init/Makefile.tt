@@ -1,0 +1,8 @@
+collate:
+	carton exec embra collate
+
+installdeps:
+	carton exec embra listdeps --missing | cpanm --local-dir local --notest
+
+update:
+	carton update

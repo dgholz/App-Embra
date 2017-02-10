@@ -1,0 +1,18 @@
+[GatherDir]
+exclude_match = local/
+from = posts
+
+[PruneFiles]
+filename = cpanfile
+filename = cpanfile.snapshot
+filename = embra.ini
+
+[DetectYamlFrontMatter]
+[TransformMarkdown]
+[Favicon]
+[Sitemap]
+[SnippetsToNotes]
+[Template::Basic]
+
+[PublishFiles]
+to = site
