@@ -1,3 +1,4 @@
+requires "Any::Moose" => "< 0.27";
 requires "App::Cmd::Setup" => "0";
 requires "Class::Inspector" => "0";
 requires "Config::MVP::Assembler" => "0";
@@ -47,7 +48,7 @@ on 'test' => sub {
 };
 
 on 'configure' => sub {
-  requires "ExtUtils::MakeMaker" => "0";
+  requires "ExtUtils::MakeMaker" => "7.1101";
   requires "File::ShareDir::Install" => "0.06";
 };
 
