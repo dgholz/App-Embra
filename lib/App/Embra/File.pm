@@ -109,6 +109,7 @@ has 'ext' => (
     lazy => 1,
     builder => method { ($self->_split_name)[2] },
     trigger => 1,
+    clearer => 1,
 );
 
 method _split_name {
@@ -117,6 +118,7 @@ method _split_name {
 
 method _trigger_ext( $old_ext ) {
     $self->name( $self->with_ext( $self->ext ) );
+    $self->clear_ext;
 }
 
 =method with_ext
