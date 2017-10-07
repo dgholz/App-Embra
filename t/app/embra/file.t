@@ -9,7 +9,7 @@ use Test::Roo;
 
 has 'file' => (
     is => 'ro',
-    default => method { App::Embra::File->new(name => 'hi im file') },
+    default => method { App::Embra::File->new(name => 'hi im file.cool extension') },
 );
 
 test 'update notes on file' => method {
@@ -26,7 +26,7 @@ test '_original_name saves name given to constructor' => method {
     $self->file->name( 'hello, me am file' );
     is(
         $self->file->_original_name,
-        'hi im file',
+        'hi im file.cool extension',
         '_original_name matches name given to ctor'
     );
 };
