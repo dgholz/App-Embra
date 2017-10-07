@@ -1,5 +1,7 @@
 CPANM := $(shell command -v cpanm 2> /dev/null)
 
+all: build
+
 install-carton:
 ifndef CPANM
 	plenv install-cpanm
