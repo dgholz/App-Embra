@@ -17,8 +17,8 @@ test 'update notes on file' => method {
 
     is_deeply(
         [ @{ $self->file->notes }{qw<foo baz>} ],
-        [ 'bar', [ 'quux', 'quuux' ]],
-        'hi'
+        [ 'bar', [ 'quux', 'quuux' ] ],
+        'notes are updated with params passed to update_notes'
     );
 };
 
