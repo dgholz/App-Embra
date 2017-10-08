@@ -66,6 +66,27 @@ test 'changing ext changes name' => method {
     );
 };
 
+test 'blanking ext removes last extension' => method {
+    $self->file->name( 'file.foo ext.bar ext' );
+    $self->file->ext( q{} );
+    is(
+        $self->file->name,
+        'file.foo ext',
+        'blank extensions get removed'
+    );
+    is(
+        $self->file->ext,
+        'foo ext',
+        'penultimate extension replaces blanked extension'
+    );
+    $self->file->ext( q{} );
+    is(
+        $self->file->ext,
+        '',
+        'nothing replaces ultimate blanked extension'
+    );
+};
+
 run_me;
 
 done_testing;
