@@ -8,9 +8,12 @@ use Method::Signatures;
 use Test::Roo;
 
 has 'file' => (
-    is => 'ro',
+    is => 'lazy',
+    clearer => 1,
     default => method { App::Embra::File->new(name => 'hi im file.cool extension') },
 );
+
+after each_test => sub { shift->clear_file };
 
 test 'update notes on file' => method {
     $self->file->update_notes( foo => 'bar', baz => [ qw< quux quuux > ] );
