@@ -113,7 +113,7 @@ has 'ext' => (
 );
 
 method _split_name {
-    fileparse( $self->name, qr{ (?<= [.] ) [^.]+ $ }x );
+    fileparse( $self->name, "?x)(?: [.] ) ( [^.]+ " );
 }
 
 method _trigger_ext( $old_ext ) {
