@@ -104,21 +104,18 @@ The extension of the file's C<L</name>>. Changing this will cause the file's C<L
 
 =cut
 
-has 'ext' => (
-    is => 'rw',
-    lazy => 1,
-    builder => method { ($self->_split_name)[2] },
-    trigger => 1,
-    clearer => 1,
-);
+# I lied, this is actually a couple of methods, since this 'attribute'' is wholely dependent on $self->name
 
 method _split_name {
     fileparse( $self->name, "?x)(?: [.] ) ( [^.]+ " );
 }
 
-method _trigger_ext( $old_ext ) {
-    $self->name( $self->with_ext( $self->ext ) );
-    $self->clear_ext;
+method ext( $ext? ) {
+    if ( defined $ext ) {
+        $self->name( $self->with_ext( $ext ) );
+    } else {
+        ($self->_split_name)[2];
+    }
 }
 
 =method with_ext
