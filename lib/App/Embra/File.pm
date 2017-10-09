@@ -28,7 +28,7 @@ The path to the file. Change this to change where the file will appear in the si
 =cut
 
 has 'name' => (
-    is => 'rw',
+    is       => 'rw',
     required => 1,
 );
 
@@ -67,8 +67,8 @@ The permissions of the file. Defaults to 0644.
 =cut
 
 has 'mode' => (
-  is  => 'rw',
-  lazy => 1,
+  is      => 'rw',
+  lazy    => 1,
   default => method { oct(644) },
 );
 
@@ -79,7 +79,7 @@ The original name of this file. This is automatically saved from the C<L</name>>
 =cut
 
 has '_original_name' => (
-  is  => 'rwp',
+  is       => 'rwp',
   init_arg => undef,
 );
 
@@ -94,7 +94,7 @@ A hash ref which stores extra values associated with the file. It is read and wr
 =cut
 
 has 'notes' => (
-    is => 'ro',
+    is      => 'ro',
     default => method { {} },
 );
 
