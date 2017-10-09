@@ -123,17 +123,25 @@ method _trigger_ext( $old_ext ) {
 
 =method with_ext
 
-    $file->with_ext( $ext );
+    my $file = App::Embra::File->new( 'filename.txt' );
+    my $ext = 'html';
+    $file->with_ext( $ext ); # filename.html
+    $file->with_ext( '.md' ); # filename.md
 
-Returns L</name> with its extension changed to C<$ext>.
+Returns L</name> with its extension changed to C<$ext>. The leading period on C<$ext> is automatically stripped. If C<$ext> is undef, the empty string, or not supplied, returns L</name> with the last extension removed.
+
+    my $file = App::Embra::File->new('hi.hello.howdy');
+    my $stripped_ext = $file->with_ext( q{} ); # hi.hello
+    App::Embra::File->new( $stripped_ext )->with_ext(); # hi
 
 =cut
 
-method with_ext( $ext ) {
-    $ext =~ s/ \A [.] //xms;
+method with_ext( $ext = undef when q{} ) {
     my ($f, $d, $e) = $self->_split_name;
+    return canonpath( $d . $f ) if not defined $ext;
+    $ext =~ s/ \A [.] //xms;
     return $self->name if $e eq $ext;
-    return canonpath( $d . $f . $ext );
+    return canonpath( $d . $f . q{.} . $ext );
 }
 
 =method update_notes
