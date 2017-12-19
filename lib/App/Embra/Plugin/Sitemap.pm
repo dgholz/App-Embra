@@ -13,7 +13,8 @@ use Moo;
 
 =head1 SYNOPSIS
 
-    # embra.ini
+In your F<embra.ini>:
+
     [Sitemap]
     filename = My_pages.html
 

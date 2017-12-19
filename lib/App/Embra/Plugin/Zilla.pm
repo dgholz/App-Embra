@@ -16,7 +16,8 @@ use App::Embra::PluginBundle::WrapZillaPlugin;
 
 =head1 SYNOPSIS
 
-    # embra.ini
+In your F<embra.ini>:
+
     [Zilla / =Dist::Zilla::Plugin]
     dist_zilla_plugin_option = this is passed through to D::Z::P
 

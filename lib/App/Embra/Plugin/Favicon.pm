@@ -10,7 +10,8 @@ use Method::Signatures;
 
 =head1 SYNOPSIS
 
-    # embra.ini
+In your F<embra.ini>:
+
     [Favicon]
     src = my_cool_fav.ico
 

@@ -61,11 +61,11 @@ sub validate_args {
         ...
     }
 
-Returns the instance of L<App::Embra> being used to build your site. Delegates the method dispatch to C<< $self->app >>, which is an instance of L<App::Embra::App/embra>. Thus, every instance of
+Returns the instance of L<App::Embra> being used to build your site. Delegates the method dispatch to C<< $self->app >>, which is an instance of L<App::Embra::App/embra>. Thus,
 
     $self->embra
 
-could instead be replace with
+is a short-hand for
 
     $self->app->embra
 
