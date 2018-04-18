@@ -12,12 +12,11 @@ perl:
 
 install:
   - dzil authordeps --missing | cpanm --notest --quiet
+  - dzil listdeps --author --missing --cpanm-versions | xargs cpanm --quiet --notest
   - dzil build
-  - cpanm Carton
-  - carton install
 
 script:
-  - carton exec dzil smoke --release --author
+  - dzil smoke --release --author
 
 cache:
   directories:

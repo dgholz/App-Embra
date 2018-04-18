@@ -15,9 +15,9 @@ authordeps: install-dzil
 	carton exec dzil authordeps | carton exec cpanm -l local --notest
 
 installdeps: authordeps
-	carton exec dzil listdeps | carton exec cpanm -l local --notest
+	carton exec dzil listdeps --author --missing --cpanm-version | carton exec xargs cpanm --quiet --local-lib local --notest
 
-update:
+update: | install-carton
 	carton update
 
 test:
