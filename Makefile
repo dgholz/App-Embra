@@ -30,3 +30,7 @@ installdeps: authordeps
 .PHONY: test
 test: installdeps
 	@carton exec dzil test
+
+.PHONY: smoke
+smoke: installdeps
+	@carton exec dzil smoke --release --author
