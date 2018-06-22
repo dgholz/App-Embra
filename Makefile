@@ -25,9 +25,9 @@ installdeps: authordeps
 	carton exec dzil listdeps --author --missing --cpanm-version | carton exec xargs cpanm --quiet --local-lib local --notest
 
 .PHONY: test
-test:
+test: installdeps
 	@carton exec dzil test
 
 .PHONY: build
-build:
+build: authordeps
 	@carton exec dzil build
