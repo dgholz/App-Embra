@@ -9,11 +9,11 @@ $(CPANM_PATH):
 $(CARTON_PATH): | $(CPANM_PATH)
 	cpanm --quiet --notest Carton
 
-install-dzil: ${CARTON_PATH}
-	carton exec cpanm -l local --notest Dist::Zilla
+local/bin/dzil: | $(CARTON_PATH)
+	carton exec cpanm -l local --quiet --notest Dist::Zilla
 
 .PHONY: authordeps
-authordeps: install-dzil
+authordeps: | local/bin/dzil
 	carton exec dzil authordeps | carton exec cpanm -l local --notest
 
 .PHONY: installdeps
