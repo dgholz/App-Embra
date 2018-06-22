@@ -1,7 +1,6 @@
 CPANM_PATH = $(shell which cpanm || echo install-cpanm)
 CARTON_PATH = $(shell which carton || echo install-carton)
-
-all: build
+build:
 
 $(CPANM_PATH):
 	plenv install-cpanm
