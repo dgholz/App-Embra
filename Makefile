@@ -9,6 +9,10 @@ $(CPANM_PATH):
 $(CARTON_PATH): | $(CPANM_PATH)
 	cpanm --quiet --notest Carton
 
+.PHONY: update
+update: $(CARTON_PATH)
+	carton update
+
 local/bin/dzil: | $(CARTON_PATH)
 	carton exec cpanm -l local --quiet --notest Dist::Zilla
 
@@ -19,10 +23,6 @@ authordeps: | local/bin/dzil
 .PHONY: installdeps
 installdeps: authordeps
 	carton exec dzil listdeps --author --missing --cpanm-version | carton exec xargs cpanm --quiet --local-lib local --notest
-
-.PHONY: update
-update: | $(CARTON_PATH)
-	carton update
 
 .PHONY: test
 test:
