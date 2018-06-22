@@ -11,12 +11,10 @@ perl:
   - "5.14"
 
 install:
-  - dzil authordeps --missing | cpanm --notest --quiet
-  - dzil listdeps --author --missing --cpanm-versions | xargs cpanm --quiet --notest
-  - dzil build
+  - make build
 
 script:
-  - dzil smoke --release --author
+  - make smoke
 
 cache:
   directories:
