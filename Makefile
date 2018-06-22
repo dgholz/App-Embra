@@ -20,6 +20,10 @@ local/bin/dzil: | $(CARTON_PATH)
 authordeps: | local/bin/dzil
 	carton exec dzil authordeps --missing --cpanm-version | carton exec xargs cpanm --quiet --local-lib local --notest
 
+.PHONY: build
+build: authordeps
+	@carton exec dzil build
+
 .PHONY: installdeps
 installdeps: authordeps
 	carton exec dzil listdeps --author --missing --cpanm-version | carton exec xargs cpanm --quiet --local-lib local --notest
@@ -27,7 +31,3 @@ installdeps: authordeps
 .PHONY: test
 test: installdeps
 	@carton exec dzil test
-
-.PHONY: build
-build: authordeps
-	@carton exec dzil build
