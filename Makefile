@@ -1,14 +1,15 @@
-CPANM := $(shell command -v cpanm 2> /dev/null)
+CPANM_PATH = $(shell which cpanm || echo install-cpanm)
+CARTON_PATH = $(shell which carton || echo install-carton)
 
 all: build
 
-install-carton:
-ifndef CPANM
+$(CPANM_PATH):
 	plenv install-cpanm
-endif
-	cpanm Carton
 
-install-dzil: install-carton
+$(CARTON_PATH): | $(CPANM_PATH)
+	cpanm --quiet --notest Carton
+
+install-dzil: ${CARTON_PATH}
 	carton exec cpanm -l local --notest Dist::Zilla
 
 authordeps: install-dzil
@@ -17,7 +18,7 @@ authordeps: install-dzil
 installdeps: authordeps
 	carton exec dzil listdeps --author --missing --cpanm-version | carton exec xargs cpanm --quiet --local-lib local --notest
 
-update: | install-carton
+update: | $(CARTON_PATH)
 	carton update
 
 test:
