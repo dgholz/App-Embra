@@ -18,7 +18,7 @@ local/bin/dzil: | $(CARTON_PATH)
 
 .PHONY: authordeps
 authordeps: | local/bin/dzil
-	carton exec dzil authordeps | carton exec cpanm -l local --notest
+	carton exec dzil authordeps --missing --cpanm-version | carton exec xargs cpanm --quiet --local-lib local --notest
 
 .PHONY: installdeps
 installdeps: authordeps
