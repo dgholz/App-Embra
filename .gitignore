@@ -3,3 +3,4 @@
 App-Embra-*
 local
 cpanfile.snapshot
+.perl-version

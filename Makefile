@@ -1,27 +1,39 @@
-CPANM := $(shell command -v cpanm 2> /dev/null)
+CPANM_PATH = $(shell which cpanm || echo install-cpanm)
+CARTON_PATH = $(shell which carton || echo install-carton)
+build:
 
-all: build
-
-install-carton:
-ifndef CPANM
+$(CPANM_PATH):
 	plenv install-cpanm
-endif
-	cpanm Carton
 
-install-dzil: install-carton
-	carton exec cpanm -l local --notest Dist::Zilla
+$(CARTON_PATH): | $(CPANM_PATH)
+	cpanm --quiet --notest Carton
 
-authordeps: install-dzil
-	carton exec dzil authordeps | carton exec cpanm -l local --notest
+cpanfile.snapshot: cpanfile | $(CARTON_PATH)
+	carton install
 
-installdeps: authordeps
-	carton exec dzil listdeps | carton exec cpanm -l local --notest
-
-update:
+.PHONY: update
+update: cpanfile.snapshot
 	carton update
 
-test:
+local/bin/dzil: | $(CARTON_PATH)
+	carton exec cpanm -l local --quiet --notest Dist::Zilla
+
+.PHONY: authordeps
+authordeps: cpanfile.snapshot | local/bin/dzil
+	carton exec dzil authordeps --missing --cpanm-version | carton exec xargs cpanm --quiet --local-lib local --notest
+
+.PHONY: build
+build: authordeps
+	@carton exec dzil build
+
+.PHONY: installdeps
+installdeps: authordeps
+	carton exec dzil listdeps --author --missing --cpanm-version | carton exec xargs cpanm --quiet --local-lib local --notest
+
+.PHONY: test
+test: installdeps
 	@carton exec dzil test
 
-build:
-	@carton exec dzil build
+.PHONY: smoke
+smoke: installdeps
+	@carton exec dzil smoke --release --author
