@@ -8,15 +8,18 @@ $(CPANM_PATH):
 $(CARTON_PATH): | $(CPANM_PATH)
 	cpanm --quiet --notest Carton
 
+cpanfile.snapshot: cpanfile | $(CARTON_PATH)
+	carton install
+
 .PHONY: update
-update: $(CARTON_PATH)
+update: cpanfile.snapshot
 	carton update
 
 local/bin/dzil: | $(CARTON_PATH)
 	carton exec cpanm -l local --quiet --notest Dist::Zilla
 
 .PHONY: authordeps
-authordeps: | local/bin/dzil
+authordeps: cpanfile.snapshot | local/bin/dzil
 	carton exec dzil authordeps --missing --cpanm-version | carton exec xargs cpanm --quiet --local-lib local --notest
 
 .PHONY: build
