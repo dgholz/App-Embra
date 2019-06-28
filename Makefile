@@ -1,5 +1,5 @@
-CPANM_PATH = $(shell which cpanm || echo install-cpanm)
-CARTON_PATH = $(shell which carton || echo install-carton)
+CPANM_PATH = $(shell cpanm --version 2>&1 >/dev/null && which cpanm || echo install-cpanm)
+CARTON_PATH = $(shell carton --version 2>&1 >/dev/null && which carton || echo install-carton)
 build:
 
 $(CPANM_PATH):

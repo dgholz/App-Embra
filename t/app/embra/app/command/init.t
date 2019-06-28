@@ -3,6 +3,7 @@ use warnings;
 
 use App::Embra;
 use lib 't/lib';
+use App::Embra::Plugin::Test;
 
 use Method::Signatures;
 use Test::Roo;

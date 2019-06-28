@@ -48,7 +48,10 @@ method publish_site {
 }
 
 method exclude_file( $file ) {
-    return 1 if $self->to->subsumes( $file->name );
+    # recognise when files gathered from the publish dir are going to be nested into it again
+    my $dirname_orig = Path::Class::file( $file->_original_name )->dir->relative;
+    my $dirname = Path::Class::file( $file->name )->dir->relative( $self->to );
+    return 1 if $dirname eq $dirname_orig;
     return;
 }
 

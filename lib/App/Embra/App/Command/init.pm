@@ -35,7 +35,7 @@ sub abstract { 'initialise a new site'; }
 
 =head1 OPTIONS
 
-No new options; the standard L<embra options|fApp::Embra::App::Command/GLOBAL OPTIONS> are available, including C<-g|--debug> to enable detailed progress logging.
+No new options; the standard L<embra options|App::Embra::App::Command/GLOBAL OPTIONS> are available, including C<-g|--debug> to enable detailed progress logging.
 
 =cut
 
@@ -62,13 +62,10 @@ sub embra {
 
     require App::Embra;
     require App::Embra::MVP::Assembler;
-    require Config::MVP::Reader::INI::INIReader;
-
-    my $assembler = App::Embra::MVP::Assembler->new();
-    my $reader = Config::MVP::Reader::INI::INIReader->new($assembler);
+    require Config::MVP::Reader::INI;
 
     my $templates_dir = File::ShareDir::module_dir(__PACKAGE__);
-    $reader->read_string((<<"") =~ s/^\s+//gm);
+    (my $config = <<"") =~ s/^\s+//gms;
       [GatherDir]
       from = $templates_dir
       
@@ -77,18 +74,19 @@ sub embra {
       
       [PublishFiles]
 
-    return $self->{embra} = App::Embra->from_config_mvp_sequence( $assembler->sequence );
+    my $assembler = App::Embra::MVP::Assembler->new();
+    my $reader = Config::MVP::Reader::INI::INIReader->new($assembler);
+    $reader->read_string($config);
+
+    return $self->{embra} = App::Embra->from_config_mvp_sequence( sequence => $assembler->sequence );
 }
 
 
 sub execute {
     my ( $self, $opt, $arg ) = @_;
 
-    my %template_vars = guess_template_vars( cwd );
-    for my $file ( $self->embra->files ) {
-        if ( $file->ext eq 'tt' ) {
-            $file->ext('');
-        }
+    my %template_vars = guess_template_vars( dir( cwd ) );
+    for my $file ( @{ $self->embra->files } ) {
         $file->update_notes( %template_vars );
     }
     $self->embra->collate;

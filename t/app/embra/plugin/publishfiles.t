@@ -58,6 +58,14 @@ test 'prunes files in publish dir' => method {
     );
 };
 
+test q{doesn't prune files in the publish dir if they won't cause nesting} => method {
+    my $in_publish = App::Embra::File->new(
+        name => $self->output_dir.'/im/in/the/publish_dir',
+    );
+    $in_publish->name('now_im_not');
+    push @{ $self->embra_files }, $in_publish;
+}
+
 after 'setup' => method( @_ ) {
     push @{ $self->embra_files }, App::Embra::File->new(
         name => $self->output_dir.'/prune me',
